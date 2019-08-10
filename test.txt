@@ -1,0 +1,85 @@
+JSON Structures in the database
+
+Table : jobs
+Column : requirements
+{
+    "designation" : "desg",
+    "description" : "descp",
+    "skills" : ("skill1", "skill2", "skilln"),
+    "experience" : "exp",
+    "qualification" : ("qualification1", "qualification2" ,"qualification3"),
+}
+Example :-
+{
+    'designation' : 'Department Head',
+    'description' : 'descp1', 
+    'skills' : '('Java','SQL','HTML')',
+    'experience' : '3years', 
+    'qualification' : '('HSC','Bsc','MSc')'
+}
+
+
+Table : questions
+Column : questions
+{
+    "type1" : {
+        "question1" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+        "question2" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+        "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks")
+    },
+    "type2" : {
+        "question1" : (("option1", "option2", "option3", "option4"), "answer", "marks"),
+        "question2" : (("option1", "option2", "option3", "option4"), "answer", "marks"),
+        "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks")
+    },
+    "type_N" : {
+        "question1" : (("option1", "option2", "option3", "option4"), "answer", "marks"),
+        "question2" : (("option1", "option2", "option3", "option4"), "answer", "marks"),
+        "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks")
+    },
+    "other" : {
+        "other_type_1" : {
+            "question1" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+            "question2" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+            "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+        },
+        "other_type_1" : {
+            "question1" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+            "question2" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+            "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks")
+        },
+        "other_type_N" : {
+            "question1" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+            "question2" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
+            "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks")
+        },
+    }
+}
+
+
+Table : questions
+Column : knockout_questions
+{
+    "question1" : (("answer1", "weight1"), ("answer2", "weight2"), ("answer_N", "weight_N")),
+    "question2" : (("answer1", "weight1"), ("answer2", "weight2"), ("answer_N", "weight_N")),
+    "question_N" : (("answer1", "weight1"), ("answer2", "weight2"), ("answer_N", "weight_N")),
+}
+
+
+Table : application_status
+Column : applicant_status
+staus : {
+    0 : applied,
+    1 : accepted,
+    2 : rejected,
+    3 : on_hold,
+}
+{
+    "u_id" : {
+        "status" : "2", 
+        "knockout_questions" : "score",
+        "score" : "score",
+        "cv_rank" : "rank",
+        "total_rank" : "rank"
+    }
+}
