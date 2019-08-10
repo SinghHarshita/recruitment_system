@@ -53,7 +53,8 @@ Column : questions
             "question2" : (("option1", "option2", "option3", "option4"), "answer" , "marks"),
             "question_N" : (("option1", "option2", "option3", "option4"), "answer" , "marks")
         },
-    }
+    },
+    "time" : "time"
 }
 
 
