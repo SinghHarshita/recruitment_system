@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': "recruitment_system",
         "HOST" : "localhost",
         "USER" : "root",
-        "PASSWORD" : "harshita@99"
+        "PASSWORD" : "root"
     }
 }
 
