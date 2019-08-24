@@ -20,7 +20,10 @@
     
     <title>{% block landing_page_title %}HireSight{% endblock %}</title>
     {% block landing_page_head %} {% endblock %}
-    <link rel="stylesheet" href="{%static 'css/navbar.css'%}">
+    
+    <!-- title icon -->
+    <link rel="shortcut icon" href="{% static 'images/logo.png'%}" />
+
     </head>
 <body>
     {% include 'layout/navbar.html' %}
