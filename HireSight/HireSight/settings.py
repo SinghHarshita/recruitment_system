@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Applicant',
     'Company',
-    'LandingPage'
+    'LandingPage',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': "recruitment_system",
         "HOST" : "localhost",
         "USER" : "root",
-        "PASSWORD" : "",
+        "PASSWORD" : "harshita@99"
     }
 }
 
@@ -124,3 +124,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    #"/LandingPage/static"
+)
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
