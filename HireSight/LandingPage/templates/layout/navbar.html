@@ -1,8 +1,8 @@
 {% load static %}
-<nav class="navbar navbar-expand-md navbar-light" style = "background-color: #ddeeef;">
+<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top" style = "background-color: #ddeeef;">
     <!--style = "background-color: #ddddff;" style = "background-color: #ddeeef;"-->
     <a href="#" class="navbar-brand">
-        <img src="{% static 'images/Logo _ HireSight.png' %}" height="50" alt="HireSight">
+        <img class="logo-default img-responsive" src="{% static 'images/Logo _ HireSight.png' %}" height="50" alt="HireSight">
     </a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -15,8 +15,8 @@
                 </a>
         </div>
         <div class="navbar-nav ml-auto">
-                <a href="#" class="nav-item nav-link active" style = "font-weight: 1000;">Applicant</a>
-            <a href="#" class="nav-item nav-link active" style = "font-weight: 1000;">Company</a>
+                <a href="#applicant" class="nav-item nav-link active" style = "font-weight: 1000;">Applicant</a>
+            <a href="#company" class="nav-item nav-link active" style = "font-weight: 1000;">Company</a>
             <a href="#" class="nav-item nav-link active">
                 Sign In
             </a>
