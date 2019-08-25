@@ -1,11 +1,25 @@
-a:active {
-    color : #063b69;
+#navigation-bar {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100%;   
+    margin: 0 auto;
 }
 
-button:hover{
-    color : blue;
+/* footer for small screens */
+/*@media only screen and (max-width : 650px) {
+    #footer-nav {
+        height: 300px;
+        margin-bottom : 0px;
+        position: fixed;
+    }
 }
-
-a.nav-item:hover {
-    color : red;
-}
+*/
+/* footer for large screens */
+/*@media only screen and (min-width : 650px) {
+    #footer-nav {
+        height: 150px;
+        margin-bottom : 0px;
+        position: fixed;
+    }
+}*/

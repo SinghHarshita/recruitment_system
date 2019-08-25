@@ -1,34 +1,45 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <title>{% block landing_page_title %}HireSight{% endblock %}</title>
-    {% block landing_page_head %} {% endblock %}
-    
-    <!-- title icon -->
-    <link rel="shortcut icon" href="{% static 'images/logo.png'%}" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!--jQuery-->
+        
 
+        <title>{% block landing_page_title %}HireSight{% endblock %}</title>
+        {% block landing_page_head %} {% endblock %}
+        
+        <!-- title icon -->
+        <link rel="shortcut icon" href="{% static 'images/logo.png'%}" />
+
+        <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery-1.7.2.min.js"></script>
+        <script src="http://lab.mattvarone.com/projects/jquery/totop/js/easing.js"></script>
+        <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery.ui.totop.js"></script>
+
+        <!--Navbar css-->
+        <link rel="stylesheet" href="{%static 'css/navbar.css'%}">
+        
     </head>
-<body>
-    {% include 'layout/navbar.html' %}
-    {% block landing_page_content %}
-    {% endblock %}
-    {% include 'layout/footer.html' %}
-</body>
+    <body>
+        {% include 'layout/navbar.html' %}
+        <br><br><br>
+        {% block landing_page_content %}
+        {% endblock %}
+        {% include 'layout/footer.html' %}
+    </body>
 </html>

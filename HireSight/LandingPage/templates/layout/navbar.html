@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-md navbar-light navbar-fixed-top" style = "background-color: #ddeeef;">
+<nav class="navbar navbar-expand-md navbar-light " style = "background-color: #ddeeef;" id = "navigation-bar">
     <!--style = "background-color: #ddddff;" style = "background-color: #ddeeef;"-->
     <a href="#" class="navbar-brand">
         <img class="logo-default img-responsive" src="{% static 'images/Logo _ HireSight.png' %}" height="50" alt="HireSight">
@@ -24,3 +24,14 @@
         </div>
     </div>
 </nav>
+<script>
+    $(window).scroll(function () {
+        if ($(window).scrollTop() <= 50) {
+            $('.navbar').css({'background':'#ddeeef', 'margin-top': '0px'});
+            $('.logo-default').attr({"src": "{% static 'images/Logo _ HireSight.png' %}", "height":"50"});
+        } else {
+            $('.navbar').css({'background':'white', 'margin-top': '-10px'});
+            $('.logo-default').attr({"src": "{% static 'images/new_logo.png' %}", "height":"40"});
+        }
+    });
+</script>
