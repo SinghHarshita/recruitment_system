@@ -1,0 +1,97 @@
+body, #slider, .wrap, .slide-content{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    width:100%;
+    height:89vh; 
+    /* Will occupy 50% of web screen */
+    overflow-x:hidden;
+}
+
+.wrap{position:relative}
+
+.slide{
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.slide1{background-image: url('../images/sliderImage/search.png')}
+.slide2{background-image: url('../images/sliderImage/apply.png')}
+.slide3{background-image: url('../images/sliderImage/filter.png')}
+
+.slide-content{
+    display:flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: left;
+    text-align: left;
+    margin-left:70px;
+}
+
+.slide-content span{
+    font-size:4rem;
+    color:#fff;
+    margin-top: 20px;
+}
+
+.sp_feature{
+    font-size:20px;
+    color:#fff;
+    margin-left:20px;
+    align-items:center;
+    justify-content:center;
+}
+
+.arrow{
+    cursor:pointer;
+    position:absolute;
+    top:50%;
+    margin-top:-35px;
+    width:0;
+    height:0;
+    border-style:solid;
+}
+
+#arrow-left{
+    border-width:30px 40px 30px 0px;
+    border-color:transparent #fff transparent transparent;
+    left:0;
+    margin-left:30px;
+}
+
+.slide-content .btn{
+    position: relative;
+    top: 10%;
+    left: 5%;
+    background-color: #fff;
+    color: #0000A0;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+.slide-content .btn1{
+    position: relative;
+    top: 1%;
+    left: 20%;
+    background-color: #fff;
+    color: #0000A0;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#arrow-right{
+    border-width:30px 0px 30px 40px;
+    border-color:transparent transparent transparent #fff;
+    right:0;
+    margin-right:30px;
+}
