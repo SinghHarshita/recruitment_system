@@ -16,10 +16,10 @@
         <div class="navbar-nav ml-auto">
                 <a href="#applicant" class="nav-item nav-link active" style = "font-weight: 1000;">Applicant</a>
             <a href="#company" class="nav-item nav-link active" style = "font-weight: 1000;">Company</a>
-            <a href="#" class="nav-item nav-link active">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="nav-item nav-link active">
                 Sign In
             </a>
-            <a href="#" class="nav-item nav-link active">Sign Up</a>
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="nav-item nav-link active">Sign Up</a>
             <a href="#" class="nav-item btn btn-danger" style="color:white; font-weight: 500">Post a Job</a>
         </div>
     </div>

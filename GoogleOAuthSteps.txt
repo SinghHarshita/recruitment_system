@@ -1,0 +1,47 @@
+In settings.py file
+    INSTALLED_APPS = [
+        ...,
+        'social_django',
+        'django.contrib.sites',
+        ...,
+    ]
+
+    SITE_ID = 1
+
+    SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+    AUTHENTICATION_BACKENDS = (
+        'social_core.backends.google.GoogleOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '517781533942-7k02oetvdgm7499hhspp3g6bj6joupk9.apps.googleusercontent.com'
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'gCxksmM6r3bJzepJVzafUwfP'
+
+    SESSION_COOKIE_SAMESITE = None
+
+    LOGIN_URL = '/auth/login/google-oauth2/'
+
+    LOGIN_REDIRECT_URL = '/'
+    LOGOUT_REDIRECT_URL = '/'
+
+
+In urls.py
+    
+    from django.conf import settings
+    from django.contrib.auth import logout
+
+    path('',include('social_django.urls',namespace='social')),    
+    path('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL},name='logout'),
+
+
+In Anchor Tag For Sign In
+
+    <a href="{% url 'social:begin' 'google-oauth2' %}" class="nav-item nav-link active">
+        Sign In
+    </a>
+
+
+Migrate to the database(Necessary)
+
+    python manage.py migrate
