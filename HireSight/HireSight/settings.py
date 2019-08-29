@@ -106,6 +106,7 @@ DATABASES = {
         'NAME': "recruitment_system",
         "HOST" : "localhost",
         "USER" : "root",
+        #"PASSWORD" : "sumedhdg15",
         "PASSWORD" : "root",
         #"PASSWORD" : "harshita@99"
     }
