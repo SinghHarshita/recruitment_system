@@ -40,7 +40,31 @@ INSTALLED_APPS = [
     'Applicant',
     'Company',
     'LandingPage',
+    # For OAuth
+    # 'blog',
+    'social_django',
+    'django.contrib.sites',
 ]
+# For OAuth
+SITE_ID = 1
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '517781533942-7k02oetvdgm7499hhspp3g6bj6joupk9.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'gCxksmM6r3bJzepJVzafUwfP'
+
+SESSION_COOKIE_SAMESITE = None
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+
+LOGIN_REDIRECT_URL = '/form_details'
+LOGOUT_REDIRECT_URL = '/'
+# #################################################
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +106,7 @@ DATABASES = {
         'NAME': "recruitment_system",
         "HOST" : "localhost",
         "USER" : "root",
+        #"PASSWORD" : "sumedhdg15",
         "PASSWORD" : "root",
         #"PASSWORD" : "harshita@99"
     }
