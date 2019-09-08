@@ -38,8 +38,16 @@ def auth_user(request):
         return redirect('/',kwargs={msg:"You are Not Registered...."})
     
     if(len(row1)):
-        return redirect('/applicant/',kwargs={})
-    else:
-        return redirect('comapany/',kwargs={})
+        data = row1[0]
+        #print(data)
+        request.session["id"] = data[0]
+        request.session["email"] = data[4]
+        #request.session["data"] = applicant_data(data)
 
-    # return HttpResponse(str(len(row)))
+        return redirect('/applicant/', kwargs={data})
+    
+    else:
+        data = row2[0]
+        request.session["id"] = data[0]
+        request.session["email"] = data[3]
+        return redirect('/company/',kwargs={})

@@ -1,5 +1,15 @@
 {% extends "layout/company_index.html" %}
 
 {% block content %}
-<h1>HireSight : Company</h1>
+<h1>{{name}}</h1>
+<p>
+    <code>
+        {{descp}}
+    </code>
+    <br><br>
+    {{address}}<br>
+    {{contact}}<br>
+    {{alternative_email_id}}<br>
+</p>
+
 {% endblock %}
