@@ -25,7 +25,7 @@ SECRET_KEY = '%@x0%_%n$74=k=u4lbj%(g&%t74in^omms786k0nzlsta6mmoh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['localhost','127.0.0.1','hiresight.com']
+# ALLOWED_HOSTS = ['localhost','127.0.0.1','hiresight.com']
 ALLOWED_HOSTS = []
 
 # Application definition
