@@ -1,0 +1,8 @@
+{% extends "layout/applicant_header.html" %}
+{% block content %}
+<h1 id = "notifications">Notifications</h1>
+{{name}}
+{{request.session.id}}
+{{request.session.email}}
+<a href="/applicant">Back</a>
+{% endblock %}

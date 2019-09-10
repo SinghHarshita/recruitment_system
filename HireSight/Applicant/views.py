@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.db import connection
 from django.http import HttpResponse
 
+data = {}
 # Create your views here.
 def index(request):
+    global data
     #print(request.session["id"])
     with connection.cursor() as cursor :
         cursor.execute("SELECT * from user where u_id = %s",[request.session["id"]])
@@ -14,6 +16,8 @@ def index(request):
 
 
 def applicant_data(data) :
+    """ Returns JSON of applicant data """
+    
     return {
         "name" : data[1],
         "gender" : data[5],
@@ -25,3 +29,8 @@ def applicant_data(data) :
         "cv_updated_at" : data[10],
         "notifications" : data[12],
     }
+
+def notifications(request) :
+    global data
+    #print(data)
+    return render(request, "applicant_notifications.html", data)
