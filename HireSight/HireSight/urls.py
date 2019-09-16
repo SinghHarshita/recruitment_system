@@ -23,7 +23,7 @@ from . import views
 # #################
 
 urlpatterns = [
-    url(r'^$', include('LandingPage.urls')),
+    url('', include('LandingPage.urls')),
     url(r'^applicant/', include('Applicant.urls')),
     url(r'^company/', include('Company.urls')),
     path('admin/', admin.site.urls),
