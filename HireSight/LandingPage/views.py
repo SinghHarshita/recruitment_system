@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.db import connection
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -11,58 +12,51 @@ def index(request):
 def registerApplicant(request):
     if (request.POST):
         data = request.POST.dict()
-        fname = "'" + (data.get('fname') or "NULL") + "'" 
-        lname = "'" + (data.get('lname') or "NULL") + "'"
-        full_name = "'{} {}'".format(data.get('fname'),data.get('lname'))
-        email = "'" + (data.get('email') or "NULL") + "'"
-        gender = "'" + (data.get('gender') or 'NULL') + "'"
-        dob = "'" + (data.get('datepicker') or "0000-00-00") + "'"
-        phone = data.get('mobile') or "NULL"
+        insert_data = dict()
+        insert_data['user'] = 'User'
+        insert_data['fname'] = data.get('fname') or "NULL"
+        insert_data['lname'] = data.get('lname') or "NULL"
+        full_name = (insert_data['fname'] + " " + insert_data['lname']).replace("'","")
+        insert_data['full_name'] = full_name
+        # insert_data['email'] = (data.get('email') or "NULL").replace("'","")
+        insert_data['gender'] = (data.get('gender') or 'NULL').replace("'","")
+        insert_data['dob'] = (data.get('datepicker') or "0000-00-00").replace("'","")
+        insert_data['phone'] = (data.get('mobile') or "NULL").replace("'","")
+
         address = data.get('address1') or "NULL"
         address += data.get('address2') or ""
         address += data.get('city') or ""
         address += data.get('state') or ""
         address += data.get('zip') or ""
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * from user where email_id = {}".format(email))
-            row1 = list(cursor.fetchall())
-            cursor.execute("SELECT * from company where email_id = {}".format(email))
-            row2 = list(cursor.fetchall())
-            if(len(row1) == 0 and len(row2) == 0):
-                sql = "INSERT into user(full_name,fname,lname,email_id,gender,date_of_birth,phone,address)values({},{},{},{},{},{},{},{})".format(full_name,fname,lname,email,gender,dob,phone,"'" + address + "'")
-                # return HttpResponse("<h2>{}</h2>".format(sql))
-                cursor.execute(sql)
-                messages.add_message(request,messages.INFO,"Registered Successfully.......")
-                return redirect("/login/google-oauth2/",kwargs={})
-            else:
-                messages.add_message(request,messages.INFO,"Already Registered.......")
-                return redirect('/',kwargs={})
+        insert_data['address'] = address.replace("'","")
+        request.session['data'] = insert_data
 
-        # return HttpResponse("<h2>{}</h2>".format(sql))
+        # return HttpResponse("<h2>" + str(request.session['data']) + "</h2>")
+        return redirect("/login/google-oauth2/",kwargs={})
+
         
 def registerCompany(request):
     if(request.POST):
         data = request.POST.dict()
-        name = "'" + data.get('cname') + "'"
-        email = "'" + data.get('email') + "'"
-        phone = data.get('mobile')
+        insert_data = dict()
+        insert_data['user'] = 'Company'
+        # request.session['data'] = data
+        # return HttpResponse("<h2>" + str(request.session['data']) + "</h2>")
+    
+        insert_data['name'] = data.get('cname')
+        # insert_data['email'] = "'" + data.get('email') + "'"
+        insert_data['phone'] = data.get('mobile')
+
         address = data.get('address1') or "NULL"
         address += data.get('address2') or ""
         address += data.get('city') or ""
         address += data.get('state') or ""
-        address += data.get('zip') or ""
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * from user where email_id = {}".format(email))
-            row1 = list(cursor.fetchall())
-            cursor.execute("SELECT * from company where email_id = {}".format(email))
-            row2 = list(cursor.fetchall())
-            if(len(row1) == 0 and len(row2) == 0):
-                sql = "INSERT into compnay(name,address,email_id,contact) values ({},{},{},{})".format(name,address,email,phone)
-                cursor.execute(sql)
-                messages.add_message(request,messages.INFO,"Registered Successfully.......")
-                return redirect("/login/google-oauth2/",kwargs={})
-            else:
-                messages.add_message(request,50,"Already Registered.......")
-                return redirect('/',kwargs={})
+        address += (data.get('zip') or "" + "'")
+        address = address.replace("'",'')
+        insert_data['address'] = address
+        request.session['data'] = insert_data
 
+        # return HttpResponse("<h2>" + str(request.session['data']) + "</h2>")
+        return redirect("/login/google-oauth2/",kwargs={})
+        
     # return HttpResponse("<h2>Registered Successfully</h2>")

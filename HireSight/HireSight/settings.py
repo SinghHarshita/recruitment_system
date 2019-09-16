@@ -55,6 +55,10 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+# SOCIAL_AUTH_PIPELINE = (
+#     'social_core.pipeline.user.user_details',
+# )
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '517781533942-7k02oetvdgm7499hhspp3g6bj6joupk9.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'gCxksmM6r3bJzepJVzafUwfP'
 
@@ -74,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'HireSight.middleware.UserRestrict',
 ]
 
 ROOT_URLCONF = 'HireSight.urls'
@@ -93,6 +98,9 @@ TEMPLATES = [
         },
     },
 ]
+
+# For storing some data while redirecting to GoogleAuth
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['key']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 

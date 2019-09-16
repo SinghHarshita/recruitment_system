@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db import connection
 from django.http import HttpResponse
+from django.shortcuts import redirect
 
 # Create your views here.
 def index(request):
@@ -25,3 +26,10 @@ def applicant_data(data) :
         "cv_updated_at" : data[10],
         "notifications" : data[12],
     }
+
+def log_out(request):
+    try :
+        request.session.clear()
+    except :
+        pass
+    return redirect('/')
