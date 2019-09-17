@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from django.shortcuts import redirect
-# from django.contrib.auth import logout
+from django.contrib.auth import logout
 
 # Create your views here.
 def index(request):
@@ -25,7 +25,9 @@ def company_data(data) :
 def log_out(request):
     try:
         request.session.clear()
+        del request.user
     except:
         pass
     # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
+    # logout(request)
     return redirect('/')

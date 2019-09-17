@@ -59,6 +59,22 @@ AUTHENTICATION_BACKENDS = (
 #     'social_core.pipeline.user.user_details',
 # )
 
+SOCIAL_AUTH_DISCONNECT_PIPELINE = (
+    # Verifies that the social association can be disconnected from the current
+    # user (ensure that the user login mechanism is not compromised by this
+    # disconnection).
+    'social_core.pipeline.disconnect.allowed_to_disconnect',
+
+    # Collects the social associations to disconnect.
+    'social_core.pipeline.disconnect.get_entries',
+
+    # Revoke any access_token when possible.
+    'social_core.pipeline.disconnect.revoke_tokens',
+
+    # Removes the social associations.
+    'social_core.pipeline.disconnect.disconnect',
+)
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '517781533942-7k02oetvdgm7499hhspp3g6bj6joupk9.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'gCxksmM6r3bJzepJVzafUwfP'
 
