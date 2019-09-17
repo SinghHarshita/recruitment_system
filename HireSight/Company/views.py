@@ -29,5 +29,5 @@ def log_out(request):
     except:
         pass
     # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
-    # logout(request)
+    logout(request)
     return redirect('/')
