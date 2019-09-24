@@ -22,8 +22,10 @@ from django.contrib.auth import logout
 from . import views
 # #################
 
+app_name = 'hireSight'
+
 urlpatterns = [
-    url(r'^$', include('LandingPage.urls')),
+    url('', include('LandingPage.urls')),
     url(r'^applicant/', include('Applicant.urls')),
     url(r'^company/', include('Company.urls')),
     path('admin/', admin.site.urls),
@@ -31,6 +33,7 @@ urlpatterns = [
     path('',include('social_django.urls',namespace='social')),    
     path('logout/', views.log_out,name='logout'),
     # ###########
-    url(r'^form_details/',views.details,name='form_details'),
+    url(r'^form_details',views.details,name='form_details'),
     url(r'^system_auth/',views.auth_user,name='auth_user'),
+    url(r'^auth_user/', views.auth_user, name='authUser')
 ]
