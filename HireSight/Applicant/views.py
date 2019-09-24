@@ -30,6 +30,9 @@ def applicant_data(data) :
         "notifications" : data[12],
     }
 
+def test(request):
+    return render(request, "test.html")
+
 def notifications(request) :
     global data
     #print(data)

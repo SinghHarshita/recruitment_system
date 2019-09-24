@@ -18,3 +18,6 @@ def company_data(data) :
         "contact" : data[5],
         "descp" : data[6],
     }
+
+def test(request):
+    return render(request, "company_test.html", {})

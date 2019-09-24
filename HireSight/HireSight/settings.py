@@ -107,8 +107,8 @@ DATABASES = {
         "HOST" : "localhost",
         "USER" : "root",
         #"PASSWORD" : "sumedhdg15",
-        "PASSWORD" : "root",
-        #"PASSWORD" : "harshita@99"
+        #"PASSWORD" : "root",
+        "PASSWORD" : ""
     }
 }
 
