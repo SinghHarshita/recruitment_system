@@ -22,12 +22,15 @@ def company_data(data) :
         "descp" : data[6],
     }
 
-def log_out(request):
-    try:
-        request.session.clear()
-        del request.user
-    except:
-        pass
-    # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
-    logout(request)
-    return redirect('/')
+def test(request):
+    return render(request, "company_test.html", {})
+  
+# def log_out(request):
+#     try:
+#         request.session.clear()
+#         del request.user
+#     except:
+#         pass
+#     # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
+#     logout(request)
+#     return redirect('/')

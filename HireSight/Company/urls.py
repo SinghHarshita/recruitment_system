@@ -8,7 +8,8 @@ app_name = 'Company'
 
 urlpatterns = [
     url(r'^$', views.index, name = 'index'),
-    url(r'^log_out/', views.log_out, name = 'logout'),
+    url(r'^run/$', views.test, name = "run"),
+    #url(r'^notifications/$', views.notifications, name = "notifications"),
     path('',include('social_django.urls',namespace='social')),    
     # path('logout/', logout,{'next_page': settings.LOGOUT_REDIRECT_URL},name='logout'),
 ]

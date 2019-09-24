@@ -3,6 +3,8 @@ from django.http import HttpResponse
 
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
+
 from django.db import connection
 from django.urls import reverse
 from django.contrib import messages
@@ -95,3 +97,7 @@ def auth_user(request,**kwargs):
         request.session["id"] = data[0]
         request.session["email"] = data[3]
         return redirect('/company/',kwargs={})
+
+def log_out(request):
+    logout(request)
+    return redirect("/")

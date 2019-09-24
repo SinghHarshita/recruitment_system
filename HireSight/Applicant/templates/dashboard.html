@@ -1,5 +1,9 @@
-{% extends "layout/applicant_index.html" %}
-{% block content %}
+
+{% extends "layout/applicant_header.html" %}
+{% load static %}
+<!-- {% include "partials/applicant_header.html" %}
+{% include "applicant_navbar.html" %}
+{% block dash_content %}
 <h1>Dashboard!</h1>
 {{name}}<br>
 {{gender}}<br>
@@ -7,5 +11,17 @@
 {{cv_file_path}}<br>
 {{address}}<br>
 {{age}}<br>
-<a href="{% url 'Applicant:logout' %}">Log Out</a>
+<a href="{%url 'notifications' %}" style="color:red;">notifications</a>
+{% endblock %}
+{% include "partials/applicant_footer.html" %} -->
+
+{% block applicant_content %}
+<h1 id = "dashboard">Dashboard!</h1>
+{{name}}<br>
+{{gender}}<br>
+{{phone}}<br>
+{{cv_file_path}}<br>
+{{address}}<br>
+{{dob}}<br>
+<!-- <a href="{%url 'notifications' %}" style="color:red;">notifications</a> -->
 {% endblock %}

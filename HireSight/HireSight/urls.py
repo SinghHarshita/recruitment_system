@@ -31,7 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # For OAuth
     path('',include('social_django.urls',namespace='social')),    
-    path('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL},name='logout'),
+    path('logout/', views.log_out,name='logout'),
     # ###########
     url(r'^form_details',views.details,name='form_details'),
     url(r'^system_auth/',views.auth_user,name='auth_user'),
