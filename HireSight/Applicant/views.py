@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.db import connection
 from django.http import HttpResponse
-from django.shortcuts import redirect
 
 data = {}
 # Create your views here.
@@ -44,11 +43,3 @@ def notifications(request) :
     global data
     #print(data)
     return render(request, "applicant_notifications.html", data)
-
-def log_out(request):
-    try :
-        request.session.clear()
-    except :
-        pass
-    return redirect('/')
-

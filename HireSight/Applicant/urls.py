@@ -2,8 +2,6 @@ from django.urls import path
 from django.conf.urls import url
 from . import views
 
-app_name = 'Applicant'
-
 urlpatterns = [
     url(r'^$', views.index, name = "applicant_dashboard"),
     url(r'^notifications/$', views.notifications, name = "notifications"),
