@@ -15,13 +15,13 @@
 {% endblock %}
 {% include "partials/applicant_footer.html" %} -->
 
-{% block content %}
+{% block applicant_content %}
 <h1 id = "dashboard">Dashboard!</h1>
 {{name}}<br>
 {{gender}}<br>
 {{phone}}<br>
 {{cv_file_path}}<br>
 {{address}}<br>
-{{age}}<br>
-<a href="{%url 'notifications' %}" style="color:red;">notifications</a>
+{{dob}}<br>
+<!-- <a href="{%url 'notifications' %}" style="color:red;">notifications</a> -->
 {% endblock %}
