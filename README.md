@@ -20,7 +20,7 @@ The web app is written using Django framework.
 Softwares / Libraries Required : 
 1. Django
 2. django social_auth
-3. xampp/wampp server
+3. xampp/wamp server
 
 After cloning the repository, in settings.py add your username, host and password for the database.
 In mysql, create a database named recruitment_system. Import the .sql into this database.
