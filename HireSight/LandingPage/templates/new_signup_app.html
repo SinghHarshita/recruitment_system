@@ -1,0 +1,156 @@
+<!-- Applicant Modal -->
+  <div class="modal" id="app_signup" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sign-Up as Applicant</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'LandingPage:registerApplicant' %}" method="post">
+            {% csrf_token %}
+            
+            <!-- NAME -->
+            <div class="form-group row">
+                <label for="fname" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-5">  
+                  <input type="text" class="form-control" id="fname" name="fname" placeholder="John" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="lname" name="lname" placeholder="Doe" required>
+                </div>
+              </div>
+
+              <!-- EMAIL -->
+              <!-- <div class="form-group row">
+                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-8">
+                    <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                  </div>
+              </div> -->
+
+              <!-- Contact Number -->
+            <div class="form-group row">
+                <label for="mobile" class="col-sm-2 col-form-label">Contact</label>
+                <div class="col-sm-5">  
+                  <input type="text" class="form-control" id="mobile" name="mobile" placeholder="+91 - *** *** ****" required>
+                </div>
+              </div>
+  
+              <!-- DOB -->
+              <div class="form-group row">
+                <label for="datepicker" class="col-sm-2 col-form-label">DOB</label>
+                <div class="col-sm-10">
+                  <input id="datepicker" name="datepicker" width="276" placeholder="mm/dd/yyyy" required>
+                </div>
+              </div>
+  
+              <!-- GENDER -->
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="M" checked>
+                <label class="form-check-label" for="exampleRadios1">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="F">
+                <label class="form-check-label" for="exampleRadios2">Female</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="exampleRadios3" value="O">
+                <label class="form-check-label" for="exampleRadios3">Other</label>
+              </div>
+              <br><br>
+  
+              <!-- ADDRESS -->
+              <div class="form-group row">
+                <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
+                <div class="col-sm-7">  
+                  <input type="text" class="form-control" id="inputAddress" name="address1" placeholder="1234 Main St">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputAddress2" class="col-sm-2 col-form-label">Address 2</label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Apartment, studio, or floor">
+                </div>
+              </div>
+  
+              <div class="form-group row">
+                <label for="inputCity" class="col-sm-2 col-form-label">City</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="inputCity" name="city" placeholder="Ambernath">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputState" class="col-sm-2 col-form-label">State</label>
+                <div class="col-sm-4">  
+                  <select id="inputState" name="state" class="form-control">
+                    <option selected>Choose...</option>
+                    <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Assam</option>
+                    <option>Bihar</option>
+                    <option>Chhattisgarh</option>
+                    <option>Goa</option>
+                    <option>Gujarat</option>
+                    <option>Haryana</option>
+                    <option>Himachal Pradesh</option>
+                    <option>Jammu and Kashmir</option>
+                    <option>Jharkhand</option>
+                    <option>Karnataka</option>
+                    <option>Kerala</option>
+                    <option>Madhya Pradesh</option>
+                    <option>Maharashtra</option>
+                    <option>Manipur</option>
+                    <option>Meghalaya</option>
+                    <option>Mizoram</option>
+                    <option>Nagaland</option>
+                    <option>Odisha</option>
+                    <option>Punjab</option>
+                    <option>Rajasthan</option>
+                    <option>Sikkim</option>
+                    <option>Tamil Nadu</option>
+                    <option>Telangana</option>
+                    <option>Tripura</option>
+                    <option>Uttar Pradesh</option>
+                    <option>Uttarakhand</option>
+                    <option>West Bengal</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputZip" class="col-sm-2 col-form-label">Zip</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputZip" name="zip">
+                </div>
+              </div>
+
+              <!-- CV -->
+                  <div class="form-group row">
+                    <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">Attach CV</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                  </div>
+  
+              <!-- CHECKBOX -->
+              <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                  <label class="form-check-label" for="exampleCheck1">I agree to the terms and conditions.</label>
+                </div>
+    
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+          </form>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>

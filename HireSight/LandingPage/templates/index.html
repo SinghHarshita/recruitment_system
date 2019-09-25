@@ -2,13 +2,16 @@
 {% block landing_page_head %}
 {% endblock %}
 {% block landing_page_content %}
-<!-- Slider -->
-    {% include "carousel.html" %}
-<!-- The Different Sections -->
-<section style="background-color: #ddeeef">
-    {% include "applicant.html"%}
-    {% include "company.html" %}
-    {% include "aboutUs.html" %}
-    {% include "team.html" %}
+<section>
+	{% include "new_header.html"%}
+	{% include "new_applicant.html"%}
+	{% include "new_signup_app.html"%}
+	{% include "new_company.html"%}
+	{% include "new_signup_com.html"%}
+	{% include "new_services.html"%}
+	{% include "new_team.html"%}
+	{% include "new_techstack.html"%}
+	{% include "new_contact.html"%}
+	{% include "new_top.html"%}
 </section>
 {% endblock %}

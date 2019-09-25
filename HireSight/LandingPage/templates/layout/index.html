@@ -1,48 +1,103 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- For Carousel -->
-    <link rel="stylesheet" href="{%static 'css/styleSlider.css' %}">
-    <!-- <script src="{%static 'js/app.js' %}"></script> -->
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <!-- For Carousel -->
+        <!-- <link rel="stylesheet" href="{% static 'css/styleSlider.css' %}"> -->
+        <!-- <script src="{%static 'js/app.js' %}"></script> -->
+        <!-- jQuery library -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
         <!-- Latest compiled JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> -->
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
         <!--jQuery-->
-        
+
+
+        <!-- NEW -->
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Custom fonts for this template -->
+        <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+        <!-- Custom styles for this template -->
+        <link href="{% static 'css/agency.css' %}" rel="stylesheet">
+
+
+
 
         <title>{% block landing_page_title %}HireSight{% endblock %}</title>
         {% block landing_page_head %} {% endblock %}
-        
-        <!-- title icon -->
-        <link rel="shortcut icon" href="{% static 'images/logo.png'%}" />
 
-        <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery-1.7.2.min.js"></script>
-        <script src="http://lab.mattvarone.com/projects/jquery/totop/js/easing.js"></script>
-        <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery.ui.totop.js"></script>
+        <!-- title icon -->
+        <!-- <link rel="shortcut icon" href="{% static 'images/logo.png'%}" /> -->
+
+        <!-- <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery-1.7.2.min.js"></script> -->
+        <!-- <script src="http://lab.mattvarone.com/projects/jquery/totop/js/easing.js"></script> -->
+        <!-- <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery.ui.totop.js"></script> -->
 
         <!--Navbar css-->
-        <link rel="stylesheet" href="{%static 'css/navbar.css'%}">
-        
+        <!-- <link rel="stylesheet" href="{%static 'css/navbar.css'%}"> -->
+
     </head>
-    <body>
-        {% include 'layout/navbar.html' %}
-        <br><br><br>
-        {% block landing_page_content %}
+    <body id="page-top">
+        {% include 'layout/new_navbar.html' %}
+        <!-- {% block landing_page_content %} -->
         {% endblock %}
-        {% include 'layout/footer.html' %}
+        {% include 'layout/new_footer.html' %}
+        <!-- Bootstrap core JavaScript -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+        <!-- Contact form JavaScript -->
+        <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+        <script src="{% static 'js/contact_me.js' %}"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="{% static 'js/agency.min.js' %}"></script>
+
+
+        <!--  datepicker -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript">
+            $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+        </script>
+
+        <!-- Back to top button -->
+        <script type="text/javascript">
+            const btnScrollToTop = document.querySelector("#btnScrollToTop");
+            btnScrollToTop.addEventListener("click",function() {
+                // window.scrollTo(0,0);
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior:"smooth"
+                });
+            });
+        </script>
+
     </body>
 </html>

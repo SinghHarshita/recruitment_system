@@ -1,3 +1,6 @@
+Command to be Executed:
+    pip install social-auth-app-django
+
 In settings.py file
     INSTALLED_APPS = [
         ...,
