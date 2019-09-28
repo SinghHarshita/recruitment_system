@@ -1,8 +1,21 @@
 {% extends "layout/applicant_header.html" %}
 {% block applicant_content %}
-<h1 id = "notifications">Browse Jobs</h1>
-{{name}}
-{{request.session.id}}
-{{request.session.email}}
-<!-- <a href="/applicant">Back</a> -->
+<form action="">
+    <div class="col-md-6 input-group">
+        <input type="text" value="" class="form-control" placeholder="Search...">
+        <!-- <div class="input-group-append">
+            <select name="" id="">
+                <option value="">option1</option>
+                <option value="">option2</option>
+                <option value="">option3</option>
+                <option value="">option4</option>
+            </select>
+        </div> -->
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <i class="nc-icon nc-zoom-split"></i>
+          </div>
+        </div>
+    </div>
+</form>
 {% endblock %}
