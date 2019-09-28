@@ -1,10 +1,12 @@
 {% extends "layout/applicant_header.html" %}
 {% block applicant_content %}
+{% include "applicant_history_details_modal.html" %}
 <div class="row">
+  <!-- {{jobs}} -->
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title">{{name}}'s History</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -19,19 +21,27 @@
                 <th>
                   Status
                 </th>
+                <th>
+                  &nbsp;
+                </th>
                 <!-- <th class="text-right">
                   Salary
                 </th> -->
               </thead>
               <tbody>
-                {% for job in jobs %}
-                <tr>
-                  <td>{{designation}}</td>
-                  <td>{{company}}</td>
-                  <td>{{status}}</td>
+                {% for i,j in jobs.items %}
+                <tr id = "{{i}}">
+                  <td>{{j.job_details.designation}} <br>
+                    <small>{{j.job_details.description}}</small>
+                  </td>
+                  <td>{{j.company_details.c_name  }}</td>
+                  <td>{{j.status}}</td>
+                  <!-- <td> <button class="btn btn-warning" onclick="job_details({{i}},{{jobs}})" data-toggle = "modal" data-target="#history_job_details"> <i class="nc-icon nc-alert-circle-i"></i> </button></td> -->
+                  <td> <a href="#history_job_details" class="btn btn-warning" onclick="job_details({{i}},{{jobs}})" data-toggle = "modal" data-target="#history_job_details"> <i class="nc-icon nc-alert-circle-i"></i> </a></td> 
                 </tr>
                 {% empty %}
-                Applied for no jobs
+                <p class="text-danger"><b>No History Available</b> </p> 
+                <!-- <i class="nc-icon nc-alert-circle-i"></i> -->
                 {% endfor %}
               </tbody>
             </table>
@@ -167,6 +177,30 @@
         </div>
       </div>
     </div> -->
-  </div>
+</div>
+<script>
+    function job_details(i,jobs){
+
+      // console.log(i);
+      // console.log(jobs[i]["job_details"]);
+      // for (let a = 0; a < jobs[i]["job_details"]["skills"].length; a++) {
+      //   console.log(jobs[i]["job_details"]["skills"]);
+      // }
+      var title = "<b>" + jobs[i]["job_details"]["designation"] + "</b>";
+      var body = "<p><small>Posted By " + jobs[i]["company_details"]["c_name"] + "</small></p>" + 
+      "<br>" + "<p><b>Job Description : </b></p><p>" + jobs[i]["job_details"]["description"] + "</p>" + 
+      "<p><b>Skills Required : </b>" + jobs[i]["job_details"]["skills"] + "</p>" + 
+      "<p><b>About " + jobs[i]["company_details"]["c_name"] + "</b></p>" +
+      "<p>" + jobs[i]["company_details"]["c_description"] + "<br><br><small><b>Email : </b>"+ jobs[i]["company_details"]["c_email"] +
+      "<br><b>Contact Number : </b>" + jobs[i]["company_details"]["c_phone"] + 
+      "<br><b>Address : </b>" + jobs[i]["company_details"]["c_address"] + "</small></p>";
+    
+      $("#history_details_modal_title").empty();
+      $("#history_details_modal_title").append(title);
+      $("#history_details_modal_body").empty();
+      $("#history_details_modal_body").append(body);
+    
+    }
+</script>
 <!-- <a href="/applicant">Back</a> -->
 {% endblock %}
