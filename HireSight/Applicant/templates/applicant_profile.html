@@ -27,19 +27,19 @@
               <div class="button-container">
                 <div class="row">
                   <div class="col-lg-3 col-md-6 col-6 ml-auto">
-                    <h5>12
+                    <h5>{{applied_count}}
                       <br>
                       <small>Applied</small>
                     </h5>
                   </div>
                   <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-                    <h5>2
+                    <h5>{{accepted_count}}
                       <br>
                       <small>Accepted</small>
                     </h5>
                   </div>
                   <div class="col-lg-3 mr-auto">
-                    <h5>10
+                    <h5>{{rejected_count}}
                       <br>
                       <small>Rejected</small>
                     </h5>
@@ -50,19 +50,19 @@
           </div>
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Teams</h4>
+              <h4 class="card-title">Skills</h4>
             </div>
             <div class="card-body">
               <ul class="list-unstyled team-members">
-                {% for team in teams %}
+                {% for skill in skills %}
                 <li>
                     <div class="row">
                         <div class="col-md-7 col-7">
-                            Team1
+                            {{skill}}
                             <br />
-                            <span class="text-muted">
+                            <!-- <span class="text-muted">
                                   <small>Team Member</small>
-                            </span>
+                            </span> -->
                         </div>
                     </div>    
                 </li>
@@ -136,7 +136,7 @@
                   <div class="col-md-6 pr-1">
                     <div class="form-group">
                       <label>Email Id : </label>
-                      <input type="text" class="form-control" disabled="" placeholder="Company" value="{{request.session.email}}">
+                      <input type="text" class="form-control" disabled="" placeholder="Email" value="{{request.session.email}}">
                     </div>
                   </div>
                   <!-- <div class="col-md-3 px-1">
@@ -155,24 +155,24 @@
                 <div class="row">
                   <div class="col-md-6 pr-1">
                     <div class="form-group">
-                      <label>Name : </label>
-                      <input type="text" class="form-control" placeholder="Company" value="{{request.session.name}}">
+                      <label>First Name : </label>
+                      <input type="text" class="form-control" placeholder="First Name" value="{{first_name}}">
                     </div>
                   </div>
                   <div class="col-md-6 pl-1">
                     <div class="form-group">
-                        <label>Address : </label>
-                        <input type="text" class="form-control" placeholder="Home Address" value="Mumbai, Maharashtra, India">
+                        <label>Last Name : </label>
+                        <input type="text" class="form-control" placeholder="Last Name" value="{{last_name}}">
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <!-- <div class="col-md-12">
+                  <div class="col-md-12">
                     <div class="form-group">
                       <label>Address</label>
-                      <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
+                      <input type="text" class="form-control" placeholder="Address" value="{{address}}">
                     </div>
-                  </div> -->
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4 pr-1">
@@ -201,6 +201,34 @@
                       <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
                     </div>
                   </div> -->
+                  <div class="col-md-4 pr-1">
+                    <div class="form-group">
+                      <label> Date of Birth :  </label>
+                      <!-- <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea> -->
+                      <input type="date" name="dob" id="dob" class="form-control" placeholder="Date of Birth">
+                    </div>
+                  </div>
+                  <div class="col-md-4 px-1">
+                      <div class="form-group">
+                        <label>Phone number : </label>
+                        <input type="number" class="form-control" placeholder="phone number" value="{{phone}}">
+                      </div>
+                    </div>
+                  <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label> Gender :  </label>
+                        <br>
+                        <!-- <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea> -->
+                        <!-- <input type="date" name="dob" id="dob" class="form-control" placeholder="Date of Birth"> -->
+                        {% if gender == F %}
+                          <input type="radio" name="gender" id="gender"> Male <br>
+                          <input type="radio" name="gender" id="gender" checked> Female
+                        {% else %}
+                          <input type="radio" name="gender" id="gender" checked> Male <br>
+                          <input type="radio" name="gender" id="gender" checked> Female
+                        {% endif %}
+                      </div>
+                    </div>
                 </div>
                 <div class="row">
                   <div class="update ml-auto mr-auto">
