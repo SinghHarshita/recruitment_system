@@ -25,12 +25,15 @@ def company_data(data) :
 def test(request):
     return render(request, "company_test.html", {})
   
-# def log_out(request):
-#     try:
-#         request.session.clear()
-#         del request.user
-#     except:
-#         pass
-#     # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
-#     logout(request)
-#     return redirect('/')
+def log_out(request):
+    try:
+        request.session.clear()
+        del request.user
+    except:
+        pass
+    # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
+    logout(request)
+    return redirect('/')
+    
+def notifications(request):
+    pass

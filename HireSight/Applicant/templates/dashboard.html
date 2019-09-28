@@ -1,6 +1,6 @@
-
 {% extends "layout/applicant_header.html" %}
 {% load static %}
+{% comment %}
 <!-- {% include "partials/applicant_header.html" %}
 {% include "applicant_navbar.html" %}
 {% block dash_content %}
@@ -14,7 +14,7 @@
 <a href="{%url 'notifications' %}" style="color:red;">notifications</a>
 {% endblock %}
 {% include "partials/applicant_footer.html" %} -->
-
+{% endcomment %}
 {% block applicant_content %}
 <h1 id = "dashboard">Dashboard!</h1>
 {{name}}<br>
@@ -23,5 +23,7 @@
 {{cv_file_path}}<br>
 {{address}}<br>
 {{dob}}<br>
+{% comment %}
 <!-- <a href="{%url 'notifications' %}" style="color:red;">notifications</a> -->
+{% endcomment %}
 {% endblock %}
