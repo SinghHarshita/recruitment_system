@@ -9,7 +9,8 @@ def index(request):
     with connection.cursor() as cursor :
         cursor.execute("SELECT * from company where c_id = %s",[request.session["id"]])
         data = company_data(list(cursor.fetchall())[0])
-    return render(request, "company_dashboard.html", data)
+    #return render(request, "company_dashboard.html", data)
+    return render(request, "new_company_dashboard.html", data)
     #return HttpResponse("Hello Comapny!")
 
 def company_data(data) :

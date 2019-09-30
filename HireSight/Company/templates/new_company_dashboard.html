@@ -1,0 +1,138 @@
+{% extends 'layout/new_company_header.html' %}
+{% load static %}
+{% block company %}
+    <div class="row"> 
+        <div class="col-sm-3 col-xs-6"> 
+            <div class="tile-stats tile-red"> 
+                <div class="icon"><i class="entypo-suitcase"></i></div> 
+                <div class="num" data-start="0" data-end="83" data-postfix="" data-duration="1500" data-delay="0">0</div> 
+                <h3>Open Jobs</h3> 
+                <p>lorem ipsem</p> 
+            </div> 
+        </div> 
+        <div class="col-sm-3 col-xs-6"> 
+            <div class="tile-stats tile-green"> 
+                <div class="icon"><i class="entypo-docs"></i></div> 
+                <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500" data-delay="600">0</div> 
+                <h3>Closed Jobs</h3> 
+                <p>Lorem ipsum dolor sit elit.</p> 
+            </div> 
+        </div> 
+        <div class="clear visible-xs"></div> 
+            <div class="col-sm-3 col-xs-6"> 
+                <div class="tile-stats tile-aqua"> 
+                    <div class="icon"><i class="entypo-users"></i></div> 
+                    <div class="num" data-start="0" data-end="23" data-postfix="" data-duration="1500" data-delay="1200">0</div> 
+                    <h3>Applicants</h3> 
+                    <p>Lorem ipsum dolor sit.</p> 
+            </div> 
+        </div> 
+        <div class="col-sm-3 col-xs-6"> 
+            <div class="tile-stats tile-blue"> 
+                <div class="icon"><i class="entypo-rss"></i></div> 
+                <div class="num" data-start="0" data-end="52" data-postfix="" data-duration="1500" data-delay="1800">0</div> 
+                <h3>Hired</h3> 
+                <p>Lorem ipsum dolor sit amet.</p> 
+            </div> 
+        </div> 
+    </div>
+    
+    <br />
+
+    <!-- Table : jobs -->
+    <div class="row"> 
+        <!-- <div class="col-sm-4"> 
+            <div class="panel panel-primary"> 
+                <table class="table table-bordered table-responsive"> 
+                    <thead> 
+                        <tr> 
+                            <th class="padding-bottom-none text-center"> 
+                                <br /> 
+                                <br /> 
+                                <span class="monthly-sales"></span> 
+                            </th> 
+                        </tr> 
+                    </thead> 
+                    <tbody> 
+                        <tr> 
+                            <td class="panel-heading"> <h4>Monthly Sales</h4> </td> 
+                        </tr> 
+                    </tbody> 
+                </table> 
+            </div> 
+        </div>  -->
+        <div class="col-sm-8"> 
+            <div class="panel panel-primary"> 
+                <div class="panel-heading"> 
+                    <div class="panel-title">Jobs Posted</div> 
+                    <div class="panel-options"> 
+                        <!-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg">
+                            <i class="entypo-cog"></i>
+                        </a>  -->
+                        <a href="#" data-rel="collapse">
+                            <i class="entypo-down-open"></i>
+                        </a> 
+                        <!-- <a href="#" data-rel="reload">
+                            <i class="entypo-arrows-ccw"></i>
+                        </a>  -->
+                        <!-- <a href="#" data-rel="close">
+                            <i class="entypo-cancel"></i>
+                        </a>  -->
+                    </div> 
+                </div> 
+                <table class="table table-bordered table-responsive table-hover"> 
+                    <thead> 
+                        <tr> 
+                            <th>#</th> 
+                            <th>Designation</th> 
+                            <th>Skills</th> 
+                            <th>Exprience</th>
+                            <th>Qualification</th>
+                            <th>Closing Date</th>
+                            <th>Applicants</th> 
+                        </tr> 
+                    </thead> 
+                    <tbody> 
+                        {% for job in jobs %}
+                            <tr>
+                                <td>{{index}}</td>
+                                <td>{{job.designation}}</td>
+                                <td>{{job.skills}}</td>
+                                <td>{{job.exprience}}</td>
+                                <td>{{job.qualification}}</td>
+                                <td>{{job.last_date}}</td>
+                                <td>
+                                    {% if job.applicants.count > 0 %} 
+                                    <a href="#">
+                                        <i class="entypo-eye"></i>
+                                    </a>
+                                    {% else %}
+                                        No applicants
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            No Jobs Posted Yet!
+                        {% endfor %}
+                        <!-- <tr>  
+                        </tr> 
+                        <tr> 
+                            <td>2</td> 
+                            <td>Ylli Pylla</td> 
+                            <td>Font-end Developer</td> 
+                            <td class="text-center"><span class="inlinebar-2">1,3,4,5,3,5</span></td> 
+                        </tr> 
+                        <tr> 
+                            <td>3</td> 
+                            <td>Arlind Nushi</td> 
+                            <td>Co-founder</td> 
+                            <td class="text-center"><span class="inlinebar-3">5,3,2,5,4,5</span></td> 
+                        </tr>  -->
+                    </tbody> 
+                </table> 
+            </div> 
+        </div> 
+    </div>
+
+    <br />
+{% endblock %}
