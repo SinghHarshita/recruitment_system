@@ -1,6 +1,487 @@
-{% extends "layout/company_index.html" %}
+{% extends "layout/new_company_header.html" %}
 
 {% block content %}
-<h1>{{name}}</h1>
-<h2>View Jobs</h2>
+<!-- <h1>{{name}}</h1>
+<h2>View Jobs</h2> -->
+
+<h2>
+    <strong>Edit {{job}}</strong>
+</h2>
+
+<form id="rootwizard-2" method="post" action="" class="form-wizard validate"> 
+    <div class="steps-progress"> 
+        <div class="progress-indicator"></div> 
+    </div> 
+    <ul> 
+        <li class="active"><a href="#tab2-1" data-toggle="tab"><span>1</span>Job Details</a> </li> 
+        <li> <a href="#tab2-2" data-toggle="tab"><span>2</span>Job Requirements</a> </li> 
+        <li> <a href="#tab2-3" data-toggle="tab"><span>3</span>Knockout Questions</a> </li> 
+        <li> <a href="#tab2-4" data-toggle="tab"><span>4</span>Questions</a> </li> 
+        <!-- <li> <a href="#tab2-5" data-toggle="tab"><span>5</span>Register</a> </li>  -->
+    </ul> 
+        <div class="tab-content"> 
+            <div class="tab-pane active" id="tab2-1"> 
+                <div class="row"> 
+                    <div class="col-md-6"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="designation">Designation</label> 
+                            <input class="form-control" name="designation" id="designation" data-validate="required" value="{{designation}}" placeholder="Designation" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-6"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="no_of_vacancies">Enter number of vacancies</label> 
+                            <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" value="{{no_of_vacancies}}" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-12"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="description">Job Description</label> 
+                            <textarea class="form-control autogrow" name="description" id="description" data-validate="minlength[4]" value="{{description}}" rows="5" placeholder="Enter job description"></textarea> 
+                        </div> 
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                            <label class="control-label" for="last_date">Closing Date</label>
+                            <input class="form-control datepicker" name="last_date" id="last_date" data-validate="required" value="{{last_date}}" placeholder="Closing Date" /> 
+                    </div>
+                </div> 
+            </div> 
+            <div class="tab-pane" id="tab2-2"> 
+                <div class="row"> 
+                    <div class="col-md-8"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="qualification">Qualification</label> 
+                            <input type = "text" class="form-control" name="qualification" id="qualification" data-validate="required" value="{{qualification}}" placeholder="Enter Qualifications separated by space" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="experience">Experience</label> 
+                            <input type = "number" class="form-control" name="experience" id="experience" data-validate="required" value="{{experience}}" placeholder="Enter experience in years" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-12"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="skills">Skills</label> 
+                            <input class="form-control" name="skills" id="skills" data-validate="required" value="{{skills}}" placeholder="Enter skills here ( separated by comma(,) )" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <!-- <div class="row"> 
+                    <div class="col-md-5"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="city">City</label> 
+                            <input class="form-control" name="city" id="city" data-validate="required" placeholder="Current city" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="state">State</label> 
+                            <select name="test" class="selectboxit"> 
+                                <optgroup label="United States"> 
+                                    <option value="1">Alabama</option> 
+                                    <option value="2">Boston</option> 
+                                    <option value="3">Ohaio</option> 
+                                    <option value="4">New York</option> 
+                                    <option value="5">Washington</option> 
+                                </optgroup> 
+                            </select> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-3"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="zip">Zip</label>
+                            <input class="form-control" name="zip" id="zip" data-mask="** *** **" data-validate="required" placeholder="Zip Code" /> 
+                        </div> 
+                    </div> 
+                </div>  -->
+            </div> 
+            <div class="tab-pane" id="tab2-3"> 
+                <!-- <strong>Primary School</strong> 
+                <br /> 
+                <br /> 
+                <div class="row"> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="prim_subject">Subject</label> 
+                            <input class="form-control" name="prim_subject" id="prim_subject" data-validate="require" placeholder="Graduation Degree" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="prim_school">School Name</label> 
+                            <input class="form-control" name="prim_school" id="prim_school" placeholder="Which school did you attended" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="prim_date_start">Start Date</label> 
+                            <input class="form-control datepicker" name="prim_date_start" id="prim_date_start" data-start-view="2" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="prim_date_end">End Date</label> 
+                            <input class="form-control datepicker" name="prim_date_end" id="prim_date_end" data-start-view="2" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <br /> 
+                <strong>Secondary School</strong> 
+                <br /> <br /> 
+                <div class="row"> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="second_subject">Subject</label> 
+                            <input class="form-control" name="second_subject" id="second_subject" data-validate="require" placeholder="High School" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="second_school">School Name</label> 
+                            <input class="form-control" name="second_school" id="second_school" placeholder="Which school did you attended" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="second_date_start">Start Date</label> 
+                            <input class="form-control datepicker" name="second_date_start" id="second_date_start" data-start-view="2" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="second_date_end">End Date</label> 
+                            <input class="form-control datepicker" name="second_date_end" id="second_date_end" data-start-view="2" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <br /> 
+                <div class="row"> 
+                    <div class="col-md-12"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="other_qualifications">
+                                <strong>Other Qualifications</strong>
+                            </label> 
+                            <textarea class="form-control autogrow" name="other_qualifications" id="other_qualifications" placeholder="List one subject per row"></textarea> 
+                        </div> 
+                    </div> 
+                </div>  -->
+                <strong>Knockout Questions</strong>
+                <div class="col-md-8">
+                        <div class="form-group"> 
+                            <label class="control-label" for="k_question1">Question</label> 
+                            <input class="form-control" name="k_question1" id="k_question1" data-validate="required" placeholder="Question" />
+                            <br /> 
+                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" name="no_of_options1" id = "no_of_options1" data-validate="number" placeholder="Number of Options" onchange="" />
+                        <br />
+                    </div>
+                </div>
+            </div> 
+            <div class="tab-pane" id="tab2-4"> 
+                <!-- <strong>Current &amp; Past Jobs</strong> 
+                <br /> <br /> 
+                <div class="row"> 
+                    <div class="col-md-1"> 
+                        <label class="control-label">&nbsp;</label> 
+                        <p class="text-right"> 
+                            <span class="label label-info">1</span> 
+                        </p> 
+                    </div> 
+                    <div class="col-md-3"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_1">Company Name</label> 
+                            <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current job" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_1">Job Position</label> 
+                            <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current position" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_start_date_1">Start Date</label> 
+                            <input class="form-control datepicker" name="job_position_start_date_1" id="job_position_start_date_1" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_end_date_1">End Date</label> 
+                            <input class="form-control datepicker" name="job_position_end_date_1" id="job_position_end_date_1" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                </div>  -->
+                <!-- <div class="row"> 
+                    <div class="col-md-1"> 
+                        <label class="control-label">&nbsp;</label> 
+                        <p class="text-right"> 
+                            <span class="label label-info">2</span> 
+                        </p> 
+                    </div> 
+                    <div class="col-md-3"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_2">Company Name</label> 
+                            <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_2">Job Position</label> 
+                            <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_start_date_2">Start Date</label> 
+                            <input class="form-control datepicker" name="job_position_start_date_2" id="job_position_start_date_2" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_end_date_2">End Date</label> 
+                            <input class="form-control datepicker" name="job_position_end_date_2" id="job_position_end_date_2" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-1"> 
+                        <label class="control-label">&nbsp;</label> 
+                        <p class="text-right"> 
+                            <span class="label label-info">3</span> 
+                        </p> 
+                    </div> 
+                    <div class="col-md-3"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_3">Company Name</label> 
+                            <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_3">Job Position</label> 
+                            <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_start_date_3">Start Date</label> 
+                            <input class="form-control datepicker" name="job_position_start_date_3" id="job_position_start_date_3" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_end_date_3">End Date</label> 
+                            <input class="form-control datepicker" name="job_position_end_date_3" id="job_position_end_date_3" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-1"> 
+                        <label class="control-label">&nbsp;</label> 
+                        <p class="text-right"> 
+                            <span class="label label-info">4</span> 
+                        </p> 
+                    </div> 
+                    <div class="col-md-3"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_4">Company Name</label> 
+                            <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-4"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_4">Job Position</label> 
+                            <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_start_date_4">Start Date</label> 
+                            <input class="form-control datepicker" name="job_position_start_date_4" id="job_position_start_date_4" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-2"> 
+                        <div class="form-group"> 
+                            <label class="control-label" for="job_position_end_date_4">End Date</label> 
+                            <input class="form-control datepicker" name="job_position_end_date_4" id="job_position_end_date_4" placeholder="(Optional)" /> 
+                        </div> 
+                    </div> 
+                </div>  -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="question_type_1">Type</label>
+                                <select name="question_type_1" id="question_type_1">
+                                    <option value="aptitude">Aptitude</option>
+                                    <option value="maths">Maths</option>
+                                    <option value="english">English</option>
+                                    <option value="programming">Programming</option>
+                                    <option value="other">Other</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="question_1">Question</label>
+                            <input type="text" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="answer_1">Answer</label>
+                            <input type="text" class="form-control" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="marks_1">Marks</label>
+                                <input type="text" class="form-control" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>Options</p>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /> 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"> 
+                    <button type="submit" class="btn btn-primary">Update</button> 
+                </div>
+            </div> 
+            <!-- <div class="tab-pane" id="tab2-5"> 
+                <div class="form-group"> 
+                    <label class="control-label">Choose Username</label> 
+                    <div class="input-group"> 
+                        <div class="input-group-addon"> 
+                            <i class="entypo-user"></i> 
+                        </div> 
+                        <input type="text" class="form-control" name="username" id="username" data-validate="required,minlength[5]" data-message-minlength="Username must have minimum of 5 chars." placeholder="Could also be your email" /> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-6"> 
+                        <div class="form-group"> 
+                            <label class="control-label">Choose Password</label> 
+                            <div class="input-group"> 
+                                <div class="input-group-addon"> 
+                                    <i class="entypo-key"></i> 
+                                </div> 
+                                <input type="password" class="form-control" name="password" id="password" data-validate="required" placeholder="Enter strong password" /> 
+                            </div> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-6"> 
+                        <div class="form-group"> 
+                            <label class="control-label">Repeat Password</label> 
+                            <div class="input-group"> 
+                                <div class="input-group-addon"> 
+                                    <i class="entypo-cw"></i> 
+                                </div> 
+                                <input type="password" class="form-control" name="password" id="password2" data-validate="required,equalTo[#password]" data-message-equal-to="Passwords doesn't match." placeholder="Confirm password" /> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-6"> 
+                        <div class="form-group"> 
+                            <label class="control-label">Include Services</label> 
+                            <select multiple="multiple" name="my-select[]" class="form-control multi-select"> 
+                                <option value="1">Web Builder</option> 
+                                <option value="2" selected>Server Side Scripting</option> 
+                                <option value="3">Secure Connection</option> 
+                                <option value="4" selected>Database Access</option> 
+                                <option value="5" selected>Email</option> 
+                                <option value="6">eCommerce</option> 
+                            </select> 
+                        </div> 
+                    </div> 
+                    <div class="col-md-6"> 
+                        <div class="form-group"> 
+                            <label class="control-label">Gender</label> 
+                            <br /> 
+                            <div class="make-switch switch-small" data-on-label="M" data-off-label="F"> 
+                                <input type="checkbox" checked> 
+                            </div> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label class="control-label">Subscribe for Newsletter</label> 
+                            <br /> 
+                            <div class="make-switch switch-small" data-on-label="Yes" data-off-label="No"> 
+                                <input type="checkbox" checked> 
+                            </div> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label class="control-label">Auto-renew Subscription 
+                                <span class="label label-warning">Yearly</span> 
+                            </label> 
+                            <br /> 
+                            <div class="make-switch switch-small" data-on-label="Yes" data-off-label="No"> 
+                                <input type="checkbox" checked> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="form-group"> 
+                    <div class="checkbox checkbox-replace"> 
+                        <input type="checkbox" name="chk-rules" id="chk-rules" data-validate="required" data-message-message="You must accept rules in order to complete this registration."> 
+                        <label for="chk-rules">By registering I accept terms and conditions.</label> 
+                    </div> 
+                </div> 
+                <div class="form-group"> 
+                    <button type="submit" class="btn btn-primary">Finish Registration</button> 
+                </div> 
+            </div>  -->
+            <ul class="pager wizard"> 
+                <li class="previous"> <a href="#"><i class="entypo-left-open"></i> Previous</a> </li> 
+                <li class="next"> <a href="#">Next <i class="entypo-right-open"></i></a> </li> 
+            </ul> 
+        </div> 
+</form>
+
+{% endblock %}
+
+{% block footer %}
+<script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
+<script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
+<script src="{% static 'assets/js/jquery.inputmask.bundle.js' %}" id="script-resource-10"></script> 
+<script src="{% static 'assets/js/selectboxit/jquery.selectBoxIt.min.js' %}" id="script-resource-11"></script> 
+<script src="{% static 'assets/js/bootstrap-datepicker.js' %}" id="script-resource-12"></script> 
+<script src="{% static 'assets/js/bootstrap-switch.min.js' %}" id="script-resource-13"></script> 
+<script src="{% static 'assets/js/jquery.multi-select.js' %}" id="script-resource-14"></script> 
+<script src="{% static 'assets/js/neon-chat.js' %}" id="script-resource-15"></script>
 {% endblock %}
