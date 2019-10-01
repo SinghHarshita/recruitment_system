@@ -64,7 +64,9 @@
         <div class="col-sm-8"> 
             <div class="panel panel-primary"> 
                 <div class="panel-heading"> 
-                    <div class="panel-title">Jobs Posted</div> 
+                    <div class="panel-title">
+                        <h2 class="text-center">Jobs Posted</h2> 
+                    </div> 
                     <div class="panel-options"> 
                         <!-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg">
                             <i class="entypo-cog"></i>
@@ -84,12 +86,12 @@
                     <thead> 
                         <tr> 
                             <th>#</th> 
-                            <th>Designation</th> 
-                            <th>Skills</th> 
-                            <th>Exprience</th>
-                            <th>Qualification</th>
-                            <th>Closing Date</th>
-                            <th>Applicants</th> 
+                            <th class="text-center">Designation</th> 
+                            <th class="text-center">Skills</th> 
+                            <th class="text-center">Exprience</th>
+                            <th class="text-center">Qualification</th>
+                            <th class="text-center">Closing Date</th>
+                            <th class="text-center">Applicants</th> 
                         </tr> 
                     </thead> 
                     <tbody> 
@@ -112,7 +114,7 @@
                                 </td>
                             </tr>
                         {% empty %}
-                            No Jobs Posted Yet!
+                            <h4 class="text-center"><em>No Jobs Posted Yet!</em></h4>
                         {% endfor %}
                         <!-- <tr>  
                         </tr> 

@@ -42,10 +42,10 @@
                     </a> 
                 </div> 
                 <div class="sui-hover inline-links animate-in"> 
-                    <a href="#"> 
+                    <a href="{% url 'company_profile' %}"> 
                         <i class="entypo-user"></i>Profile
                     </a> 
-                    <a href="#"> 
+                    <a href="{% url 'company_post_jobs' %}"> 
                         <i class="entypo-briefcase"></i>Jobs
                     </a> 
                     <a href="{% url 'logout' %}"> 
@@ -59,7 +59,7 @@
             <ul id="main-menu" class="main-menu"> 
                 <!-- Changed -->
                 <li>
-                    <a href=""><i class="entypo-gauge"></i>
+                    <a href="{% url 'index' %}"><i class="entypo-gauge"></i>
                     <span class="title">Dashboard</span></a>
                 </li> 
             <!-- <li class="has-sub"> <a href="layouts/layout-api/index.html">

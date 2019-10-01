@@ -1,6 +1,6 @@
 {% extends "layout/new_company_header.html" %}
 
-{% block content %}
+{% block company %}
 <!-- <h1>{{name}}</h1>
 <h2>View Jobs</h2> -->
 
@@ -474,7 +474,7 @@
 </form>
 
 {% endblock %}
-
+{% load static %}
 {% block footer %}
 <script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
 <script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
