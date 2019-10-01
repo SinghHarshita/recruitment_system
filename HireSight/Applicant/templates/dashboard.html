@@ -16,12 +16,167 @@
 {% include "partials/applicant_footer.html" %} -->
 
 {% block applicant_content %}
-<h1 id = "dashboard">Dashboard!</h1>
+<!-- <h1 id = "dashboard">Dashboard!</h1>
 {{name}}<br>
 {{gender}}<br>
 {{phone}}<br>
 {{cv_file_path}}<br>
 {{address}}<br>
-{{dob}}<br>
+{{dob}}<br> -->
 <!-- <a href="{%url 'notifications' %}" style="color:red;">notifications</a> -->
+
+<div class="row"> 
+    <div class="col-sm-3 col-xs-6"> 
+        <div class="tile-stats tile-red"> 
+            <div class="icon"><i class="entypo-suitcase"></i></div> 
+            <div class="num" data-start="0" data-end="83" data-postfix="" data-duration="1500" data-delay="0">0</div> 
+            <h3>Applied</h3> 
+            <p>lorem ipsem</p> 
+        </div> 
+    </div> 
+    <div class="col-sm-3 col-xs-6"> 
+        <div class="tile-stats tile-green"> 
+            <div class="icon"><i class="entypo-docs"></i></div> 
+            <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500" data-delay="600">0</div> 
+            <h3>Accepted</h3> 
+            <p>Lorem ipsum dolor sit elit.</p> 
+        </div> 
+    </div> 
+    <div class="clear visible-xs"></div> 
+        <div class="col-sm-3 col-xs-6"> 
+            <div class="tile-stats tile-aqua"> 
+                <div class="icon"><i class="entypo-users"></i></div> 
+                <div class="num" data-start="0" data-end="23" data-postfix="" data-duration="1500" data-delay="1200">0</div> 
+                <h3>Rejected</h3> 
+                <p>Lorem ipsum dolor sit.</p> 
+        </div> 
+    </div> 
+    <div class="col-sm-3 col-xs-6"> 
+        <div class="tile-stats tile-blue"> 
+            <div class="icon"><i class="entypo-rss"></i></div> 
+            <div class="num" data-start="0" data-end="52" data-postfix="" data-duration="1500" data-delay="1800">0</div> 
+            <h3>On Hold</h3> 
+            <p>Lorem ipsum dolor sit amet.</p> 
+        </div> 
+    </div> 
+</div>
+
+<br />
+
+<!-- Table -->
+<div class="row"> 
+    <!-- <div class="col-sm-4"> 
+        <div class="panel panel-primary"> 
+            <table class="table table-bordered table-responsive"> 
+                <thead> 
+                    <tr> 
+                        <th class="padding-bottom-none text-center"> 
+                            <br /> 
+                            <br /> 
+                            <span class="monthly-sales"></span> 
+                        </th> 
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    <tr> 
+                        <td class="panel-heading"> <h4>Monthly Sales</h4> </td> 
+                    </tr> 
+                </tbody> 
+            </table> 
+        </div> 
+    </div>  -->
+    <div class="col-sm-8"> 
+        <div class="panel panel-primary"> 
+            <div class="panel-heading"> 
+                <div class="panel-title"><h2>{{name}}'s History</h2></div> 
+                <div class="panel-options"> 
+                    <!-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg">
+                        <i class="entypo-cog"></i>
+                    </a>  -->
+                    <a href="#" data-rel="collapse">
+                        <i class="entypo-down-open"></i>
+                    </a> 
+                    <!-- <a href="#" data-rel="reload">
+                        <i class="entypo-arrows-ccw"></i>
+                    </a>  -->
+                    <!-- <a href="#" data-rel="close">
+                        <i class="entypo-cancel"></i>
+                    </a>  -->
+                </div> 
+            </div> 
+            <table class="table table-bordered table-responsive table-hover"> 
+                <thead> 
+                    <tr> 
+                        <!-- <th>#</th>  -->
+                        <th class="text-center">Job</th> 
+                        <th class="text-center">Company</th> 
+                        <th class="text-center">Status</th>
+                        <th>&nbsp;</th>
+                        <!-- <th>Closing Date</th>
+                        <th>Applicants</th>  -->
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    {% for i,j in jobs.items %}
+                        <tr id = "{{i}}">
+                            <td>{{j.job_details.designation}} <br>
+                                <small>{{j.job_details.description}}</small>
+                            </td>
+                            <td class="text-center">{{j.company_details.c_name  }}</td>
+                            <td class="text-center">{{j.status}}</td>
+                            <!-- <td> <button class="btn btn-warning" onclick="job_details({{i}},{{jobs}})" data-toggle = "modal" data-target="#history_job_details"> <i class="nc-icon nc-alert-circle-i"></i> </button></td> -->
+                            <td class="text-center"> <a href="#history_job_details" class="btn btn-primary" onclick="job_details({{i}},{{jobs}})" data-toggle = "modal" data-target="#history_job_details"> <i class="entypo-info-circled"></i> </a></td> 
+                        </tr>
+                    {% empty %}
+                        <h4 class="text-center"><em>No history available!</em></h4>
+                    {% endfor %}
+                    <!-- <tr>  
+                    </tr> 
+                    <tr> 
+                        <td>2</td> 
+                        <td>Ylli Pylla</td> 
+                        <td>Font-end Developer</td> 
+                        <td class="text-center"><span class="inlinebar-2">1,3,4,5,3,5</span></td> 
+                    </tr> 
+                    <tr> 
+                        <td>3</td> 
+                        <td>Arlind Nushi</td> 
+                        <td>Co-founder</td> 
+                        <td class="text-center"><span class="inlinebar-3">5,3,2,5,4,5</span></td> 
+                    </tr>  -->
+                </tbody> 
+            </table> 
+        </div> 
+    </div> 
+</div>
+
+<br />
+{% include 'applicant_history_details_modal.html' %}
+{% endblock %}
+
+{% block applicant_footer %}
+<script>
+    function job_details(i,jobs){
+
+      // console.log(i);
+      // console.log(jobs[i]["job_details"]);
+      // for (let a = 0; a < jobs[i]["job_details"]["skills"].length; a++) {
+      //   console.log(jobs[i]["job_details"]["skills"]);
+      // }
+      var title = "<b>" + jobs[i]["job_details"]["designation"] + "</b>";
+      var body = "<p><small>Posted By " + jobs[i]["company_details"]["c_name"] + "</small></p>" + 
+      "<br>" + "<p><b>Job Description : </b></p><p>" + jobs[i]["job_details"]["description"] + "</p>" + 
+      "<p><b>Skills Required : </b>" + jobs[i]["job_details"]["skills"] + "</p>" + 
+      "<p><b>About " + jobs[i]["company_details"]["c_name"] + "</b></p>" +
+      "<p>" + jobs[i]["company_details"]["c_description"] + "<br><br><small><b>Email : </b>"+ jobs[i]["company_details"]["c_email"] +
+      "<br><b>Contact Number : </b>" + jobs[i]["company_details"]["c_phone"] + 
+      "<br><b>Address : </b>" + jobs[i]["company_details"]["c_address"] + "</small></p>";
+    
+      $("#history_details_modal_title").empty();
+      $("#history_details_modal_title").append(title);
+      $("#history_details_modal_body").empty();
+      $("#history_details_modal_body").append(body);
+    
+    }
+</script>
 {% endblock %}
