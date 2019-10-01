@@ -48,7 +48,7 @@
                     <a href="#"> 
                         <i class="entypo-briefcase"></i>Jobs
                     </a> 
-                    <a href="#"> 
+                    <a href="{% url 'logout' %}"> 
                         <i class="entypo-lock"></i>Log Out
                     </a> 
                     <span class="close-sui-popup">&times;</span>
@@ -115,7 +115,7 @@
                     </li> 
                 </ul> 
             </li>  -->
-            <li> <a href="" >
+            <li> <a href="{% url 'company_post_jobs' %}" >
                 <i class="entypo-docs"></i>
                 <span class="title">Post Jobs</span></a> 
             </li> 
