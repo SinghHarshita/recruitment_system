@@ -1,0 +1,72 @@
+{% extends 'layout/new_company_header.html' %}
+{% load static %}
+{% block company %}
+<div class="row">
+    <div class="col-sm-9">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title" style="color: black; font-size: 24px;">
+                    <em>Job Details</em>
+                </div>
+                <div class="panel-options">
+                    <a href="#" data-rel="collapse">
+                        <i class="entypo-down-open"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!--
+                    Job details here
+                -->
+            </div> 
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-responsive table-hover table-primary">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Knockout Questions Score</td>
+            <td>Score</td>
+            <td>CV Rank</td>
+            <td>Total Rank</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for applicant in applicants %}
+            <tr>
+                <td>{{applicant.index}}</td>
+                <td>{{applicant.name}}</td>
+                <td>{{applicant.knockout_score}}</td>
+                <td>{{applicant.score}}</td>
+                <td>{{applicant.cv_rank}}</td>
+                <td>{{applicant.total_rank}}</td>
+                {% if applicant.status == "0" %}
+                    <td><button class="btn btn-primary">Accpet</button></td>
+                    <td><button class="btn btn-danger">Reject</button></td>
+                    <td><button class="btn btn-success">On Hold</button></td>
+                {% elif applicant.status == "1" %}
+                    <td>Accepted</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                {% elif applicant.status == "2" %}
+                    <td>&nbsp;</td>
+                    <td>Rejected</td>
+                    <td>&nbsp;</td>
+                {% elif applicant.status == "3" %}
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>On Hold</td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <p class="text-center" style="color: black; font-size:16px;"><em>No Applicants</em></p>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

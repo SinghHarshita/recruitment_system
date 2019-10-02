@@ -1,21 +1,75 @@
 {% extends "layout/applicant_header.html" %}
 {% block applicant_content %}
-<form action="">
-    <div class="col-md-6 input-group">
-        <input type="text" value="" class="form-control" placeholder="Search...">
-        <!-- <div class="input-group-append">
-            <select name="" id="">
-                <option value="">option1</option>
-                <option value="">option2</option>
-                <option value="">option3</option>
-                <option value="">option4</option>
-            </select>
-        </div> -->
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <i class="nc-icon nc-zoom-split"></i>
-          </div>
-        </div>
+
+<!--
+    Write all JS functions in footer block or in a separate file
+-->
+
+<div class="mail-env">
+  <div class="mail-body">
+    <div class="row" id="search_results">
+      <!-- Make the necessary changes -->
+        {% for i,j in search_job_results %}
+            <div class="member-entry" style="margin-left: 30px; margin-right: 30px;"> 
+                <!-- <a href="../timeline/index.html" class="member-img"> 
+                    <img src="../../assets/images/member-1.jpg" class="img-rounded" /> 
+                    <i class="entypo-forward"></i> 
+                </a>  -->
+                <div class="member-details"> 
+                    <h4> 
+                        <a href="#job_details" data-toggle="modal" data-target="#job_details" onclick="job_details({{i}},{{j}})">Designation : {{designation}}</a> 
+                        <a href="" class="btn btn-primary pull-right">Apply Now</a>
+                    </h4> 
+                    <div class="row info-list"> 
+                        <div class="col-sm-4"> 
+                            <i class="entypo-briefcase"></i>Posted By <a href="#">{{c_name}}</a> 
+                        </div> 
+                        <div class="col-sm-4"> 
+                            <i class="entypo-mail"></i> <a href="#">{{c_email}}</a> 
+                        </div> 
+                        <div class="col-sm-4"> 
+                            <i class="entypo-phone"></i> <a href="#">{{c_phone}}</a> 
+                        </div> 
+                        <div class="clear"></div> 
+                        <div class="col-sm-4"> 
+                            <i class="entypo-tools"></i> Skills: <a href="#">{{skills}}</a> 
+                        </div> 
+                        <div class="col-sm-4"> 
+                            <i class="entypo-newspaper"></i>Qualification: <a href="#">{{qualification}}</a> 
+                        </div> 
+                        <div class="col-sm-4"> 
+                            <i class="entypo-calendar"></i> Apply By <a href="#">{{last_date}}</a> 
+                        </div>
+                        <!-- <div class="clear"></div>
+                        <div class="col-sm-4"> 
+                            <a href="" class="btn btn-primary">Apply Now</a> 
+                        </div>  -->
+                    </div> 
+                </div> 
+            </div>
+        {% empty %}
+            <h2 class="text-center"><em>No jobs found!</em></h2>
+        {% endfor %}
     </div>
-</form>
+</div>
+  {% include 'browse_jobs_filters.html' %}
+</div>
+{% include 'job_details_modal.html' %}
+{% endblock %}
+
+{% block applicant_footer %}
+
+<script>
+
+  function job_details(i,j) {
+    //For rendering job details in a modal
+    // Make the necessary changes
+      $("#job_details_modal_title").empty();
+      $("#job_details_modal_title").append(i);
+      $("#job_details_modal_body").empty();
+      $("#job_details_modal_body").append(j);
+  }
+
+</script>
+
 {% endblock %}

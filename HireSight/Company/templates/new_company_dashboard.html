@@ -92,6 +92,7 @@
                             <th class="text-center">Qualification</th>
                             <th class="text-center">Closing Date</th>
                             <th class="text-center">Applicants</th> 
+                            <th>&nbsp;</th>
                         </tr> 
                     </thead> 
                     <tbody> 
@@ -105,11 +106,18 @@
                                 <td>{{job.last_date}}</td>
                                 <td>
                                     {% if job.applicants.count > 0 %} 
-                                    <a href="#">
+                                    <a href="{% url 'company_view_applicants' %}" class="btn btn-danger">
                                         <i class="entypo-eye"></i>
                                     </a>
                                     {% else %}
                                         No applicants
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if job.last_date < job.current_date %}
+                                        &nbsp;
+                                    {% else %}
+                                        <a href="{% url 'company_view_jobs' %}" class="btn btn-primary"><i class="entypo-pencil"></i></a>
                                     {% endif %}
                                 </td>
                             </tr>

@@ -166,12 +166,12 @@
                     </li> 
                 </ul> 
             </li>  -->
-            <li>
+            <!-- <li>
                 <a href="{% url 'company_view_jobs' %}">
                     <i class="entypo-tools"></i>
                     <span class="title">Edit Job Details</span>
                 </a>
-            </li>
+            </li> -->
             <!-- <li class="has-sub"> <a href="mailbox/main/index.html">
                 <i class="entypo-mail"></i>
                 <span class="title">Mailbox</span>
@@ -192,7 +192,14 @@
                 </ul> 
             </li>  -->
             <li>
-                <a href="">
+                <a href="{% url 'index' %}">
+                    <i class="entypo-tools"></i>
+                    <span class="title">Edit Job Details</span>
+                </a>
+            </li>
+                
+            <li>
+                <a href="{% url 'index' %}">
                     <i class="entypo-users"></i>
                     <span class="title">View Applicants</span>
                 </a>

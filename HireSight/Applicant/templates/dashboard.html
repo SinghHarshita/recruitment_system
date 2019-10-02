@@ -64,7 +64,7 @@
 <br />
 
 <!-- Table -->
-<div class="row"> 
+<div class="row" style="color: black;"> 
     <!-- <div class="col-sm-4"> 
         <div class="panel panel-primary"> 
             <table class="table table-bordered table-responsive"> 
@@ -108,9 +108,9 @@
                 <thead> 
                     <tr> 
                         <!-- <th>#</th>  -->
-                        <th class="text-center">Job</th> 
-                        <th class="text-center">Company</th> 
-                        <th class="text-center">Status</th>
+                        <th class="text-center" style="color: black; font-size: 14px;">Job</th> 
+                        <th class="text-center" style="color: black; font-size: 14px;">Company</th> 
+                        <th class="text-center" style="color: black; font-size: 14px;">Status</th>
                         <th>&nbsp;</th>
                         <!-- <th>Closing Date</th>
                         <th>Applicants</th>  -->
@@ -151,6 +151,8 @@
 </div>
 
 <br />
+
+<a href="{% url 'test' %}" class="btn btn-primary">Apply now</a>
 {% include 'applicant_history_details_modal.html' %}
 {% endblock %}
 
