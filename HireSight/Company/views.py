@@ -29,7 +29,7 @@ def company_post_jobs(request):
     return render(request, "company_post_jobs.html", data)
 
 def company_view_applicants(request):
-    return render(request, "company_view_applicants.html", data)
+    return render(request, "view_applicants.html", data)
 
 def company_view_jobs(request):
     return render(request, "company_view_jobs.html", data)

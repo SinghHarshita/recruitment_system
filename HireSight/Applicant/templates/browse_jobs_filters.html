@@ -1,0 +1,130 @@
+<!--
+
+    Write all JS fucntions in browse_jobs.html in the footer block
+    or in a separate file
+    
+-->
+
+    <!-- Sidebar --> 
+    <div class="mail-sidebar"> 
+        <!-- Form for filtering jobs --> 
+        <form method="get" role="form" class="mail-search form-groups-bordered">
+            <!-- Search Button -->
+            <div class="mail-sidebar-row hidden-xs"> 
+                <!-- 
+                    Write the ajax function in browse_jobs.html 
+                    in the footer block 
+                -->
+                
+                <button type="submit" href="" class="btn btn-success btn-icon btn-block">Search<i class="entypo-search"></i> </button> 
+            </div>
+
+            <!-- menu -->  
+            <ul class="mail-menu"> 
+                <li>
+                    <br> 
+                    <div class="form-group">
+                        <p class="text-center"> <label class="control-label" style="color: black;">Location</label> </p>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="location" id="mumbai" value="mumbai">Mumbai</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="location" id="delhi" value="delhi">Delhi</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="location" id="kolkata" value="kolkata">Kolkata</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="location" id="kolkata" value="kolkata">Chennai</label>
+                        </div>
+                    </div>
+                </li> 
+                <li> 
+                    <br>
+                    <div class="form-group">
+                        <p class="text-center"><label class="control-label" style="color: black;">Designation</label> </p>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="ceo" value="ceo">CEO</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="project_manager" value="project_manager">Project Manager</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="programmer" value="programmer">Programmer</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="department_head" value="department_head">Department Head</label>
+                        </div>
+                    </div>
+                </li> 
+                <li> 
+                    <!-- <a href="#">Drafts</a>  -->
+                    <br>
+                    <div class="form-group">
+                        <p class="text-center"><label class="control-label" style="color: black;">Skills</label> </p>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="html" value="html">HTML</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="sql" value="sql">SQL</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="java" value="java">Java</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="python" value="Python">Python</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="cpp" value="cpp">C++</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="css" value="css">CSS</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="javascript" value="javascript">Javascript</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="skills" id="dbms" value="dbms">DBMS</label>
+                        </div>
+                    </div>
+                </li> 
+                <li class="text-center"> 
+                    <!-- <a href="#"> <span class="badge badge-gray pull-right">1</span>Spam</a>  -->
+                    <br>
+                    <div class="form-group">
+                        <p><label class="control-label" style="color: black;">Experience</label> </p>
+                        <!-- <div class="slider slider-gold" data-postfix=" $" data-min="0" data-max="10" data-min-val="0" data-max-val="10"></div> -->
+                        <!-- <div class="slider slider-gold" data-vertical="0" data-postfix="years" data-min="0" data-max="10" data-min-val="0" data-max-val="1"></div> -->
+                        <input type="number" name="experience" id="experience">
+                    </div>
+                </li> 
+                <li> 
+                    <!-- <a href="#">Trash</a>  -->
+                    <br>
+                    <div class="form-group">
+                        <p class="text-center"><label class="control-label" style="color: black;">Qualification</label> </p>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="qualification" id="hsc" value="hsc">HSC</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="be" value="be">Bachelor of Engg.</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="mtech" value="mtech">Master of Technology</label>
+                        </div>
+                        <div class="checkbox" style="margin-left: 40px; color: black">
+                            <label><input type="checkbox" name="designation" id="PhD" value="PhD">PhD</label>
+                        </div>
+                    </div>
+                </li> 
+            </ul> 
+            <!-- <div class="mail-distancer"></div>
+            <h4>Tags</h4>  -->
+            <!-- menu --> 
+            <!-- <ul class="mail-menu"> 
+                <li> <a href="#"> <span class="badge badge-danger badge-roundless pull-right"></span>Business</a> </li> 
+                <li> <a href="#"> <span class="badge badge-info badge-roundless pull-right"></span>Sports</a> </li> 
+                <li> <a href="#"> <span class="badge badge-warning badge-roundless pull-right"></span>Friends</a> </li> 
+            </ul>  -->
+        </form>
+    </div>

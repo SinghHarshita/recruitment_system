@@ -1,0 +1,72 @@
+{% extends "layout/applicant_header.html" %}
+{% block applicant_content %}
+
+<form id="rootwizard-2" method="post" action="" class="form-wizard validate"> 
+    <div class="steps-progress"> 
+        <div class="progress-indicator"></div> 
+    </div> 
+    <ul>
+        {% for i,j in types.items %}
+            {% if i %}
+                <li><a href="#tab{{i}}" data-toggle="tab"><span>{{i}}</span>{{j}}</a> </li> 
+            {% else %}
+                <li class="active"> <a href="#tab{{i}}" data-toggle="tab"><span>{{i}}</span>{{j}}</a> </li> 
+            {% endif %}
+                <!-- <li> <a href="#tab2-3" data-toggle="tab"><span>3</span>Knockout Questions</a> </li> 
+            <li> <a href="#tab2-4" data-toggle="tab"><span>4</span>Questions</a> </li>  -->
+        {% empty %}
+            <p class="text-center" style="color: black; font-size: 30px;"><em>No questions uploaded!</em></p>    
+        {% endfor %} 
+        <!-- <li> <a href="#tab2-5" data-toggle="tab"><span>5</span>Register</a> </li>  -->
+    </ul> 
+        <div class="tab-content">
+            {% for i,j in questions.items %} 
+                <div class="tab-pane active" id="tab{{i}}"> 
+                    <!-- Deicded on the basis of json -->
+                    <div class="row"> 
+                        <div class="col-md-12"> 
+                            <p style="color: black; font-size: 13px;">{{question}}</p> 
+                        </div> 
+                        <!-- <div class="col-md-6"> 
+                            <div class="form-group"> 
+                                <label class="control-label" for="no_of_vacancies">Enter number of vacancies</label> 
+                                <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
+                            </div> 
+                        </div>  -->
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="option1"></label>
+                                <input type="radio" name="option1" id="option1">Option1
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            {%empty%}
+            {% endfor %}
+            <ul class="pager wizard"> 
+                <li class="previous"> <a href="#"><i class="entypo-left-open"></i> Previous</a> </li> 
+                <li class="next"> <a href="#">Next <i class="entypo-right-open"></i></a> </li> 
+            </ul> 
+        </div> 
+</form>
+
+{% endblock %}
+
+{% block applicant_footer %}
+{% load static %}
+<!--
+    All JS functions to be written in this block or in a separate file
+-->
+
+<script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
+<script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
+<script src="{% static 'assets/js/jquery.inputmask.bundle.js' %}" id="script-resource-10"></script> 
+<script src="{% static 'assets/js/selectboxit/jquery.selectBoxIt.min.js' %}" id="script-resource-11"></script> 
+<script src="{% static 'assets/js/bootstrap-datepicker.js' %}" id="script-resource-12"></script> 
+<script src="{% static 'assets/js/bootstrap-switch.min.js' %}" id="script-resource-13"></script> 
+<script src="{% static 'assets/js/jquery.multi-select.js' %}" id="script-resource-14"></script> 
+<script src="{% static 'assets/js/neon-chat.js' %}" id="script-resource-15"></script>
+
+{% endblock %}
