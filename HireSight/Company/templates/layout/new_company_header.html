@@ -4,8 +4,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-        <meta name="description" content="Neon Admin Panel" /> <meta name="author" content="Laborator.co" /> 
-        <!-- <link rel="icon" href="assets/images/favicon.ico">  -->
+        <meta name="description" content="Neon Admin Panel" /> <meta name="author" content="Laborator.co" />
+        <link rel="icon" href="{% static 'img/logo_title.png' %}">
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141030632-1"></script> 
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -31,6 +31,7 @@
     </head> 
     <body class="page-body">
         {% include 'layout/navbar.html' %}
+        {% include 'layout/notifications.html' %}
         <div class="main-content">
 
             <div class="row"> 
@@ -86,7 +87,7 @@
             {% block company %}
             {% endblock %}
         </div>
-        {% include 'layout/notifications.html' %}
+
         {% block footer %}
         {% endblock %}
         {% include 'layout/new_company_footer.html' %}

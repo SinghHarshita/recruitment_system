@@ -1,6 +1,12 @@
 {% extends 'layout/new_company_header.html' %}
 {% load static %}
 {% block company %}
+<!--        
+
+    All JS functions to be written in footer block 
+    or in a separate file
+
+-->
     <div class="row"> 
         <div class="col-sm-3 col-xs-6"> 
             <div class="tile-stats tile-red"> 
@@ -61,7 +67,7 @@
                 </table> 
             </div> 
         </div>  -->
-        <div class="col-sm-8"> 
+        <div class="col-md-10"> 
             <div class="panel panel-primary"> 
                 <div class="panel-heading"> 
                     <div class="panel-title">
@@ -86,35 +92,35 @@
                     <thead> 
                         <tr> 
                             <th>#</th> 
-                            <th class="text-center">Designation</th> 
-                            <th class="text-center">Skills</th> 
-                            <th class="text-center">Exprience</th>
-                            <th class="text-center">Qualification</th>
-                            <th class="text-center">Closing Date</th>
-                            <th class="text-center">Applicants</th> 
+                            <th class="text-center" style="color: black"><b>Designation</b></th> 
+                            <th class="text-center" style="color: black"><b>Skills</b></th> 
+                            <th class="text-center" style="color: black"><b>Experience</b></th>
+                            <th class="text-center" style="color: black"><b>Qualification</b></th>
+                            <th class="text-center" style="color: black"><b>Closing Date</b></th>
+                            <th class="text-center" style="color: black"><b>Applicants</b></th> 
                             <th>&nbsp;</th>
                         </tr> 
                     </thead> 
                     <tbody> 
-                        {% for job in jobs %}
+                        {% for i,j in jobs.items %}
                             <tr>
-                                <td>{{index}}</td>
-                                <td>{{job.designation}}</td>
-                                <td>{{job.skills}}</td>
-                                <td>{{job.exprience}}</td>
-                                <td>{{job.qualification}}</td>
-                                <td>{{job.last_date}}</td>
-                                <td>
-                                    {% if job.applicants.count > 0 %} 
+                                <td style="color: black">{{i}}</td>
+                                <td style="color: black">{{j.requirements.designation}}</td>
+                                <td style="color: black">{{j.requirements.skills}}</td>
+                                <td style="color: black">{{j.requirements.experience}}</td>
+                                <td style="color: black">{{j.requirements.qualification}}</td>
+                                <td style="color: black">{{j.last_date}}</td>
+                                <td class="text-center">
+                                    {% if job.applicants != 0 %} 
                                     <a href="{% url 'company_view_applicants' %}" class="btn btn-danger">
                                         <i class="entypo-eye"></i>
                                     </a>
                                     {% else %}
-                                        No applicants
+                                        <em>No applicants</em>
                                     {% endif %}
                                 </td>
-                                <td>
-                                    {% if job.last_date < job.current_date %}
+                                <td class="text-center">
+                                    {% if j.last_date < j.current_date %}
                                         &nbsp;
                                     {% else %}
                                         <a href="{% url 'company_view_jobs' %}" class="btn btn-primary"><i class="entypo-pencil"></i></a>
@@ -145,4 +151,7 @@
     </div>
 
     <br />
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
