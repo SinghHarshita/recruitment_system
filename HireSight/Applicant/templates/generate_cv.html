@@ -1,0 +1,500 @@
+<!DOCTYPE html> 
+{% load static %}
+<html lang="en"> 
+    <head> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <meta name="description" content="Neon Admin Panel" /> <meta name="author" content="Laborator.co" /> 
+        <link rel="icon" href="{% static 'img/logo_title.png' %}">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141030632-1"></script> 
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('config', 'UA-141030632-1', {"groups":"laborator_analytics","link_attribution":true,"linker":{"accept_incoming":true,"domains":["laborator.co","kaliumtheme.com","oxygentheme.com","neontheme.com","themeforest.net","laborator.ticksy.com"]}});
+        </script> 
+        <title>HireSight : Applicant</title> 
+        <link rel="stylesheet" href="{% static 'assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}" id="style-resource-1"> 
+        <link rel="stylesheet" href="{% static 'assets/css/font-icons/entypo/css/entypo.css' %}" id="style-resource-2"> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic" id="style-resource-3"> 
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}" id="style-resource-4"> 
+        <link rel="stylesheet" href="{% static 'assets/css/neon-core.css' %}" id="style-resource-5"> 
+        <link rel="stylesheet" href="{% static 'assets/css/neon-theme.css' %}" id="style-resource-6"> 
+        <link rel="stylesheet" href="{% static 'assets/css/neon-forms.css' %}" id="style-resource-7"> 
+        <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" id="style-resource-8"> 
+        <link rel="stylesheet" href="{% static 'assets/css/skins/black.css' %}" id="style-resource-9">
+        <script src="{% static 'assets/js/jquery-1.11.3.min.js' %}"></script> 
+        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]--> 
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --> 
+        <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script> 
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> <![endif]--> 
+        <!-- TS1564916736: Neon - Responsive Admin Template created by Laborator --> 
+    </head> 
+    <body class="page-body" data-url="https://demo.neontheme.com">
+
+        <div class="main-content">
+            <div class="page-container"> 
+                <div class="well well-sm" style="margin-top: 50px; margin-bottom: 30px; 
+                    margin-left: 60px; margin-right: 60px; padding-left: 30px;"> 
+                    <h4>Please fill the details to register new account.</h4> 
+                </div> 
+                        
+                <form id="rootwizard-2" method="post" action="" class="form-wizard validate" style="margin-top: 70px;"> 
+                    <div class="steps-progress"> 
+                        <div class="progress-indicator"></div> 
+                    </div> 
+                    <ul> 
+                        <li class="active"> 
+                            <a href="#tab2-1" data-toggle="tab"><span>1</span>Personal Info</a> </li> 
+                        <li> <a href="#tab2-2" data-toggle="tab"><span>2</span>Address</a> </li> 
+                        <li> <a href="#tab2-3" data-toggle="tab"><span>3</span>Education</a> </li> 
+                        <li> <a href="#tab2-4" data-toggle="tab"><span>4</span>Work Experience</a> </li> 
+                        <li> <a href="#tab2-5" data-toggle="tab"><span>5</span>Register</a> </li> 
+                    </ul> 
+                    <div class="tab-content"> 
+                        <div class="tab-pane active" id="tab2-1"> 
+                            <div class="row"> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="full_name">Full Name</label> 
+                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" placeholder="Your full name" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="birthdate">Date of Birth</label> 
+                                        <input class="form-control" name="birthdate" id="birthdate" data-validate="required" data-mask="date" placeholder="Pre-formatted birth date" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-12"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="about">Write Something About You</label> 
+                                        <textarea class="form-control autogrow" name="about" id="about" data-validate="minlength[10]" rows="5" placeholder="Could be used also as Motivation Letter"></textarea> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="tab-pane" id="tab2-2"> 
+                            <div class="row"> 
+                                <div class="col-md-8"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="street">Street</label> 
+                                        <input class="form-control" name="street" id="street" data-validate="required" placeholder="Enter your street address" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="door_no">Door no.</label> 
+                                        <input class="form-control" name="door_no" id="door_no" data-validate="number" placeholder="Numbers only" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-12"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="address_line_2">Address Line 2</label> 
+                                        <input class="form-control" name="address_line_2" id="address_line_2" placeholder="(Optional) Secondary Address" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-5"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="city">City</label> 
+                                        <input class="form-control" name="city" id="city" data-validate="required" placeholder="Current city" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="state">State</label> 
+                                        <select name="test" class="selectboxit"> 
+                                            <option selected>Choose...</option>
+                                            <option>Andhra Pradesh</option>
+                                            <option>Arunachal Pradesh</option>
+                                            <option>Assam</option>
+                                            <option>Bihar</option>
+                                            <option>Chhattisgarh</option>
+                                            <option>Goa</option>
+                                            <option>Gujarat</option>
+                                            <option>Haryana</option>
+                                            <option>Himachal Pradesh</option>
+                                            <option>Jammu and Kashmir</option>
+                                            <option>Jharkhand</option>
+                                            <option>Karnataka</option>
+                                            <option>Kerala</option>
+                                            <option>Madhya Pradesh</option>
+                                            <option>Maharashtra</option>
+                                            <option>Manipur</option>
+                                            <option>Meghalaya</option>
+                                            <option>Mizoram</option>
+                                            <option>Nagaland</option>
+                                            <option>Odisha</option>
+                                            <option>Punjab</option>
+                                            <option>Rajasthan</option>
+                                            <option>Sikkim</option>
+                                            <option>Tamil Nadu</option>
+                                            <option>Telangana</option>
+                                            <option>Tripura</option>
+                                            <option>Uttar Pradesh</option>
+                                            <option>Uttarakhand</option>
+                                            <option>West Bengal</option> 
+                                        </select> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="zip">Zip</label>
+                                        <input class="form-control" name="zip" id="zip" data-mask="** *** **" data-validate="required" placeholder="Zip Code" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="tab-pane" id="tab2-3"> 
+                            <strong>Primary School</strong> 
+                            <br /> 
+                            <br /> 
+                            <div class="row"> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="prim_subject">Subject</label> 
+                                        <input class="form-control" name="prim_subject" id="prim_subject" data-validate="require" placeholder="Graduation Degree" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="prim_school">School Name</label> 
+                                        <input class="form-control" name="prim_school" id="prim_school" placeholder="Which school did you attended" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="prim_date_start">Start Date</label> 
+                                        <input class="form-control datepicker" name="prim_date_start" id="prim_date_start" data-start-view="2" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="prim_date_end">End Date</label> 
+                                        <input class="form-control datepicker" name="prim_date_end" id="prim_date_end" data-start-view="2" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <br /> 
+                            <strong>Secondary School</strong> 
+                            <br /> <br /> 
+                            <div class="row"> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="second_subject">Subject</label> 
+                                        <input class="form-control" name="second_subject" id="second_subject" data-validate="require" placeholder="High School" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="second_school">School Name</label> 
+                                        <input class="form-control" name="second_school" id="second_school" placeholder="Which school did you attended" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="second_date_start">Start Date</label> 
+                                        <input class="form-control datepicker" name="second_date_start" id="second_date_start" data-start-view="2" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="second_date_end">End Date</label> 
+                                        <input class="form-control datepicker" name="second_date_end" id="second_date_end" data-start-view="2" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <br /> 
+                            <div class="row"> 
+                                <div class="col-md-12"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="other_qualifications">
+                                            <strong>Other Qualifications</strong>
+                                        </label> 
+                                        <textarea class="form-control autogrow" name="other_qualifications" id="other_qualifications" placeholder="List one subject per row"></textarea> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="tab-pane" id="tab2-4"> 
+                            <strong>Current &amp; Past Jobs</strong> 
+                            <br /> <br /> 
+                            <div class="row"> 
+                                <div class="col-md-1"> 
+                                    <label class="control-label">&nbsp;</label> 
+                                    <p class="text-right"> 
+                                        <span class="label label-info">1</span> 
+                                    </p> 
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_1">Company Name</label> 
+                                        <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current job" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_1">Job Position</label> 
+                                        <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current position" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_start_date_1">Start Date</label> 
+                                        <input class="form-control datepicker" name="job_position_start_date_1" id="job_position_start_date_1" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_end_date_1">End Date</label> 
+                                        <input class="form-control datepicker" name="job_position_end_date_1" id="job_position_end_date_1" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-1"> 
+                                    <label class="control-label">&nbsp;</label> 
+                                    <p class="text-right"> 
+                                        <span class="label label-info">2</span> 
+                                    </p> 
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_2">Company Name</label> 
+                                        <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_2">Job Position</label> 
+                                        <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_start_date_2">Start Date</label> 
+                                        <input class="form-control datepicker" name="job_position_start_date_2" id="job_position_start_date_2" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_end_date_2">End Date</label> 
+                                        <input class="form-control datepicker" name="job_position_end_date_2" id="job_position_end_date_2" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-1"> 
+                                    <label class="control-label">&nbsp;</label> 
+                                    <p class="text-right"> 
+                                        <span class="label label-info">3</span> 
+                                    </p> 
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_3">Company Name</label> 
+                                        <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_3">Job Position</label> 
+                                        <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_start_date_3">Start Date</label> 
+                                        <input class="form-control datepicker" name="job_position_start_date_3" id="job_position_start_date_3" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_end_date_3">End Date</label> 
+                                        <input class="form-control datepicker" name="job_position_end_date_3" id="job_position_end_date_3" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-1"> 
+                                    <label class="control-label">&nbsp;</label> 
+                                    <p class="text-right"> 
+                                        <span class="label label-info">4</span> 
+                                    </p> 
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_4">Company Name</label> 
+                                        <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_4">Job Position</label> 
+                                        <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_start_date_4">Start Date</label> 
+                                        <input class="form-control datepicker" name="job_position_start_date_4" id="job_position_start_date_4" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-2"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label" for="job_position_end_date_4">End Date</label> 
+                                        <input class="form-control datepicker" name="job_position_end_date_4" id="job_position_end_date_4" placeholder="(Optional)" /> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="tab-pane" id="tab2-5"> 
+                            <div class="form-group"> 
+                                <label class="control-label">Choose Username</label> 
+                                <div class="input-group"> 
+                                    <div class="input-group-addon"> 
+                                        <i class="entypo-user"></i> 
+                                    </div> 
+                                    <input type="text" class="form-control" name="username" id="username" data-validate="required,minlength[5]" data-message-minlength="Username must have minimum of 5 chars." placeholder="Could also be your email" /> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label">Choose Password</label> 
+                                        <div class="input-group"> 
+                                            <div class="input-group-addon"> 
+                                                <i class="entypo-key"></i> 
+                                            </div> 
+                                            <input type="password" class="form-control" name="password" id="password" data-validate="required" placeholder="Enter strong password" /> 
+                                        </div> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label">Repeat Password</label> 
+                                        <div class="input-group"> 
+                                            <div class="input-group-addon"> 
+                                                <i class="entypo-cw"></i> 
+                                            </div> 
+                                            <input type="password" class="form-control" name="password" id="password" data-validate="required,equalTo[#password]" data-message-equal-to="Passwords doesn't match." placeholder="Confirm password" /> 
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="row"> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label">Include Services</label> 
+                                        <select multiple="multiple" name="my-select[]" class="form-control multi-select"> 
+                                            <option value="1">Web Builder</option> 
+                                            <option value="2" selected>Server Side Scripting</option> 
+                                            <option value="3">Secure Connection</option> 
+                                            <option value="4" selected>Database Access</option> 
+                                            <option value="5" selected>Email</option> 
+                                            <option value="6">eCommerce</option> 
+                                        </select> 
+                                    </div> 
+                                </div> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group"> 
+                                        <label class="control-label">Gender</label> 
+                                        <br /> 
+                                        <div class="make-switch switch-small" data-on-label="M" data-off-label="F"> 
+                                            <input type="checkbox" checked> 
+                                        </div> 
+                                    </div> 
+                                    <div class="form-group"> 
+                                        <label class="control-label">Subscribe for Newsletter</label> 
+                                        <br /> 
+                                        <div class="make-switch switch-small" data-on-label="Yes" data-off-label="No"> 
+                                            <input type="checkbox" checked> 
+                                        </div> 
+                                    </div> 
+                                    <div class="form-group"> 
+                                        <label class="control-label">Auto-renew Subscription 
+                                            <span class="label label-warning">Yearly</span> 
+                                        </label> 
+                                        <br /> 
+                                        <div class="make-switch switch-small" data-on-label="Yes" data-off-label="No"> 
+                                            <input type="checkbox" checked> 
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="form-group"> 
+                                <div class="checkbox checkbox-replace"> 
+                                    <input type="checkbox" name="chk-rules" id="chk-rules" data-validate="required" data-message-message="You must accept rules in order to complete this registration."> 
+                                    <label for="chk-rules">By registering I accept terms and conditions.</label> 
+                                </div> 
+                            </div> 
+                            <div class="form-group"> 
+                                <button type="submit" class="btn btn-primary">Finish Registration</button> 
+                            </div> 
+                        </div> 
+                        <ul class="pager wizard"> 
+                            <li class="previous"> <a href="#"><i class="entypo-left-open"></i> Previous</a> </li> 
+                            <li class="next"> <a href="#">Next <i class="entypo-right-open"></i></a> </li> 
+                        </ul> 
+                    </div> 
+                </form>
+            </div>
+        </div>
+
+
+        <link rel="stylesheet" href="{% static 'assets/js/jvectormap/jquery-jvectormap-1.2.2.css' %}" id="style-resource-1"> 
+        <link rel="stylesheet" href="{% static 'assets/js/rickshaw/rickshaw.min.css' %}" id="style-resource-2"> 
+        <script src="{% static 'assets/js/gsap/TweenMax.min.js' %}" id="script-resource-1"></script> 
+        <script src="{% static 'assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}" id="script-resource-2"></script> 
+        <script src="{% static 'assets/js/bootstrap.js' %}" id="script-resource-3"></script> 
+        <script src="{% static 'assets/js/joinable.js' %}" id="script-resource-4"></script> 
+        <script src="{% static 'assets/js/resizeable.js' %}" id="script-resource-5"></script> 
+        <script src="{% static 'assets/js/neon-api.js' %}" id="script-resource-6"></script> 
+        <script src="{% static 'assets/js/cookies.min.js' %}" id="script-resource-7"></script> 
+        <script src="{% static 'assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js' %}" id="script-resource-8"></script> 
+        <script src="{% static 'assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js' %}" id="script-resource-9"></script> 
+        <script src="{% static 'assets/js/jquery.sparkline.min.js' %}" id="script-resource-10"></script> 
+        <script src="{% static 'assets/js/rickshaw/vendor/d3.v3.js' %}" id="script-resource-11"></script> 
+        <script src="{% static 'assets/js/rickshaw/rickshaw.min.js' %}" id="script-resource-12"></script> 
+        <script src="{% static 'assets/js/raphael-min.js' %}" id="script-resource-13"></script> 
+        <script src="{% static 'assets/js/morris.min.js' %}" id="script-resource-14"></script> 
+        <script src="{% static 'assets/js/toastr.js' %}" id="script-resource-15"></script> 
+        <script src="{% static 'assets/js/neon-chat.js' %}" id="script-resource-16"></script> 
+
+        <script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
+        <script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
+        <script src="{% static 'assets/js/jquery.inputmask.bundle.js' %}" id="script-resource-10"></script> 
+        <script src="{% static 'assets/js/selectboxit/jquery.selectBoxIt.min.js' %}" id="script-resource-11"></script> 
+        <script src="{% static 'assets/js/bootstrap-datepicker.js' %}" id="script-resource-12"></script> 
+        <script src="{% static 'assets/js/bootstrap-switch.min.js' %}" id="script-resource-13"></script> 
+        <script src="{% static 'assets/js/jquery.multi-select.js' %}" id="script-resource-14"></script> 
+        <script src="{% static 'assets/js/neon-chat.js' %}" id="script-resource-15"></script>
+
+        <link rel="stylesheet" href="{% static 'assets/js/selectboxit/jquery.selectBoxIt.css' %}" id="style-resource-1">
+        <!-- JavaScripts initializations and stuff --> 
+        <script src="{% static 'assets/js/neon-custom.js' %}" id="script-resource-17"></script> 
+        
+        <!-- Demo Settings --> 
+        <script src="{% static 'assets/js/neon-demo.js' %}" id="script-resource-18"></script> 
+        <!-- <script src="{% static 'assets/js/neon-skins.js' %}" id="script-resource-19"></script>  -->
+        <script type="text/javascript">
+    
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-28991003-7']);
+            _gaq.push(['_setDomainName', 'demo.neontheme.com']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+            
+        </script>
+    </body>
+</html>

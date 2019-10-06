@@ -111,3 +111,6 @@ def notifications(request) :
 def test(request):
     global data
     return render(request, "apply_job_q_a.html", data)
+
+def generate_cv(request):
+    return render(request, "generate_cv.html")
