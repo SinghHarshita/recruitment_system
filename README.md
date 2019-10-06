@@ -33,7 +33,27 @@
     Note : The prefix 'c' indicates company. So c_name would be company name
 
 2. Apply Now
-    
+    Clicked from browse_jobs.html
+    URL and function in veiws.py : test
+    The html page that is rendered is apply_job_q_a.html
+
+    JSON to be rendered : 
+    data["types"] = {
+        0 : "type0",
+        1 : "type1",
+        2 : "type2",
+        .
+        .
+        .
+    }
+
+    data["questions"] = {
+        "type" : {
+            "question" : 
+            "options" : [],
+        }
+    }
+
 3. View CV
 4. Edit CV
 5. Generate CV
