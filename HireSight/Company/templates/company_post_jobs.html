@@ -19,8 +19,8 @@
         <ul> 
             <li class="active"><a href="#tab2-1" data-toggle="tab"><span>1</span>Job Details</a> </li> 
             <li> <a href="#tab2-2" data-toggle="tab"><span>2</span>Job Requirements</a> </li> 
-            <li> <a href="#tab2-3" data-toggle="tab"><span>3</span>Knockout Questions</a> </li> 
-            <li> <a href="#tab2-4" data-toggle="tab"><span>4</span>Questions</a> </li> 
+            <li class=""> <a href="#tab2-3" data-toggle="tab"><span>3</span>Knockout Questions</a> </li> 
+            <li class=""> <a href="#tab2-4" data-toggle="tab"><span>4</span>Questions</a> </li> 
             <!-- <li> <a href="#tab2-5" data-toggle="tab"><span>5</span>Register</a> </li>  -->
         </ul> 
             <div class="tab-content"> 
@@ -176,19 +176,26 @@
                             </div> 
                         </div> 
                     </div>  -->
-                    <strong>Knockout Questions</strong>
+                    <!-- <strong>Knockout Questions</strong> -->
                     <div class="col-md-8">
-                            <div class="form-group"> 
-                                <label class="control-label" for="k_question1">Question</label> 
-                                <input class="form-control" name="k_question1" id="k_question1" data-validate="required" placeholder="Question" />
+                            <div class="form-group">
+                                    <label class="control-label" for="k_question1">Question</label> 
+                                    <input class="form-control" name="k_question1" id="k_question1" data-validate="required" placeholder="Question" />
                                 <br /> 
                             </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input class="form-control" name="no_of_options1" id = "no_of_options1" data-validate="number" placeholder="Number of Options" onchange="" />
+                            <label class="control-label" for="no_of_options1">Number of Options</label>
+                            <input type = "number" class="form-control" name="no_of_options1" id = "no_of_options1" data-validate="required" placeholder="Number of Options" onchange="addKnockOutOptions()" />
                             <br />
                         </div>
+                    </div>
+                    <div id="feilds1">
+                        
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-primary" onclick="addKQuestion()">Add Question</button>
                     </div>
                 </div> 
                 <div class="tab-pane" id="tab2-4"> 
@@ -481,6 +488,63 @@
 
 
 {% block footer %}
+
+<script>
+    // Adding options for knockout questions
+    var k_q_no = 0;
+    var k_x = 1;
+
+    function addKnockOutOptions() {
+        //var num = $("#no_of_options1").getattribute("value");
+        var num = $("#no_of_options1").val();
+        //console.log(num);
+        if(num > k_q_no) {
+                //console.log(num);
+                var add = num - k_q_no;
+                k_q_no = num;
+                var openingRowDiv = "<div class = 'row'>";
+                var openingColumnDiv = "<div class = 'col-sm-6'>";
+                var closingDiv = "</div>";
+                //$("#feilds")
+                
+                for (let i = 0; i < add; i++) {
+                    console.log("hello");
+                    var html = openingRowDiv + openingColumnDiv 
+                    +  "<div class='form-group'> <label class='control-label' for='option" + (k_x) + "'>"+"Option" 
+                    +"</label><input class='form-control' type='text' name ='option" + (k_x) + "' data-validate='required' /></div>" 
+                    + closingDiv + openingColumnDiv
+                    +  "<div class='form-group'> <label class='control-label' for='marks" + (k_x) + "'>"+ "Marks" 
+                    +"</label><input class='form-control' type='text' name ='Marks" + (k_x) + "' data-validate='required' /></div>" 
+                    + closingDiv + closingDiv
+                    $("#feilds1").append(html);
+                    k_x++;
+                }
+            }
+            else{
+                
+            }
+    }
+
+    // Adding another knockout question
+    var feilds = 1;
+    function addKQuestion() {
+        feilds ++;
+        var html = "<div class='row'>" + "<div class='col-sm-8'>" 
+        + "<div class='form-group'>" + "<label class='control-label' for='k_question"+feilds+"'>" 
+        + "</label>" + "<input class='form-control' name='k_question"+feilds+"' data-validate='required' placeholder='Question' />"
+        +"</div>" + "</div>" 
+        +"<div class='col-md-4'>" 
+        + "<div class='form-group'>"
+        + "<label class='control-label' for='no_of_options"+feilds+
+        "'>Number of Options</label>"
+        + "<input class='form-control' name='no_of_options'"+feilds+"  type='number' data-validate='required' plcaeholder='Enter the number of options' />"
+        +" </div>"
+        + "</div>" 
+        +"</div>" 
+        
+    }
+
+</script>
 
 <script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
 <script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
