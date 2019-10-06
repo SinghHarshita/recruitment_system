@@ -1,5 +1,97 @@
 {% extends "layout/new_company_header.html" %}
 {% load static %}
 {% block company %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h1 style="color: black"><em>{{name}}'s Profile</em></h1>
+                </div>
+                <div class="panel-options">
+                    <a href="" class="btn">Save Changes</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                    <!-- Company Name -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="name" value="{{name}}" data-validate="required">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Email</label>
+                                <input type="text" class="form-control" name="name" id="name" value="{{email}}" data-validate="required">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description" class="control-label">Description</label>
+                                <textarea name="description" id="" cols="30" rows="10" class="form-control" data-validate="minlength[10]">{{descp}}</textarea>
+                                <!-- <input type="text" class="form-control" name="description" id="name" value="{{descp}}" data-validate="required"> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact" class="control-label">Contact</label>
+                                <input type="text" class="form-control" name="contact" id="name" value="{{contact}}" data-validate="required">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">Address</label>
+                                    <textarea name="address" id="" cols="30" rows="10" class="form-control" data-validate="required">{{address}}
+                                    </textarea>
+                                    <!-- <input type="text" class="form-control" name="name" id="name" value="{{phone}}" data-validate="required"> -->
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <!-- Alternative Email Address -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="alternative_email_id" class="control-label">Alternative Email</label>
+                                <input type="text" class="form-control" name="alternative_email_id" id="name" value="{{alternative_email_id}}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
+<script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
+<script src="{% static 'assets/js/jquery.inputmask.bundle.js' %}" id="script-resource-10"></script> 
+<script src="{% static 'assets/js/selectboxit/jquery.selectBoxIt.min.js' %}" id="script-resource-11"></script> 
+<script src="{% static 'assets/js/bootstrap-datepicker.js' %}" id="script-resource-12"></script> 
+<script src="{% static 'assets/js/bootstrap-switch.min.js' %}" id="script-resource-13"></script> 
+<script src="{% static 'assets/js/jquery.multi-select.js' %}" id="script-resource-14"></script> 
+<script src="{% static 'assets/js/neon-chat.js' %}" id="script-resource-15"></script>
 
 {% endblock %}
