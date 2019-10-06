@@ -85,6 +85,7 @@ def company_view_jobs(request):
         cursor.execute("SELECT * from jobs where c_id = %s and last_date >= %s",[request.session['id'],date.today()])
         jobs = list(cursor.fetchall())
     # Looping through all list of active jobs
+    final_arr = []
     for job in jobs:
         var1 = eval(job[2])
         temp = dict()
@@ -149,6 +150,7 @@ def company_view_jobs(request):
         temp["3"] = {
             "questions" : arr
         }
+        final_arr.append(temp)
         # return HttpResponse(temp.items()) 
 
         # temp_list1 = list(temp_arr[0][1])
@@ -176,9 +178,12 @@ def company_view_jobs(request):
         #         "answer" : "",
         #         "marks" : [],
         #     }
+    for i,j in enumerate(final_arr):
+        dict1[i] = j
+    dict1['count'] = range(1,len(final_arr)+1)
 
-    # return HttpResponse(temp.items()) #Final dictionary data
-    return render(request, "company_view_jobs.html", temp)
+    # return HttpResponse(dict1.items()) #Final dictionary data
+    return render(request, "company_view_jobs.html", dict1)
 
 def company_statistics(request):
     """ Renders view for company statistics """

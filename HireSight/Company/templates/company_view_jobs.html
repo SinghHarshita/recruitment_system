@@ -3,9 +3,29 @@
 {% block company %}
 <!-- <h1>{{name}}</h1>
 <h2>View Jobs</h2> -->
+<script>
+    function change_job(var1){
+        alert(var1);
+    }
+</script>
 
 <h2>
-    <strong>Edit {{job}}</strong>
+    <!-- <strong>Edit {{job}}</strong> -->
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="font:20px arial" onchange="change_job()">Jobs
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="ul">
+<!--               <li><a onclick="change_job()" value = "html">HTML</a></li>
+              <li><a onclick="change_job()">CSS</a></li>
+              <li><a onclick="change_job()">JavaScript</a></li>
+              <li><a onclick="change_job()">About Us</a></li> -->
+          {% for i in count %}
+            <li><a onclick="change_job({{i}})">Job {{i}}</a></li>
+          {% empty %}
+            <li><a onclick="change_job(null)">No Jobs</a><li>
+          {% endfor %}
+        </ul>
+      </div>
 </h2>
 
 <form id="rootwizard-2" method="post" action="" class="form-wizard validate"> 
