@@ -1,1 +1,39 @@
-# recruitment_system
+## recruitment_system
+
+1. Browse Jobs
+    The main html file is browse_jobs.html.
+    The filters are coded in the the file browse_jobs_filters.html
+    
+    AJAX function is to be written to render results on the basis of the search filters.    
+    (Note : All JS functions to be written in a separate file or in the footer block)
+
+    JSON structure to be rendered on the front end :
+    data['search_job_details'] = {
+        0 : {
+            'j_id' : __,
+            'c_name' : ______,
+            "c_email" : ________,
+            "c_phone" : ______,
+            "c_description" : ______,
+            "c_address" : _________,
+            "skills" : ("",""...),
+            "qualification" : ("",""...),
+            "designation" : _______,
+            "description" : __________,
+            "no_of_vacancies" : ____________,
+            "last_date" : ________,
+        },
+        1 : {.....},
+        .
+        .
+        .
+        n : {......},
+        "current_date" : ___________, (this is the present date)
+    }
+    Note : The prefix 'c' indicates company. So c_name would be company name
+
+2. Apply Now
+    
+3. View CV
+4. Edit CV
+5. Generate CV
