@@ -67,3 +67,5 @@
 
 5. Generate CV
     The front end yet has to be written
+
+6. Edit Profile
