@@ -18,9 +18,11 @@ def index(request):
 
 def company_data(data) :
     """ Returns company details """
+
     return {
         "name" : data[1],
         "address" : data[2],
+        "email" : data[3],
         "alternative_email_id" : data[4],
         "contact" : data[5],
         "descp" : data[6],

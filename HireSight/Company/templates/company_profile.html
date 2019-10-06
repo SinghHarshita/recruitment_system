@@ -2,214 +2,96 @@
 {% load static %}
 {% block company %}
 <div class="row">
-        <div class="col-md-4">
-          <div class="card card-user">
-            <div class="image">
-              <img src="{% static 'img/damir-bosnjak.jpg' %}" alt="...">
-            </div>
-            <div class="card-body">
-              <div class="author">
-                <a href="#">
-                  <img class="avatar border-gray" src="{% static 'img/mike.jpg' %}" alt="...">
-                  <!-- <i class="avatar nc-icon nc-circle-10 border-gray"></i> -->
-                  <h5 class="title">{{name}}</h5>
-                </a>
-                <p class="description">
-                  {{request.session.email}}
-                </p>
-              </div>
-              <p class="description text-center">
-                Execellance Through <br /> Innovation
-              </p>
-            </div>
-            <div class="card-footer">
-              <hr>
-              <div class="button-container">
-                <div class="row">
-                  <div class="col-lg-3 col-md-6 col-6 ml-auto">
-                    <h5>12
-                      <br>
-                      <small>Applied</small>
-                    </h5>
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-                    <h5>2
-                      <br>
-                      <small>Accepted</small>
-                    </h5>
-                  </div>
-                  <div class="col-lg-3 mr-auto">
-                    <h5>10
-                      <br>
-                      <small>Rejected</small>
-                    </h5>
-                  </div>
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h1 style="color: black"><em>{{name}}'s Profile</em></h1>
                 </div>
-              </div>
+                <div class="panel-options">
+                    <a href="" class="btn">Save Changes</a>
+                </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Teams</h4>
-            </div>
-            <div class="card-body">
-              <ul class="list-unstyled team-members">
-                {% for team in teams %}
-                <li>
+            <div class="panel-body">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                    <!-- Company Name -->
                     <div class="row">
-                        <div class="col-md-7 col-7">
-                            Team1
-                            <br />
-                            <span class="text-muted">
-                                  <small>Team Member</small>
-                            </span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="name" value="{{name}}" data-validate="required">
+                            </div>
                         </div>
-                    </div>    
-                </li>
-                {% endfor %}
-                    <!-- <div class="col-md-2 col-2">
-                      <div class="avatar">
-                        <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                      </div>
                     </div>
-                    <div class="col-md-7 col-7">
-                      DJ Khaled
-                      <br />
-                      <span class="text-muted">
-                        <small>Offline</small>
-                      </span>
+
+                    <!-- Email -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Email</label>
+                                <input type="text" class="form-control" name="name" id="name" value="{{email}}" data-validate="required">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3 col-3 text-right">
-                      <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></btn>
+
+                    <!-- Description -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description" class="control-label">Description</label>
+                                <textarea name="description" id="" cols="30" rows="10" class="form-control" data-validate="minlength[10]">{{descp}}</textarea>
+                                <!-- <input type="text" class="form-control" name="description" id="name" value="{{descp}}" data-validate="required"> -->
+                            </div>
+                        </div>
                     </div>
-                  </div> -->
-                <!-- <li>
-                  <div class="row">
-                    <div class="col-md-2 col-2">
-                      <div class="avatar">
-                        <img src="../assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                      </div>
+
+                    <!-- Contact -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact" class="control-label">Contact</label>
+                                <input type="text" class="form-control" name="contact" id="name" value="{{contact}}" data-validate="required">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-7 col-7">
-                      Creative Tim
-                      <br />
-                      <span class="text-success">
-                        <small>Available</small>
-                      </span>
+
+                    <!-- Address -->
+                    <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">Address</label>
+                                    <textarea name="address" id="" cols="30" rows="10" class="form-control" data-validate="required">{{address}}
+                                    </textarea>
+                                    <!-- <input type="text" class="form-control" name="name" id="name" value="{{phone}}" data-validate="required"> -->
+                                </div>
+                            </div>
                     </div>
-                    <div class="col-md-3 col-3 text-right">
-                      <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></btn>
+                    
+                    <!-- Alternative Email Address -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="alternative_email_id" class="control-label">Alternative Email</label>
+                                <input type="text" class="form-control" name="alternative_email_id" id="name" value="{{alternative_email_id}}">
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="row">
-                    <div class="col-md-2 col-2">
-                      <div class="avatar">
-                        <img src="../assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                      </div>
-                    </div>
-                    <div class="col-ms-7 col-7">
-                      Flume
-                      <br />
-                      <span class="text-danger">
-                        <small>Busy</small>
-                      </span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                      <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></btn>
-                    </div>
-                  </div>
-                </li> -->
-              </ul>
+                </form>
             </div>
-          </div>
         </div>
-        <div class="col-md-8">
-          <div class="card card-user">
-            <div class="card-header">
-              <h5 class="card-title">Edit Profile</h5>
-            </div>
-            <div class="card-body">
-              <form>
-                <div class="row">
-                  <div class="col-md-6 pr-1">
-                    <div class="form-group">
-                      <label>Email Id : </label>
-                      <input type="text" class="form-control" disabled="" placeholder="Company" value="{{request.session.email}}">
-                    </div>
-                  </div>
-                  <!-- <div class="col-md-3 px-1">
-                    <div class="form-group">
-                      <label>Name : </label>
-                      <input type="text" class="form-control" placeholder="Username" value="{{name}}">
-                    </div>
-                  </div> -->
-                  <!-- <div class="col-md-4 pl-1">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" placeholder="Email">
-                    </div>
-                  </div> -->
-                </div>
-                <div class="row">
-                  <div class="col-md-6 pr-1">
-                    <div class="form-group">
-                      <label>Name : </label>
-                      <input type="text" class="form-control" placeholder="Company" value="{{request.session.name}}">
-                    </div>
-                  </div>
-                  <div class="col-md-6 pl-1">
-                    <div class="form-group">
-                        <label>Address : </label>
-                        <input type="text" class="form-control" placeholder="Home Address" value="Mumbai, Maharashtra, India">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <!-- <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Address</label>
-                      <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
-                    </div>
-                  </div> -->
-                </div>
-                <div class="row">
-                  <div class="col-md-4 pr-1">
-                    <div class="form-group">
-                      <label>City : </label>
-                      <input type="text" class="form-control" placeholder="City" value="Mumbai">
-                    </div>
-                  </div>
-                  <div class="col-md-4 px-1">
-                    <div class="form-group">
-                      <label>Country : </label>
-                      <input type="text" class="form-control" placeholder="Country" value="India">
-                    </div>
-                  </div>
-                  <div class="col-md-4 pl-1">
-                    <div class="form-group">
-                      <label>Postal Code : </label>
-                      <input type="number" class="form-control" placeholder="400071">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <!-- <div class="col-md-12">
-                    <div class="form-group">
-                      <label>About Me</label>
-                      <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
-                    </div>
-                  </div> -->
-                </div>
-                <div class="row">
-                  <div class="update ml-auto mr-auto">
-                    <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
+<script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
+<script src="{% static 'assets/js/jquery.inputmask.bundle.js' %}" id="script-resource-10"></script> 
+<script src="{% static 'assets/js/selectboxit/jquery.selectBoxIt.min.js' %}" id="script-resource-11"></script> 
+<script src="{% static 'assets/js/bootstrap-datepicker.js' %}" id="script-resource-12"></script> 
+<script src="{% static 'assets/js/bootstrap-switch.min.js' %}" id="script-resource-13"></script> 
+<script src="{% static 'assets/js/jquery.multi-select.js' %}" id="script-resource-14"></script> 
+<script src="{% static 'assets/js/neon-chat.js' %}" id="script-resource-15"></script>
+
 {% endblock %}
