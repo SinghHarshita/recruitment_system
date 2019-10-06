@@ -54,6 +54,16 @@
         }
     }
 
+    When the submit button is clicked, the marks have to calculated as well as the total_rank.
+    Right now there is no CV Analysis, so randomise the CV Rank.    
+
 3. View CV
+    drive code
+
 4. Edit CV
+    CV details to be rendered.... Frontend not yet written
+    Figure out how to read the CV and render the text.
+    It just has to be put in the editor.
+
 5. Generate CV
+    The front end yet has to be written
