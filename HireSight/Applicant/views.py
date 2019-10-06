@@ -24,6 +24,7 @@ def applicant_data(data) :
     
     return {
         "name" : data[1],
+        "email" : data[4],
         "gender" : data[5],
         "dob" : data[6],
         "phone" : data[7],
