@@ -78,11 +78,11 @@ def company_view_applicants(request):
     """ Renders applicants for a particular job """
     return render(request, "view_applicants.html", data)
 
-def company_view_jobs(request):
+def company_view_jobs(request,job_id):
     """ Renders view for editing a particular job """
     dict1 = dict()
     with connection.cursor() as cursor:
-        cursor.execute("SELECT * from jobs where c_id = %s and last_date >= %s",[request.session['id'],date.today()])
+        cursor.execute("SELECT * from jobs where c_id = %s and j_id = %s",[request.session['id'],job_id])
         jobs = list(cursor.fetchall())
     # Looping through all list of active jobs
     final_arr = []
@@ -178,11 +178,11 @@ def company_view_jobs(request):
         #         "answer" : "",
         #         "marks" : [],
         #     }
-    for i,j in enumerate(final_arr):
-        dict1[i] = j
-    dict1['count'] = range(1,len(final_arr)+1)
+    # for i,j in enumerate(final_arr):
+    #     dict1[i] = j
 
-    # return HttpResponse(dict1.items()) #Final dictionary data
+    print(temp)
+    return HttpResponse(temp) #Final dictionary data
     return render(request, "company_view_jobs.html", dict1)
 
 def company_statistics(request):

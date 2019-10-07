@@ -112,7 +112,7 @@
                                 <td style="color: black">{{j.last_date}}</td>
                                 <td class="text-center">
                                     {% if job.applicants != 0 %} 
-                                    <a href="{% url 'company_view_applicants' %}" class="btn btn-danger">
+                                    <a href="{% url 'Company:company_view_applicants' %}" class="btn btn-danger">
                                         <i class="entypo-eye"></i>
                                     </a>
                                     {% else %}
@@ -123,7 +123,7 @@
                                     {% if j.last_date < j.current_date %}
                                         &nbsp;
                                     {% else %}
-                                        <a href="{% url 'company_view_jobs' %}" class="btn btn-primary"><i class="entypo-pencil"></i></a>
+                                        <a href="{% url 'Company:company_view_jobs' j.j_id %}" class="btn btn-primary"><i class="entypo-pencil"></i></a>
                                     {% endif %}
                                 </td>
                             </tr>
