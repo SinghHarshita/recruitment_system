@@ -72,8 +72,13 @@ def company_post_jobs(request):
     """ Renders post jobs form """
     return render(request, "company_post_jobs.html", data)
 
-def company_view_applicants(request):
+def company_view_applicants(request,id):
     """ Renders applicants for a particular job """
+    global data
+    job_id = int(id)
+    #data["applicants"]["job_details"] = data[]
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from jobs WHERE j_id = {}".format(job_id))
     return render(request, "view_applicants.html", data)
 
 def company_view_jobs(request):

@@ -9,7 +9,7 @@ def index(request):
     global data
     #print(request.session["id"])
     with connection.cursor() as cursor :
-        cursor.execute("SELECT * from user where u_id = {}".format(request.session["id"]))
+        cursor.execute("SELECT * from user where u_id = %s",[request.session["id"]])
         data = applicant_data(list(cursor.fetchall())[0])
         #data = list(cursor.fetchall())
         #print(data)
