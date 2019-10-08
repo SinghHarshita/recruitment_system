@@ -2,19 +2,19 @@
 HireSight is a recruitment system. It aims in making the present recruitment system faster, better and easier.
 It is an innovative solution to the problems faced by the HR department at the time of recruitment.
 
-# Stakeholders
+## Stakeholders
 1. Applicants
 2. Companies
 
-# Applicant
+### Applicant
 Avail oppurtunities of better jobs.
 
-# Companies
+### Companies
  - Post jobs
  - View Applicants and their rating
  - Accept/Reject applications
 
-# How to use it
+## How to use it
 The web app is written using Django framework.
 
 Softwares / Libraries Required : 
