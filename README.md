@@ -28,5 +28,7 @@ Then, run the command : python manage.py migrate
 This will migrate all the tables in the database
 
 After this, in the HireSight directory, run the command : 
+
         python manage.py runserver
+
 This will open the landing page of HireSight.
