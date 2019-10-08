@@ -5,9 +5,11 @@ Company Dashboard Backend
 1. View Applicants : 
     HTML page that is rendered : view_applicants.html
     function and url that renders it : company_view_applicants() , view_applicants
-    The previous file is new_company_dashboard.html.
+    The previous file is new_company_dashboard.html.<br>
+    
+    JSON structure: <br>
 
-    JSON structure: 
+
     data["applicants"] = {
         "job_details":{
             "designation" : "",
@@ -41,14 +43,17 @@ Company Dashboard Backend
         "count" : count_of_applicants
     }
 
-    On the client side, a function to generate report i.e. download the table
+    <br>
+    On the client side, a function to generate report i.e. download the table<br>
 
-2. Edit Jobs :
+2. Edit Jobs : <br>
     HTML page that is rendered : company_view_jobs.html
     The function and the url that renders it : company_view_jobs() and view_jobs
-    The previous file is new_company_dashboard.html.
+    The previous file is new_company_dashboard.html.<br>
 
-    JSON Structure :
+    JSON Structure :<br>
+
+
     data["edit_jobs"] = {
         0 : {   
             "job_details" : {
@@ -101,6 +106,8 @@ Company Dashboard Backend
             }
         },
     }
+
+    
 
 3. Post Jobs
 4. Statistics
