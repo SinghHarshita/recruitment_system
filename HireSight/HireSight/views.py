@@ -25,6 +25,8 @@ def details(request,**kwargs):
         
         user = request.session['data']['user']
     # return HttpResponse("<h2>" + str(data) + "</h2>")
+    else:
+        user = None
 
     with connection.cursor() as cursor:
         cursor.execute("SELECT * from user where email_id = %s",[request.user.email])
@@ -44,6 +46,8 @@ def details(request,**kwargs):
                 # return HttpResponse("<h2>" + str(dob) + "</h2>")
                 
                 sql = "INSERT into user(full_name,fname,lname,email_id,gender,date_of_birth,phone,address)values('{}','{}','{}','{}','{}','{}','{}','{}')".format(data['full_name'],data['fname'],data['lname'],data['email'],data['gender'],data['dob'],data['phone'],data['address'])
+            else:
+                return redirect("/")
 
             cursor.execute(sql)
             
@@ -55,17 +59,19 @@ def details(request,**kwargs):
             # request.session.modified = True
             if(user == 'Company'):
                 request.session['email'] = request.user.email
-                # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
+                return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
                 cursor.execute("SELECT * from company where email_id = %s",[request.user.email])
                 temp = list(cursor.fetchall())[0]
                 request.session['id'] = temp[0]
-                return redirect('/company/',kwargs={})
-            else:
+                return redirect('Company:company_dashboard')
+            elif(user == 'Applicant'):
                 request.session['email'] = request.user.email
                 cursor.execute("SELECT * FROM user where email_id = %s",[request.user.email])
                 temp = list(cursor.fetchall())[0]
                 request.session['id'] = temp[0]
-                return redirect('/applicant/',kwargs={})
+                return redirect('Applicant:applicant_dashboard')
+            else:
+                return redirect('/')
 
     # return HttpResponse("<h2>Sumedh please make the Form<br>I'm Bored<br>Collect the details like whether he is registering as company or User<br>After that insert the details into the User/Company table</h2>")
 
@@ -83,20 +89,19 @@ def auth_user(request,**kwargs):
         return redirect('/',kwargs={'msg':"You are Not Registered...."})
     
     if(len(row1)):
+        # return HttpResponse(user)
         data = row1[0]
         #print(data)
         request.session["id"] = data[0]
         request.session["email"] = data[4]
-        #request.session["data"] = applicant_data(data)
-
-        return redirect('/applicant/', kwargs={data})
+        return redirect('Applicant:applicant_dashboard')
     
     else:
         # return HttpResponse("<h2>" + str(row2) + "</h2>")
         data = row2[0]
         request.session["id"] = data[0]
         request.session["email"] = data[3]
-        return redirect('/company/',kwargs={})
+        return redirect('Company:company_dashboard')
 
 def log_out(request):
     logout(request)

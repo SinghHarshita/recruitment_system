@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.db import connection
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.contrib.auth import logout
 
 data = {}
 # Create your views here.
@@ -50,5 +51,6 @@ def log_out(request):
         request.session.clear()
     except :
         pass
+    logout(request)
     return redirect('/')
 

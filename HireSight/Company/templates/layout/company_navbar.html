@@ -1,13 +1,15 @@
-<!-- Company Navbar Here!
-{{request.session.id}}
-{{request.session.email}} -->
+{% comment %}
+  Company Navbar Here!
+  {{request.session.id}}
+  {{request.session.email}}
+{% endcomment %}
 <div class="wrapper ">
     <div class="sidebar" data-color="orange" data-background-color="black">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+      {% comment %}
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-      Tip 2: you can also add an image using data-image tag
-  -->
+        Tip 2: you can also add an image using data-image tag
+      {% endcomment %}
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           HireSight
@@ -24,11 +26,18 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <!-- your sidebar here -->
+          {# your sidebar here #}
           <li class="nav-item  ">
-            <a class="nav-link" href="{% url 'run' %}">
+            <a class="nav-link" href="{% url 'Company:run' %}">
               <i class="material-icons">dashboard</i>
               <p>Test</p>
+            </a>
+          </li>
+          {# Logout Button #}
+          <li class="nav-item  ">
+            <a class="nav-link" href="{% url 'Company:log_out' %}">
+              <i class="material-icons">dashboard</i>
+              <p>Log Out</p>
             </a>
           </li>
         </ul>
