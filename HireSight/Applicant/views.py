@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db import connection
 from django.http import HttpResponse
 import json
@@ -6,6 +6,12 @@ import json
 data = {}
 # Create your views here.
 def index(request):
+
+    try:
+        id = request.session['id']
+    except:
+        return redirect('/')
+
     global data
     #print(request.session["id"])
     with connection.cursor() as cursor :

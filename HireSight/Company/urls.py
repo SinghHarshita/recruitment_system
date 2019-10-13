@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^view_job/(?P<job_id>[0-9]+)/$', views.company_view_jobs, name = "company_view_jobs"),
     url(r'^statistics/$', views.company_statistics, name = "company_statistics"),
     url(r'^profile/$', views.company_profile, name = "company_profile"),
+    url(r'^save_questions/$',views.save_job_questions, name="saveQuestions"),
     #url(r'^notifications/$', views.notifications, name = "notifications"),
 ]

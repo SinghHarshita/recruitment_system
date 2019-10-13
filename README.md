@@ -98,7 +98,10 @@ Company Dashboard Backend
                 .
                 .
                 n : {  },
-            }
+            },
+			"types" : []
+        },
+		"job_id" : value,
         },
     }
 

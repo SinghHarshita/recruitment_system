@@ -12,7 +12,8 @@
         <h4>Please fill the details to post a new job.</h4> 
     </div> 
     
-    <form id="rootwizard-2" method="post" action="" class="form-wizard validate"> 
+    <form id="rootwizard-2" onsubmit="update_value()" method="post" action="{% url 'Company:saveQuestions' %}" class="form-wizard validate"> 
+        {% csrf_token %}
         <div class="steps-progress"> 
             <div class="progress-indicator"></div> 
         </div> 
@@ -29,13 +30,13 @@
                         <div class="col-md-6"> 
                             <div class="form-group"> 
                                 <label class="control-label" for="designation">Designation</label> 
-                                <input class="form-control" name="designation" id="designation" data-validate="required" placeholder="Designation" /> 
+                                <input class="form-control" onchange="change_designation(this.value)" name="designation" id="designation" data-validate="required" placeholder="Designation" /> 
                             </div> 
                         </div> 
                         <div class="col-md-6"> 
                             <div class="form-group"> 
                                 <label class="control-label" for="no_of_vacancies">Enter number of vacancies</label> 
-                                <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
+                                <input type="number" onchange="change_vacancy(this.value)" class="form-control" name="no_of_vacancies" id="no_of_vacancies" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
                             </div> 
                         </div> 
                     </div> 
@@ -43,14 +44,14 @@
                         <div class="col-md-12"> 
                             <div class="form-group"> 
                                 <label class="control-label" for="description">Job Description</label> 
-                                <textarea class="form-control autogrow" name="description" id="description" data-validate="minlength[4]" rows="5" placeholder="Enter job description"></textarea> 
+                                <textarea class="form-control autogrow" onchange="change_description(this.value)" name="description" id="description" data-validate="minlength[4]" rows="5" placeholder="Enter job description"></textarea> 
                             </div> 
                         </div> 
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                                 <label class="control-label" for="last_date">Closing Date</label>
-                                <input class="form-control datepicker" name="last_date" id="last_date" data-validate="required" placeholder="Closing Date" /> 
+                                <input class="form-control datepicker" onchange="change_last_date(this.value)" name="last_date" id="last_date" data-validate="required" value="" placeholder="Closing Date" /> 
                         </div>
                     </div> 
                 </div> 
@@ -59,13 +60,13 @@
                         <div class="col-md-8"> 
                             <div class="form-group"> 
                                 <label class="control-label" for="qualification">Qualification</label> 
-                                <input type = "text" class="form-control" name="qualification" id="qualification" data-validate="required" placeholder="Enter Qualifications separated by space" /> 
+                                <input type = "text" class="form-control" onchange="change_qualification(this.value)" name="qualification" id="qualification" data-validate="required" placeholder="Enter Qualifications separated by space" /> 
                             </div> 
                         </div> 
                         <div class="col-md-4"> 
                             <div class="form-group"> 
                                 <label class="control-label" for="experience">Experience</label> 
-                                <input type = "number" class="form-control" name="experience" id="experience" data-validate="required" placeholder="Enter experience in years" /> 
+                                <input type = "number" class="form-control" onchange="change_experience(this.value)" name="experience" id="experience" data-validate="required" placeholder="Enter experience in years" /> 
                             </div> 
                         </div> 
                     </div> 
@@ -73,7 +74,7 @@
                         <div class="col-md-12"> 
                             <div class="form-group"> 
                                 <label class="control-label" for="skills">Skills</label> 
-                                <input class="form-control" name="skills" id="skills" data-validate="required" placeholder="Enter skills here ( separated by comma(,) )" /> 
+                                <input class="form-control" name="skills" id="skills" onchange="change_skills(this.value)" data-validate="required" placeholder="Enter skills here ( separated by comma(,) )" /> 
                             </div> 
                         </div> 
                     </div> 
@@ -333,65 +334,84 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                     <label for="question_type_1">Type</label>
-                                    <select name="question_type_1" id="question_type_1">
-                                        <option value="aptitude">Aptitude</option>
-                                        <option value="maths">Maths</option>
-                                        <option value="english">English</option>
-                                        <option value="programming">Programming</option>
-                                        <option value="other">Other</option>
+                                    <select onfocus="" onchange="change_type(this.value)" name="question_type_1" id="question_type_1">
+                                        <option value="Aptitude">Aptitude</option>
+                                        <option value="Maths">Maths</option>
+                                        <option value="English">English</option>
+                                        <option value="Programming">Programming</option>
+                                        <option value="Other">Other</option>
                                     </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="question_1">Question</label>
-                                <input type="text" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="answer_1">Answer</label>
-                                <input type="text" class="form-control" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                    
+                    <div id="main_questions">
+
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="marks_1">Marks</label>
-                                    <input type="text" class="form-control" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+                                    <label for="question_1">Question</label>
+                                    <input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
                                 </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="answer_1">Answer</label>
+                                    <input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="marks_1">Marks</label>
+                                        <input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+                                    </div>
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="row">
+                            <p>Options</p>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                <div class="form-group">
+                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /> 
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+                    
+                    <div id="questions">
+
+                    </div>
+                    
                     <div class="row">
-                        <p>Options</p>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /> 
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /> 
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /> 
-                            </div>
-                        </div>
+                        <button class="btn btn-primary" style="float:right" type="button" onclick="addtypeQuestion()">Add Question</button><br><br>
                     </div>
-                    <div class="form-group"> 
+                    
+                    <div class="form-group">
+                        <input type="hidden" name="edit_jobs_details" id="edit_jobs_details" value="" /> 
                         <button type="submit" class="btn btn-primary">Submit</button> 
                     </div>
+                
                 </div> 
                 <!-- <div class="tab-pane" id="tab2-5"> 
                     <div class="form-group"> 
@@ -490,6 +510,7 @@
 {% block footer %}
 
 <script>
+    
     // Adding options for knockout questions
     var k_q_no = 0;
     var k_x = 1;
@@ -542,6 +563,173 @@
         + "</div>" 
         +"</div>" 
         
+    }
+    var glb = "Aptitude";
+    function change_type(val){
+        alert(val);
+        glb = val;
+        let temp_html1 = '';
+        alert(JSON.stringify(var1["3"]["questions"]));
+        if(var1["3"]["questions"]){
+            for(var key in var1["3"]["questions"]){
+                if(var1["3"]["questions"][key]["type"] == val){
+                    alert("Inside for loop...");
+                    temp_html1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + (key+1) + '">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_' + (key+1) + '" id="question_' + (key+1) + '" data-validate="required" placeholder="Question" value=' + var1["3"]["questions"][key]["question"] + '/></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + (key+1) + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_' + (key+1) + '" id="answer_' + (key+1) + '" data-validate="required" placeholder="Answer" value=' + var1["3"]["questions"][key]["answer"] + ' /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + (key+1) + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_' + (key+1) + '" id="marks_' + (key+1) + '" data-validate="required" placeholder="Marks" value=' + var1["3"]["questions"][key]["marks"] + ' /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_1" id="option_' + (key+1) + '_1" data-validate="required" placeholder="Option 1" value=' + var1["3"]["questions"][key]["options"][0] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_2" id="option_' + (key+1) + '_2" data-validate="required" placeholder="Option 2" value=' + var1["3"]["questions"][key]["options"][1] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_3" id="option_' + (key+1) + '_3" data-validate="required" placeholder="Option 3" value=' + var1["3"]["questions"][key]["options"][2] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_4" id="option_' + (key+1) + '_4" data-validate="required" placeholder="Option 4" value=' + var1["3"]["questions"][key]["options"][3] + ' /></div></div></div>';
+                    document.getElementById('main_questions').innerHTML = temp_html1;
+                }else{
+                    alert(temp_html1);
+                }
+            }
+        }
+        if(temp_html1 == ''){
+            alert("Inside else part....");
+            temp_html1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_1">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_1">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_1">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
+            // document.getElementById('main_questions').innerHTML = temp_html1;
+            $('#main_questions').html(temp_html1);
+        }
+    }
+
+    // function cur_value(){
+    //     // glb = document.getElementById('question_type_1').value;
+    //     glb = "Aptitude";
+    //     // alert(glb);
+    // }
+
+    function change_designation(val){
+        // alert(val);
+        var1["0"]["job_details"]["designation"] = val;
+        // alert(JSON.stringify(var1["0"]));
+    }
+
+    function change_Question(id,val){
+        // alert(id[(id.length)-1]);
+        alert(JSON.stringify(var1["3"]["questions"]));
+        // var1["3"]["questions"][id[(id.length)-1]-1] = {
+        //     "type" : glb,
+        //     "question" : val
+        // }
+        var1["3"]["questions"].push({
+            "type" : glb,
+            "question" : val
+        });
+        alert(JSON.stringify(var1));
+        console.log(var1);
+    }
+
+    function change_answer(id,val){
+        // alert(id);
+        if(var1["3"]["questions"][id[(id.length)-1]-1]){
+            var1["3"]["questions"][id[(id.length)-1]-1]["answer"] = val;    
+        }else{
+            tp = {"answer" : val};
+            var1["3"]["questions"] = {}
+            var1["3"]["questions"][id[(id.length)-1]-1] = tp;
+        }
+    }
+
+    function change_marks(id,val){
+        var1["3"]["questions"][id[(id.length)-1]-1]["marks"] = val;
+    }
+
+    function change_option(id,val){
+        // alert(id);
+        parent = id[id.length-3];
+        opt = id[id.length-1];
+        list = var1["3"]["questions"][parent-1]["options"];
+        if(list){
+            list[opt-1] = val;
+            var1["3"]["questions"][parent-1]["options"] = list;
+        }else{
+            list = [];
+            list[opt-1] = val;
+            var1["3"]["questions"][parent-1]["options"] = list;
+        }
+        // alert(JSON.stringify(var1));
+        // var1["3"]["questions"][id[(id.length)-1]-1]["options"] = val;   
+    }
+
+    function change_last_date(val){
+        var1["0"]["job_details"]["last_date"] = val;
+    }
+
+    function change_qualification(val){
+        res = val.split(" ");
+        temp_arr = []
+        for(var i=0;i<res.length;i++){
+            temp_arr.push(res[i]);
+        }
+        var1["1"]["requirements"]["qualification"] = temp_arr;
+    }
+
+    function change_experience(val){
+        var1["1"]["requirements"]["experience"] = temp_arr;
+    }
+
+    function change_skills(val){
+        res = val.split(",");
+        temp_arr = []
+        for(var i=0;i<res.length;i++){
+            temp_arr.push(res[i]);
+        }
+        var1["1"]["requirements"]["skills"] = temp_arr;
+    }
+
+    function change_vacancy(val){
+        var1["0"]["job_details"]["no_of_vacancies"] = val;
+    }
+
+    function change_description(val){
+        var1["0"]["job_details"]["description"] = val;
+    }
+
+    let var1;
+    $(document).on('ready',function(){
+        var1 = {
+            0 : {
+                "job_details" : {
+                    "designation" : "",
+                    "description" : "",
+                    "no_of_vacancies" : "",
+                    "last_date" : ""
+                }
+            },
+            1 : {
+                "requirements" : {
+                    "skills" : [],
+                    "qualification" : [],
+                    "experience" : ""
+                }
+            },
+            2 : {
+                "knockout" : []
+            },
+            3 : {
+                "questions" : [],
+                "types" : ['Aptitude','Maths','Programming','Other']
+            }
+        }
+        alert(JSON.stringify(var1));
+    });
+
+    let questions_count  = 1;
+    function addtypeQuestion(){
+        // alert(document.getElementById('questions').value);
+        questions_count++;
+        var questions_html = '';
+            questions_html+= '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + questions_count + '">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_' +  questions_count + '" id="question_"' + questions_count + '"' + '" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + questions_count + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_' + questions_count + '" id="answer_' + questions_count + '" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + questions_count + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_' + questions_count + '" id="marks_' + questions_count + '" data-validate="required" placeholder="Marks" /></div></div></div>';
+
+
+
+            questions_html+='<div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_1" id="option_' + questions_count + '_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_'+ questions_count + '_2" id="option_' + questions_count + '_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_3" id="option_' + questions_count + '_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_4" id="option_' + questions_count + '_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
+
+        // document.getElementById('root-wizard-2')('questions').innerHTML += questions_html;
+        $('#main_questions').append(questions_html);
+        // questions_count++;
+        // window.stop();
+    }
+
+    function update_value(){
+        document.getElementById('edit_jobs_details').value = JSON.stringify(var1);
     }
 
 </script>

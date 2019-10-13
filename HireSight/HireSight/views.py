@@ -49,7 +49,7 @@ def auth_user(request):
     
     else:
         data = row2[0]
-        request.session["id"] = data[0]
+        request.session["c_id"] = data[0]
         request.session["email"] = data[3]
         return redirect('/company/',kwargs={})
 

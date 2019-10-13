@@ -1,15 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
 from datetime import date
+import json
 
 data = dict()
 # Create your views here.
 def index(request):
     """ Renders the company dashboard """
+    try:
+        id = request.session['c_id']
+    except:
+        return redirect('/')
+
     global data
     with connection.cursor() as cursor :
-        cursor.execute("SELECT * from company where c_id = %s",[request.session["id"]])
+        cursor.execute("SELECT * from company where c_id = %s",[request.session["c_id"]])
         data = company_data(list(cursor.fetchall())[0])
     #return render(request, "company_dashboard.html", data)
     jobs(request)
@@ -35,7 +41,7 @@ def jobs(request):
     jobs = dict()
     with connection.cursor() as cursor:
         """ Fetching job details of all jobs posted by the company """
-        cursor.execute("SELECT * FROM jobs WHERE c_id = {}".format(request.session["id"]))
+        cursor.execute("SELECT * FROM jobs WHERE c_id = {}".format(request.session["c_id"]))
 
         i = 0
         result = cursor.fetchall()
@@ -81,11 +87,14 @@ def company_view_applicants(request):
 def company_view_jobs(request,job_id):
     """ Renders view for editing a particular job """
     dict1 = dict()
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * from jobs where c_id = %s and j_id = %s",[request.session['id'],job_id])
-        jobs = list(cursor.fetchall())
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * from jobs where c_id = %s and j_id = %s",[request.session['c_id'],job_id])
+            jobs = list(cursor.fetchall())
+    except:
+        return redirect('Company:index')
     # Looping through all list of active jobs
-    final_arr = []
+    # final_arr = []
     for job in jobs:
         var1 = eval(job[2])
         temp = dict()
@@ -104,53 +113,79 @@ def company_view_jobs(request,job_id):
                 "experience" : var1["experience"],
             }
         }
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * from questions where c_id = %s and j_id = %s",[request.session['id'],job[0]])
-            questions = list(cursor.fetchone())
-        # return HttpResponse(questions[0])
-        
-        knockouts = eval(questions[3])
-        questions1 = eval(questions[2])
-        
-        # Looping through the list of array of Knockout_questions
-        temp1_dict = dict()
-        for c,knockout in enumerate(knockouts):
-            # knockout = eval(knockout)
-            temp1_dict[c] = {
-                "question" : knockout[0],
-                "no_of_options" : knockout[1],
-                "options" : knockout[2],
-                "marks" : knockout[3],
-            }
-        temp["2"] = {
-            "knockout" : temp1_dict
-        }
+        questions = None
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * from questions where c_id = %s and j_id = %s",[request.session['c_id'],job[0]])
+                # return HttpResponse(str(request.session['id']) + " " + str(job[0]))
+                questions = list(cursor.fetchone())
+            # return HttpResponse(questions[0])
+        except :
+            pass
+            # return redirect('Company:index')
+            # print(questions[2])
 
-        # Looping through Questions
-        temp1_dict.clear()
-        temp_arr = tuple(questions1.items()) #Converting all the questions details into suitable format
-        arr = []
-
-        for a in temp_arr:
-            type1 = a[0]    #For getting type
-            ques_arr = list(a[1])   #For getting Questions 
-            for b in ques_arr:
-                ques = b
-                opt = eval(str(list(b.items())[0][1][0][0]))
-                ans = str(list(b.items())[0][1][0][1])
-                marks = str(list(b.items())[0][1][1])
-                tp_dict10 = {
-                    "type" : type1,
-                    "question" : ques,
-                    "options" : opt,
-                    "answer" : ans,
-                    "marks" : marks
+        if(questions):
+            try:
+                knockouts = json.loads(questions[3])
+            except:
+                knockouts = questions[3]
+            
+            try:
+                questions1 = json.loads(questions[2])
+            except:
+                # print(json.loads(questions[2]))
+                # return HttpResponse(questions[2])
+                # questions1 = questions[2].replace('"','\"')
+                questions1 = eval(questions[2])
+                # return HttpResponse(questions[2]["Other"])
+            
+            # Looping through the list of array of Knockout_questions
+            temp1_dict = dict()
+            if(knockouts):
+                for c,knockout in enumerate(knockouts):
+                    # knockout = eval(knockout)
+                    temp1_dict[c] = {
+                        "question" : knockout[0],
+                        "no_of_options" : knockout[1],
+                        "options" : knockout[2],
+                        "marks" : knockout[3],
+                    }
+                temp["2"] = {
+                    "knockout" : temp1_dict
                 }
-                arr.append(tp_dict10)
-        temp["3"] = {
-            "questions" : arr
-        }
-        final_arr.append(temp)
+
+            print(questions1)
+            # return HttpResponse(questions1)
+            
+            # Looping through Questions
+            temp1_dict.clear()
+            temp_arr = tuple(questions1.items()) #Converting all the questions details into suitable format
+            arr = []
+            set_type= list()
+            for a in temp_arr:
+                type1 = a[0]    #For getting type
+                ques_arr = list(a[1])   #For getting Questions 
+                for b in ques_arr:
+                    ques = str(list(b.keys())[0])
+                    opt = eval(str(list(b.items())[0][1][0][0]))
+                    ans = str(list(b.items())[0][1][0][1])
+                    marks = str(list(b.items())[0][1][1])
+                    tp_dict10 = {
+                        "type" : type1.capitalize(),
+                        "question" : ques,
+                        "options" : list(opt),
+                        "answer" : ans,
+                        "marks" : marks
+                    }
+                    set_type.append(type1.capitalize())
+                    arr.append(tp_dict10)
+            temp["3"] = {
+                "questions" : arr,
+                "types" : list(set(set_type))
+            }
+        temp["job_id"] = job_id
+        # final_arr.append(temp)
         # return HttpResponse(temp.items()) 
 
         # temp_list1 = list(temp_arr[0][1])
@@ -182,8 +217,9 @@ def company_view_jobs(request,job_id):
     #     dict1[i] = j
 
     print(temp)
-    return HttpResponse(temp) #Final dictionary data
-    return render(request, "company_view_jobs.html", dict1)
+    data["edit_jobs"] = temp
+    # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
+    return render(request, "company_view_jobs.html", data)
 
 def company_statistics(request):
     """ Renders view for company statistics """
@@ -196,3 +232,153 @@ def company_profile(request):
 def test(request):
     """ Testing codes """
     return render(request, "company_test.html", {})
+
+def save_job_questions(request):
+    c_id = request.session["c_id"]
+    var = json.dumps(request.POST.get('edit_jobs_details'))
+    # return HttpResponse(var)
+    # print(json.dumps(var))
+    # return HttpResponse(str(json.loads(json.dumps(var))))
+    try:
+        print("try")
+        dict1 = eval(json.loads(var))
+        # return HttpResponse(str(dict1["job_id"]))
+    except:
+        print("except")
+        dict1 = eval(var)
+    
+    try:
+        dict1['job_id'] = dict1['job_id']
+    except:
+        with connection.cursor() as cursor:
+            sql = "SELECT max(j_id) from jobs where c_id = {}".format(c_id)
+            cursor.execute(sql)
+            res = list(cursor.fetchone())
+            dict1['jobid'] = int(res[0])+1
+            # return HttpResponse(str(dict1))
+    # return HttpResponse(str(dict1))
+    # print(type(dict1),dict1)
+    # return HttpResponse(str(dict1["3"]["types"]))
+
+    requirements = dict()
+    requirements["designation"] = dict1["0"]["job_details"]["designation"]
+    requirements["description"] = dict1["0"]["job_details"]["description"]
+    requirements["skills"] = dict1["1"]["requirements"]["skills"]
+    requirements["experience"] = dict1["1"]["requirements"]["experience"]
+    requirements["qualification"] = dict1["1"]["requirements"]["qualification"]
+
+    vacancies = dict1["0"]["job_details"]["no_of_vacancies"]
+    date = dict1["0"]["job_details"]["last_date"]
+    date_str1 = date.split("/")
+    last_date = date_str1[2] + '-' + date_str1[0] + '-' + date_str1[1]
+    # return HttpResponse(str(dict1))
+    questions = dict()
+    for type1 in dict1["3"]["types"]:
+        questions[type1] = []
+
+    for ques_ans in dict1["3"]["questions"]:
+        list1 = questions[ques_ans["type"]]
+        temp_dict = dict()
+        # temp_dict[str(ques_ans["question"])] = None
+        options = tuple(ques_ans["options"])
+        ans = ques_ans["answer"]
+        marks = ques_ans["marks"]
+        final = ((options,ans),marks)
+        temp_dict[(str(ques_ans["question"])).replace('"','\"')] = final
+        list1.append(temp_dict)
+        questions[ques_ans["type"]] = list1
+
+    # return HttpResponse(json.loads(var))
+    # return HttpResponse(str(questions))
+
+    with connection.cursor() as cursor:
+        try:
+            print("try")
+            temp = dict1['job_id'] 
+            # return HttpResponse(str(temp))
+            sql1 = "Update jobs set requirements = '{}' where j_id = {} and c_id = {}".format(json.dumps(requirements),dict1["job_id"],c_id)
+            sql2 = "Update jobs set no_of_vacancies = {} where j_id = {} and c_id = {}".format(vacancies,dict1["job_id"],c_id)
+            sql3 = "Update jobs set last_date = '{}' where j_id = {} and c_id = {}".format(last_date,dict1["job_id"],c_id)
+            sql4 = "Update questions set questions = '{}' where j_id = {} and c_id = {}".format(json.dumps(questions),dict1["job_id"],c_id)
+            # return HttpResponse(sql3)
+            cursor.execute(sql1)
+            cursor.execute(sql2)
+            cursor.execute(sql3)
+        except:
+            print("except")
+            sql1 = "Insert into jobs values ({},{},'{}',{},8,{})".format(dict1["job_id"],c_id,json.dumps(requirements),vacancies,last_date)
+            sql2 = "Insert into questions values ({},{},'{}',{})".format(dict1["job_id"],c_id,json.dumps(questions),'NULL')
+            # return HttpResponse("456")
+            # cursor.execute(sql1)
+            # cursor.execute(sql2)
+        # return HttpResponse(str(sql3))
+    # return HttpResponse("123")
+    return redirect("Company:index")
+
+
+def save_job_questions1(request):
+    c_id = request.session["c_id"]
+    var = json.dumps(request.POST.get('edit_jobs_details'))
+    # return HttpResponse(var)
+    # print(json.dumps(var))
+    # return HttpResponse(str(json.loads(json.dumps(var))))
+    try:
+        print("try")
+        dict1 = eval(json.loads(var))
+    except:
+        print("except")
+        dict1 = eval(var)
+    
+    try:
+        dict1["3"]['job_id'] = dict1["3"]['job_id']
+    except:
+        with connection.cursor() as cursor:
+            sql = "SELECT max(j_id) from jobs"
+            cursor.execute(sql)
+            res = list(cursor.fetchone())
+            dict1["3"]['job_id'] = int(res[0])+1
+            # return HttpResponse(str(dict1))
+    # return HttpResponse("123")
+
+    print(type(dict1),dict1)
+    # return HttpResponse(str(dict1["3"]["types"]))
+
+    requirements = dict()
+    requirements["designation"] = dict1["0"]["job_details"]["designation"]
+    requirements["description"] = dict1["0"]["job_details"]["description"]
+    requirements["skills"] = dict1["1"]["requirements"]["skills"]
+    requirements["experience"] = dict1["1"]["requirements"]["experience"]
+    requirements["qualification"] = dict1["1"]["requirements"]["qualification"]
+
+    vacancies = dict1["0"]["job_details"]["no_of_vacancies"]
+    last_date = dict1["0"]["job_details"]["last_date"]
+
+    questions = dict()
+    for type1 in dict1["3"]["types"]:
+        questions[type1] = []
+
+    for ques_ans in dict1["3"]["questions"]:
+        list1 = questions[ques_ans["type"]]
+        temp_dict = dict()
+        # temp_dict[str(ques_ans["question"])] = None
+        options = tuple(ques_ans["options"])
+        ans = ques_ans["answer"]
+        marks = ques_ans["marks"]
+        final = ((options,ans),marks)
+        temp_dict[(str(ques_ans["question"])).replace('"','\"')] = final
+        list1.append(temp_dict)
+        questions[ques_ans["type"]] = list1
+
+    return HttpResponse(json.loads(var))
+    # return HttpResponse(str(questions))
+    
+    with connection.cursor() as cursor:
+        sql1 = "Update jobs set requirements = '{}' where j_id = {} and c_id = {}".format(json.dumps(requirements),dict1["job_id"],c_id)
+        sql2 = "Update jobs set no_of_vacancies = {} where j_id = {} and c_id = {}".format(vacancies,dict1["job_id"],c_id)
+        sql3 = "Update questions set questions = '{}' where j_id = {} and c_id = {}".format(json.dumps(questions),dict1["job_id"],c_id)
+        # return HttpResponse(str(sql3))
+        cursor.execute(sql1)
+        cursor.execute(sql2)
+        cursor.execute(sql3)
+
+    return redirect("Company:index")
