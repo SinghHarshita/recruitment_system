@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^history/$', views.applicant_history, name="applicant_history"),
     url(r'^browse/$', views.browse_jobs_render, name="browse_jobs_render"),
     url(r'^generate/$', views.generate_cv, name="generate_cv"),
-    #url(r'^load_applicant', views.index, name="index")
+    #url(r'^load_applicant', views.index, name="index"),
+    url(r'^upload_cv/$', views.upload_cv,name="upload_cv")
 ]

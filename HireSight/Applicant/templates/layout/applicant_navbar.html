@@ -366,13 +366,22 @@
                         </li> 
                     </ul> 
                 </li>  -->
-            <li> <a href="#">
+            <li> <a href="https://docs.google.com/document/d/{{ cv_file_path }}/edit" target="_blank">
                 <i class="entypo-vcard"></i>
                 <span class="title">View CV</span></a> 
             </li>
             <li> <a href="#">
                 <i class="entypo-pencil"></i>
                 <span class="title">Edit CV</span></a> 
+            </li>
+            <li>
+                <div class="row" style="float:right">
+                <form action="/applicant/upload_cv/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="attach_cv" style="all:unset" class="form-control-file" id="exampleFormControlFile1"><br>
+                    <input type="submit" value="Upload CV" style="" />
+                </form>
+                </div>
             </li>
             <!-- </li> 
                 <li class="has-sub"> <a href="index.html#">

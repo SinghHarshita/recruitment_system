@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db import connection
 from django.http import HttpResponse
 import json
+from .drive_actions import quickstart as qk
 
 data = {}
 # Create your views here.
@@ -33,6 +34,7 @@ def applicant_data(data) :
         "cv_file_path" : data[9],
         "cv_updated_at" : data[10],
         "notifications" : data[12],
+        "cv_folder_id" : data[13],
     }
 
 def applicant_profile(request):
@@ -53,16 +55,19 @@ def applicant_history(request):
             #     print(i)
             cursor.execute("SELECT * FROM jobs WHERE j_id = {}".format(_[0]))
             status = eval(_[1])
-            #status = eval(status[request.session["id"]])
+            try:
+                temp = int(status[request.session["id"]]["status"])
+            except:
+                temp = 4
             #print(status[request.session["id"]]["status"])
             s = ""
-            if int(status[request.session["id"]]["status"]) == 0:
+            if int(temp) == 0:
                 s = "Applied"
-            elif int(status[request.session["id"]]["status"]) == 1:
+            elif int(temp) == 1:
                 s = "Accepted"
-            elif int(status[request.session["id"]]["status"]) == 2:
+            elif int(temp) == 2:
                 s = "Rejected"
-            elif int(status[request.session["id"]]["status"]) == 3:
+            elif int(temp) == 3:
                 s = "On Hold"
             else:
                 pass
@@ -114,3 +119,31 @@ def test(request):
 
 def generate_cv(request):
     return render(request, "generate_cv.html")
+
+def upload_cv(request):
+    # return HttpResponse(request.session.items())
+    with connection.cursor() as cursor:
+        sql = "Select cv_file_path,cv_folder_id from user where u_id = '{}'".format(request.session['id'])
+        cursor.execute(sql)
+        res = list(cursor.fetchone())
+        # return HttpResponse(res)
+        if(res[1] is not None):
+            sql = "UPDATE user set cv_file_path = 'NULL' where u_id = '{}'".format(request.session['id'])
+            cursor.execute(sql)
+            qk.delete_file(res[0])
+
+    with open('Dummy_Resume_' + str(request.session['id']) +'.docx','wb') as fptr:
+        fptr.write(request.FILES['attach_cv'].read())
+
+    if(res[1] is None):
+        file_id,folder_id = qk.main(request.session['id'],request.session['email'])
+    else:
+        file_id = qk.update_cv(res[0],res[1])
+        folder_id = res[1] 
+
+    with connection.cursor() as cursor:
+        sql = "Update user set cv_file_path = '{}',cv_folder_id = '{}' where u_id = '{}'".format(file_id,folder_id,request.session['id'])
+        cursor.execute(sql)
+
+
+    return  redirect('/applicant/')
