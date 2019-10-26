@@ -16,15 +16,14 @@ def index(request):
 
 def details(request,**kwargs):
     # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
+
     if request.session.get('data'):
         data = request.session['data']
         data['email'] = request.user.email
         request.session['data'] = data
-        
         request.session.modified = True
-        
         user = request.session['data']['user']
-    # return HttpResponse("<h2>" + str(data) + "</h2>")
+        # return HttpResponse("<h2>" + str(data) + "</h2>")
     else:
         user = None
 
@@ -38,17 +37,22 @@ def details(request,**kwargs):
         else:
             if(user == 'Company'):
                 sql = "INSERT into company(name,address,email_id,contact) values ('{}','{}','{}','{}')".format(data['name'],data['address'],data['email'],data['phone'])
-            elif(user == "User"):
+                
+            elif(user == "Applicant"):
                 dob = data['dob']
                 dob = dob.split('/')
-                dob = dob[2] + '-' + dob[0] + '-' + dob[1]
-                data['dob'] = dob
+                if(len(dob) != 3):    
+                    dob = dob[0].split('-')
+                    dob = dob[2] + '-' + dob[0] + '-' + dob[1]
+                    data['dob'] = dob
+                else:            
+                    dob = dob[2] + '-' + dob[0] + '-' + dob[1]
+                    data['dob'] = dob
                 # return HttpResponse("<h2>" + str(dob) + "</h2>")
-                
                 sql = "INSERT into user(full_name,fname,lname,email_id,gender,date_of_birth,phone,address)values('{}','{}','{}','{}','{}','{}','{}','{}')".format(data['full_name'],data['fname'],data['lname'],data['email'],data['gender'],data['dob'],data['phone'],data['address'])
             else:
                 return redirect("/")
-
+            # return HttpResponse(sql)
             cursor.execute(sql)
             
             try:
@@ -59,7 +63,6 @@ def details(request,**kwargs):
             # request.session.modified = True
             if(user == 'Company'):
                 request.session['email'] = request.user.email
-                return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
                 cursor.execute("SELECT * from company where email_id = %s",[request.user.email])
                 temp = list(cursor.fetchall())[0]
                 request.session['id'] = temp[0]
