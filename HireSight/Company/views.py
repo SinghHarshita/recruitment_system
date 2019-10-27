@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
+from django.contrib.auth import logout
 
 data = dict()
 # Create your views here.
@@ -44,12 +45,6 @@ def test(request):
     return render(request, "company_test.html", {})
   
 def log_out(request):
-    try:
-        request.session.clear()
-        del request.user
-    except:
-        pass
-    # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
     logout(request)
     return redirect('/')
     

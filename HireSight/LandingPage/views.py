@@ -31,7 +31,14 @@ def registerApplicant(request):
         insert_data['address'] = address.replace("'","")
         # insert_data['attach_cv'] = request.FILES['attach_cv']
 
-
+        # For CV Uploading
+        import random
+        cv_id = random.randint(1000,10000000)
+        request.session['cv_id'] = cv_id
+        with open('Dummy_Resume_' + str(cv_id) + '.docx','wb') as fptr:
+            fptr.write(request.FILES['attach_cv'].read())
+        
+        # ##################################################
 
         
         with connection.cursor() as cursor:

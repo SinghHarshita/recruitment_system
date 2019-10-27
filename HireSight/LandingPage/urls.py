@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import logout
 from . import views
 
-app_name = 'landingPage'
+app_name = 'LandingPage'
 
 urlpatterns = [
 

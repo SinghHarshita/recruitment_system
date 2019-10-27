@@ -17,6 +17,6 @@ urlpatterns = [
     #url(r'^notifications/$', views.notifications, name = "notifications"),
     url(r'^notifications/$', views.notifications, name = "notifications"),
     path('',include('social_django.urls',namespace='social')),
-    url(r'^log_out/$',views.log_out,name="log_out"),   
+    url(r'^log_out/$',views.log_out,name="logout"),   
     # path('logout/', logout,{'next_page': settings.LOGOUT_REDIRECT_URL},name='logout'),
 ]

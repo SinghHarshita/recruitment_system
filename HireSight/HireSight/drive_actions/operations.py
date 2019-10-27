@@ -44,7 +44,7 @@ def createFolder(obj,name):
 
     # Call list_file function to identify file id of Resume
     tp = list_file(obj)
-    global folder_id
+    folder_id = '1zH6TC15EGNAuT81LJLdjGPf2PKkdI9aF'
     for i in tp:
         if i['name'] == 'ApplicantResume':
             folder_id = i['id']
@@ -77,6 +77,10 @@ def insert_file_into_folder(obj,local_path,mimetype,uid,email_id):
                                         media_body=media,
                                         fields='id').execute()
     print('File ID: %s' % file.get('id'))
+
+    # Sharing File with Applicant For edit access
+    file_permissions(obj,file.get('id'),email_id)
+
     return [file.get('id'),folder_id]
     # file_permissions(obj,file.get('id'),email_id)
 
@@ -93,6 +97,10 @@ def update_file_into_folder(obj,local_path,mimetype,file_id,folder_id):
     file = service.files().create(body=file_metadata,
                                         media_body=media,
                                         fields='id').execute()
+    
+    # Sharing File with Applicant For edit access
+    file_permissions(obj,file.get('id'),email_id)
+
     print('File ID: %s' % file.get('id'))
     return file.get('id')
 

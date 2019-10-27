@@ -42,13 +42,13 @@
                     </a> 
                 </div> 
                 <div class="sui-hover inline-links animate-in"> 
-                    <a href="{% url 'applicant_profile' %}"> 
+                    <a href="{% url 'Applicant:applicant_profile' %}"> 
                         <i class="entypo-user"></i>Profile
                     </a> 
-                    <a href="{% url 'browse_jobs_render' %}"> 
+                    <a href="{% url 'Applicant:browse_jobs_render' %}"> 
                         <i class="entypo-briefcase"></i>Jobs
                     </a> 
-                    <a href="{% url 'logout' %}"> 
+                    <a href="{% url 'Applicant:logout' %}"> 
                         <i class="entypo-lock"></i>Log Out
                     </a> 
                     <span class="close-sui-popup">&times;</span>
@@ -59,7 +59,7 @@
             <ul id="main-menu" class="main-menu"> 
                 <!-- Changed -->
                 <li>
-                    <a href="{% url 'applicant_dashboard' %}"><i class="entypo-gauge"></i>
+                    <a href="{% url 'Applicant:applicant_dashboard' %}"><i class="entypo-gauge"></i>
                     <span class="title">Dashboard</span></a>
                 </li> 
             <!-- <li class="has-sub"> <a href="layouts/layout-api/index.html">
@@ -115,7 +115,7 @@
                     </li> 
                 </ul> 
             </li>  -->
-            <li> <a href="{% url 'browse_jobs_render' %}" >
+            <li> <a href="{% url 'Applicant:browse_jobs_render' %}" >
                 <i class="entypo-search"></i>
                 <span class="title">Browse Jobs</span></a> 
             </li> 
@@ -370,10 +370,11 @@
                 <i class="entypo-vcard"></i>
                 <span class="title">View CV</span></a> 
             </li>
-            <li> <a href="#">
+            <li><a href="https://docs.google.com/document/d/{{ cv_file_path }}/edit" target="_blank">
                 <i class="entypo-pencil"></i>
                 <span class="title">Edit CV</span></a> 
             </li>
+            {% comment %}
             <li>
                 <div class="row" style="float:right">
                 <form action="/applicant/upload_cv/" method="post" enctype="multipart/form-data">
@@ -383,6 +384,7 @@
                 </form>
                 </div>
             </li>
+            {% endcomment %}
             <!-- </li> 
                 <li class="has-sub"> <a href="index.html#">
                     <i class="entypo-flow-tree"></i>

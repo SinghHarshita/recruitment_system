@@ -149,3 +149,7 @@ def upload_cv(request):
 
 
     return  redirect('/applicant/')
+
+def log_out(request):
+    logout(request)
+    return redirect('/')

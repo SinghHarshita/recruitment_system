@@ -42,13 +42,13 @@
                     </a> 
                 </div> 
                 <div class="sui-hover inline-links animate-in"> 
-                    <a href="{% url 'company_profile' %}"> 
+                    <a href="{% url 'Company:company_profile' %}"> 
                         <i class="entypo-user"></i>Profile
                     </a> 
-                    <a href="{% url 'company_post_jobs' %}"> 
+                    <a href="{% url 'Company:company_post_jobs' %}"> 
                         <i class="entypo-briefcase"></i>Jobs
                     </a> 
-                    <a href="{% url 'logout' %}"> 
+                    <a href="{% url 'Applicant:logout' %}"> 
                         <i class="entypo-lock"></i>Log Out
                     </a> 
                     <span class="close-sui-popup">&times;</span>
@@ -59,9 +59,10 @@
             <ul id="main-menu" class="main-menu"> 
                 <!-- Changed -->
                 <li>
-                    <a href="{% url 'index' %}"><i class="entypo-gauge"></i>
+                    <a href="{% url 'Company:company_dashboard' %}"><i class="entypo-gauge"></i>
                     <span class="title">Dashboard</span></a>
                 </li> 
+                {% comment %}
             <!-- <li class="has-sub"> <a href="layouts/layout-api/index.html">
                 <i class="entypo-layout"></i>
                 <span class="title">Layouts</span></a> 
@@ -115,10 +116,12 @@
                     </li> 
                 </ul> 
             </li>  -->
-            <li> <a href="{% url 'company_post_jobs' %}" >
+            {% endcomment %}
+            <li> <a href="{% url 'Company:company_post_jobs' %}" >
                 <i class="entypo-docs"></i>
                 <span class="title">Post Jobs</span></a> 
             </li> 
+            {% comment %}
             <!-- <li class="has-sub"> <a href="ui/panels/index.html">
                 <i class="entypo-newspaper"></i>
                 <span class="title">UI Elements</span></a> 
@@ -191,19 +194,21 @@
                     </li> 
                 </ul> 
             </li>  -->
+            {% endcomment %}
             <li>
-                <a href="{% url 'index' %}">
+                <a href="{% url 'Company:company_dashboard' %}">
                     <i class="entypo-tools"></i>
                     <span class="title">Edit Job Details</span>
                 </a>
             </li>
                 
             <li>
-                <a href="{% url 'index' %}">
+                <a href="{% url 'Company:company_dashboard' %}">
                     <i class="entypo-users"></i>
                     <span class="title">View Applicants</span>
                 </a>
             </li>
+            {% comment %}
             <!-- <li class="has-sub"> 
                 <a href="forms/main/index.html">
                     <i class="entypo-doc-text"></i>
@@ -373,9 +378,11 @@
                         </li> 
                     </ul> 
                 </li>  -->
+                {% endcomment %}
             <li> <a href="#">
                 <i class="entypo-chart-bar"></i>
                 <span class="title">Statistics</span></a> 
+                {% comment %}
             <!-- </li> 
                 <li class="has-sub"> <a href="index.html#">
                     <i class="entypo-flow-tree"></i>
@@ -424,6 +431,7 @@
                     </li> 
                 </ul> 
             </li>  -->
+            {% endcomment %}
             </ul> 
         
         </div> 

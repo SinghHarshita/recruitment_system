@@ -9,6 +9,7 @@ from django.db import connection
 from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import redirect
+from .drive_actions import quickstart as qk
 
 # Create your views here .........
 def index(request):
@@ -22,15 +23,15 @@ def details(request,**kwargs):
         data['email'] = request.user.email
         request.session['data'] = data
         request.session.modified = True
-        user = request.session['data']['user']
+        user = data['user']
         # return HttpResponse("<h2>" + str(data) + "</h2>")
     else:
         user = None
 
     with connection.cursor() as cursor:
-        cursor.execute("SELECT * from user where email_id = %s",[user])
+        cursor.execute("SELECT * from user where email_id = %s",[request.user.email])
         row1 = list(cursor.fetchall())
-        cursor.execute("SELECT * from company where email_id = %s",[user])
+        cursor.execute("SELECT * from company where email_id = %s",[request.user.email])
         row2 = list(cursor.fetchall())
         if(len(row1) == 1 or len(row2) == 1):
             return redirect(auth_user)
@@ -72,6 +73,7 @@ def details(request,**kwargs):
                 cursor.execute("SELECT * FROM user where email_id = %s",[request.user.email])
                 temp = list(cursor.fetchall())[0]
                 request.session['id'] = temp[0]
+                upload_cv(request)
                 return redirect('Applicant:applicant_dashboard')
             else:
                 return redirect('/')
@@ -102,6 +104,36 @@ def auth_user(request):
         request.session["email"] = data[3]
         return redirect('Company:company_dashboard')
 
+def upload_cv(request):
+    # return HttpResponse(request.session.items())
+    with connection.cursor() as cursor:
+        sql = "Select cv_file_path,cv_folder_id from user where u_id = '{}'".format(request.session['id'])
+        cursor.execute(sql)
+        res = list(cursor.fetchone())
+        # return HttpResponse(res)
+        if(res[1] is not None):
+            sql = "UPDATE user set cv_file_path = 'NULL' where u_id = '{}'".format(request.session['id'])
+            cursor.execute(sql)
+            qk.delete_file(res[0])
+
+    # with open('Dummy_Resume_' + str(request.session['id']) +'.docx','wb') as fptr:
+    #     fptr.write(request.FILES['attach_cv'].read())
+
+    if(res[1] is None):
+        file_id,folder_id = qk.main(request.session['id'],request.session['cv_id'],request.session['email'])
+    else:
+        file_id = qk.update_cv(request.session['cv_id'],res[0],res[1])
+        folder_id = res[1] 
+
+    with connection.cursor() as cursor:
+        sql = "Update user set cv_file_path = '{}',cv_folder_id = '{}' where u_id = '{}'".format(file_id,folder_id,request.session['id'])
+        cursor.execute(sql)
+
+
 def log_out(request):
-    logout(request)
+    try:
+        request.session.clear()
+        del request.user
+    except:
+        pass
     return redirect("/")
