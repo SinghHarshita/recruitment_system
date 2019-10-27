@@ -9,7 +9,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="{% url 'LandingPage:registerApplicant' %}" enctype="multipart/form-data"  method="post">
+            {% csrf_token %}
+            
             <!-- NAME -->
             <div class="form-group row">
               <label for="fname" class="col-sm-2 col-form-label">First Name</label>
@@ -23,7 +25,8 @@
                 <input type="text" class="form-control" id="lname" placeholder="Doe">
               </div>
             </div>
-
+            
+            {% comment %}    
             <!-- EMAIL -->
             <div class="form-group row">
               <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
@@ -39,6 +42,7 @@
                 <input type="password" class="form-control" id="inputPassword" placeholder="Password">
               </div>
             </div>
+            {% endcomment %}
             
             <!-- Contact Number -->
             <div class="form-group row">
@@ -135,27 +139,27 @@
               </div>
             </div>
 
-            <!-- CV -->
-            <form>
-              <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">Attach CV</label>
-                <div class="col-sm-10">
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+              <!-- CV -->
+                  <div class="form-group row">
+                    <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">Attach CV</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control-file" name="attach_cv" id="exampleFormControlFile1">
+                    </div>
+                  </div>
+  
+              <!-- CHECKBOX -->
+              <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                  <label class="form-check-label" for="exampleCheck1">I agree to the terms and conditions.</label>
                 </div>
-              </div>
-            </form>
-
-            <!-- CHECKBOX -->
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">I agree to the terms and conditions.</label>
-            </div>
+    
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+        
       </div>
     </div>
   </div>
