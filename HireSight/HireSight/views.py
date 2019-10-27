@@ -22,15 +22,15 @@ def details(request,**kwargs):
         data['email'] = request.user.email
         request.session['data'] = data
         request.session.modified = True
-        user = request.session['data']['user']
+        user = request.user.email
         # return HttpResponse("<h2>" + str(data) + "</h2>")
     else:
-        user = None
+        user = request.user.email
 
     with connection.cursor() as cursor:
-        cursor.execute("SELECT * from user where email_id = %s",[request.user.email])
+        cursor.execute("SELECT * from user where email_id = %s",[user])
         row1 = list(cursor.fetchall())
-        cursor.execute("SELECT * from company where email_id = %s",[request.user.email])
+        cursor.execute("SELECT * from company where email_id = %s",[user])
         row2 = list(cursor.fetchall())
         if(len(row1) == 1 or len(row2) == 1):
             return redirect(auth_user)
