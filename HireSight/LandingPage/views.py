@@ -13,7 +13,7 @@ def registerApplicant(request):
     if (request.POST):
         data = request.POST.dict()
         insert_data = dict()
-        insert_data['user'] = 'User'
+        insert_data['user'] = 'Applicant'
         insert_data['fname'] = data.get('fname') or "NULL"
         insert_data['lname'] = data.get('lname') or "NULL"
         full_name = (insert_data['fname'] + " " + insert_data['lname']).replace("'","")
@@ -29,10 +29,24 @@ def registerApplicant(request):
         address += data.get('state') or ""
         address += data.get('zip') or ""
         insert_data['address'] = address.replace("'","")
-        request.session['data'] = insert_data
+        # insert_data['attach_cv'] = request.FILES['attach_cv']
 
+
+
+        
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT max(u_id) from user")
+            res = list(cursor.fetchone())
+            uid = int(res[0]) + 1
+            # sql = "INSERT into user(uid,full_name,fname,lname,gender,date_of_birth,phone,address) values('{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(uid,insert_data['full_name'],insert_data['fname'],insert_data['lname'])
+
+        # insert_data['uid'] = uid
+        request.session['data'] = insert_data
+        # request.session['registeruser'] = 1
+        # return HttpResponse(request.FILES['attach_cv'])
         # return HttpResponse("<h2>" + str(request.session['data']) + "</h2>")
         return redirect("/login/google-oauth2/",kwargs={})
+
 
         
 def registerCompany(request):
