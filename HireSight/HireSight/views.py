@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 
 # Create your views here .........
 def index(request):
-    return HttpResponse("HireSight Welcomes You!")
+    return HttpResponse("HireSight Welcomes You!") 
 
 def details(request,**kwargs):
     # return HttpResponse("<h2>" + str(request.session.items()) + "</h2>")
