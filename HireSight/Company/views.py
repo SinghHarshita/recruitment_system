@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
 from datetime import date
+from django.contrib.auth import logout
 import json
 
 data = dict()
@@ -371,6 +372,10 @@ def save_job_questions(request):
         # return HttpResponse(str(sql3))
     # return HttpResponse("123")
     return redirect("Company:index")
+
+def log_out(request):
+    logout(request)
+    return redirect('/')
 
 
 def save_job_questions1(request):
