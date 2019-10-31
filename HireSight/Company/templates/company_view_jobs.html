@@ -6,9 +6,135 @@
 
 <h2>
     <strong>Edit {{job}}</strong>
-</h2>
 
-<form id="rootwizard-2" method="post" action="" class="form-wizard validate"> 
+</h2>
+<script>
+
+    var1 = {{ edit_jobs|safe }};
+    function type_change(type){
+        
+        // console.log(var1);
+        // for(var i = 0;i<var1[3]["types"].length;i++){
+        //     if(var1[3]["types"][i] == type){
+        //         type_quest = var1[3]["types"][i]
+        //     }
+        // }
+        type_quest = type;
+        str1 = '';
+        for(var i = 0;i<var1[3]["questions"].length;i++){
+            if(var1[3]["questions"][i]["type"] == type_quest){
+                // alert(var1[3]["questions"][i]["question"][0]["options"]);
+                // console.log(var1[3]["questions"]);
+                // break;
+                str1 += '<div id="quest_display">';
+                str1 += '<div class="row">';
+                str1 += '<div class="col-md-12">';
+                str1 += '<div class="form-group">';
+                str1 += '<label for="question_1">Question</label>';
+                str1 += '<input value=' + "'" + var1[3]["questions"][i]["question"] + "'" + '" type="text" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" />'; 
+                str1 += '</div></div></div>';
+                            
+                str1 += '<div class="row">';
+                str1 += '<div class="col-md-6">';
+                str1 += '<div class="form-group">';
+                str1 += '<label for="answer_1">Answer</label>';
+                str1 += '<input value=' + "'" + var1[3]["questions"][i]["question"] + "'" + '" type="text" class="form-control" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" />'; 
+                str1 += '</div>';
+                str1 += '</div>';
+                str1 += '<div class="col-md-6">';
+                str1 += '<div class="form-group">';
+                str1 += '<label for="marks_1">Marks</label>';
+                str1 == '<input value=' + "'" + var1[3]["questions"][i]["question"] + "'" + '" type="text" class="form-control" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" />'; 
+                str1 += '</div></div></div>';
+                str1 += '<div class="row">';
+                str1 += '<p>Options</p>';
+                for(var j=0;j<var1[3]["questions"][i]["options"].length;j++){
+                    str1+='<div class="col-md-6">';
+                    str1 += '<div class="form-group">';
+                    str1 += '<input value=' + "'" + var1[3]["questions"][i]["options"][j] + "'" + '" type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" />'; 
+                    str1 += '</div></div>';    
+                }
+                str1+='</div>';
+        }
+    }
+    if(str1.length == 0){
+        str1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_1">Question</label><input onchange="change_question(this.value,this.id)" id="0" value="" type="text" class="form-control" name="question_0" id="question_0" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_0">Answer</label><input onchange="change_answer(this.value,this.id)" id="0" value="" type="text" class="form-control" name="answer_0" id="answer_0" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_0">Marks</label><input onchange="change_marks(this.value,this.id)" id="0" value="" type="text" class="form-control" name="marks_0" id="marks_0" data-validate="required" placeholder="Marks" /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input onchange="change_options(this.value,0,this.id)" id="0" value="" type="text" class="form-control" name="option_0_0" id="option_0_0" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input onchange="change_options(this.value,0,this.id)" id="1" value="" type="text" class="form-control" name="option_0_1" id="option_0_1" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input onchange="change_options(this.value,0,this.id)" id="2" value="" type="text" class="form-control" name="option_0_2" id="option_0_2" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input onchange="change_options(this.value,0,this.id)" id="3" value="{{opt}}" type="text" class="form-control" name="option_0_3" id="option_0_3" data-validate="required" placeholder="Option 4" /></div></div></div>';
+    }
+    // document.getElementById('quest_display').innerHTML = str1;
+    // console.log(str1);
+    document.getElementById('main_questions').innerHTML = str1;
+}
+
+function change_Designation(designation){
+    // edit_jobs["0"]["job_details"]["designation"] = designation;
+    var1["0"]["job_details"]["designation"] = designation;
+}
+
+function change_vacancies(vacancy){
+    // edit_jobs["0"]["job_details"]["designation"] = vacancy;
+    var1["0"]["job_details"]["no_of_vacancies"] = vacancy;
+}
+
+function change_description(description){
+    // edit_jobs["0"]["job_details"]["description"] = description;
+    var1["0"]["job_details"]["description"] = description;
+}
+
+function change_closing_date(date1){
+    // edit_jobs["0"]["job_details"]["last_date"] = date1;
+    var1["0"]["job_details"]["last_date"] = date1;
+}
+
+function change_qualification(qualification){
+    // edit_jobs["1"]["requirements"]["qualification"] = qualification;
+    var1["1"]["requirements"]["qualification"] = qualification;
+}
+
+function change_experience(experience){
+    // edit_jobs["1"]["requirements"]["experience"] = experience;
+    var1["1"]["requirements"]["experience"] = experience;
+}
+
+function change_skills(skills){
+    // edit_jobs["1"]["requirements"]["skills"] = skills;
+    var1["1"]["requirements"]["skills"] = skills;
+}
+
+function change_question(value,id){
+    // edit_jobs["3"]["questions"][id]["question"] = value;
+    var1["3"]["questions"][id]["question"] = value;
+}
+
+function change_answer(value,id){
+    // edit_jobs["3"]["questions"][id]["answer"] = value;
+    var1["3"]["questions"][id]["answer"] = value;
+}
+
+function change_marks(value,id){
+    // alert(value);
+    // return;
+    // edit_jobs["3"]["questions"][id]["marks"] = value;
+    var1["3"]["questions"][id]["marks"] = value;
+}
+
+function change_options(value,pid,id){
+    // alert(String(value) + String(pid) + String(id));
+    // return;
+    // edit_jobs["3"]["questions"][pid]["options"][id] = value;
+    var1["3"]["questions"][pid]["options"][id] = value;
+    // alert({{edit_jobs}});
+    // alert(var1);
+}
+
+function update_value(){
+    // alert(JSON.stringify(var1["2"]));
+    document.getElementById('edit_jobs_details').value = JSON.stringify(var1);
+    console.log(var1);
+}
+</script>
+
+<form id="rootwizard-2" onsubmit="update_value()" method="post" action="{% url 'Company:saveQuestions' %}" class="form-wizard validate"> 
+    {% csrf_token %}
     <div class="steps-progress"> 
         <div class="progress-indicator"></div> 
     </div> 
@@ -25,13 +151,13 @@
                     <div class="col-md-6"> 
                         <div class="form-group"> 
                             <label class="control-label" for="designation">Designation</label> 
-                            <input class="form-control" name="designation" id="designation" data-validate="required" value="{{designation}}" placeholder="Designation" /> 
+                            <input onchange="change_Designation(this.value)" class="form-control" name="designation" id="designation" data-validate="required" value="{{edit_jobs.0.job_details.designation}}" placeholder="Designation" /> 
                         </div> 
                     </div> 
                     <div class="col-md-6"> 
                         <div class="form-group"> 
                             <label class="control-label" for="no_of_vacancies">Enter number of vacancies</label> 
-                            <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" value="{{no_of_vacancies}}" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
+                            <input onchange="change_vacancies(this.value)" type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" value="{{edit_jobs.0.job_details.no_of_vacancies}}" data-validate="required" placeholder="Enter Number of Vacancies" /> 
                         </div> 
                     </div> 
                 </div> 
@@ -39,14 +165,14 @@
                     <div class="col-md-12"> 
                         <div class="form-group"> 
                             <label class="control-label" for="description">Job Description</label> 
-                            <textarea class="form-control autogrow" name="description" id="description" data-validate="minlength[4]" value="{{description}}" rows="5" placeholder="Enter job description"></textarea> 
+                            <textarea onchange="change_description(this.value)" class="form-control autogrow" name="description" id="description" value="" rows="5" placeholder="Enter job description">{{edit_jobs.0.job_details.description}}</textarea> 
                         </div> 
                     </div> 
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                             <label class="control-label" for="last_date">Closing Date</label>
-                            <input class="form-control datepicker" name="last_date" id="last_date" data-validate="required" value="{{last_date}}" placeholder="Closing Date" /> 
+                            <input onchange="change_closing_date(this.value)" class="form-control datepicker" name="last_date" id="last_date" data-validate="required" value="{{edit_jobs.0.job_details.last_date}}" placeholder="Closing Date" /> 
                     </div>
                 </div> 
             </div> 
@@ -55,13 +181,13 @@
                     <div class="col-md-8"> 
                         <div class="form-group"> 
                             <label class="control-label" for="qualification">Qualification</label> 
-                            <input type = "text" class="form-control" name="qualification" id="qualification" data-validate="required" value="{{qualification}}" placeholder="Enter Qualifications separated by space" /> 
+                            <input onchange="change_qualification(this.value)" type = "text" class="form-control" name="qualification" id="qualification" data-validate="required" value="{{edit_jobs.1.requirements.qualification}}" placeholder="Enter Qualifications separated by space" /> 
                         </div> 
                     </div> 
                     <div class="col-md-4"> 
                         <div class="form-group"> 
                             <label class="control-label" for="experience">Experience</label> 
-                            <input type = "number" class="form-control" name="experience" id="experience" data-validate="required" value="{{experience}}" placeholder="Enter experience in years" /> 
+                            <input onchange="change_experience(this.value)" type = "text" class="form-control" name="experience" id="experience" data-validate="required" value="{{edit_jobs.1.requirements.experience}}" placeholder="Enter experience in years" /> 
                         </div> 
                     </div> 
                 </div> 
@@ -69,10 +195,11 @@
                     <div class="col-md-12"> 
                         <div class="form-group"> 
                             <label class="control-label" for="skills">Skills</label> 
-                            <input class="form-control" name="skills" id="skills" data-validate="required" value="{{skills}}" placeholder="Enter skills here ( separated by comma(,) )" /> 
+                            <input onchange="change_skills(this.value)" class="form-control" name="skills" id="skills" data-validate="required" value="{{edit_jobs.1.requirements.skills}}" placeholder="Enter skills here ( separated by comma(,) )" /> 
                         </div> 
                     </div> 
                 </div> 
+                {% comment %}
                 <!-- <div class="row"> 
                     <div class="col-md-5"> 
                         <div class="form-group"> 
@@ -101,8 +228,10 @@
                         </div> 
                     </div> 
                 </div>  -->
+                {% endcomment %}
             </div> 
             <div class="tab-pane" id="tab2-3"> 
+                {% comment %}
                 <!-- <strong>Primary School</strong> 
                 <br /> 
                 <br /> 
@@ -172,22 +301,103 @@
                         </div> 
                     </div> 
                 </div>  -->
-                <strong>Knockout Questions</strong>
-                <div class="col-md-8">
-                        <div class="form-group"> 
-                            <label class="control-label" for="k_question1">Question</label> 
-                            <input class="form-control" name="k_question1" id="k_question1" data-validate="required" placeholder="Question" />
-                            <br /> 
+                {% endcomment %}
+                {% comment %}
+                <!-- <strong>Knockout Questions</strong>
+                {% for key,val in temp["2"].knockout.items %}
+                    <div class="col-md-8">
+                            <div class="form-group"> 
+                                <label class="control-label" for="k_question1">Question</label> 
+                                <input onchange="change_knockout(this.id,this.val)" value="{{edit_jobs.3.questions}}" class="form-control" name="k_question1" id="{{forloop.counter0}}" data-validate="required" placeholder="Question" />
+                                <br /> 
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="no_of_options1">Number of Options</label>
+                            <input class="form-control" name="no_of_options1" id = "{{forloop.counter0}}" data-validate="number" placeholder="Number of Options" onchange="addKnockOutOptions()" />
+                            <br />
                         </div>
+                    </div>
+                {% empty %}
+                    <div class="col-md-8">
+                            <div class="form-group"> 
+                                <label class="control-label" for="k_question1">Question</label> 
+                                <input onchange="change_knockout()" value="{{edit_jobs.3.questions}}" class="form-control" name="k_question1" id="k_question1" data-validate="required" placeholder="Question" />
+                                <br /> 
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="no_of_options1">Number of Options</label>
+                            <input class="form-control" name="no_of_options1" id = "no_of_options1" data-validate="number" placeholder="Number of Options" onchange="addKnockOutOptions()" />
+                            <br />
+                        </div>
+                    </div>
+                {% endfor %}
+            </div> -->
+            {% endcomment %}
+
+            {% for key,value in edit_jobs.2.knockout.items %}    
+                <div class="col-md-8">
+                    <div class="form-group">
+                            <label class="control-label" for="k_question1">Question</label> 
+                            <input onchange="change_knockout(this.id,this.value)" class="form-control" name="k_question1" id="{{forloop.counter0}}" data-validate="required" placeholder="Question" value="{{value.question}}" />
+                        <br /> 
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" name="no_of_options1" id = "no_of_options1" data-validate="number" placeholder="Number of Options" onchange="" />
+                        <label class="control-label" for="no_of_options1">Number of Options</label>
+                        <input type = "number" class="form-control" name="no_of_options1" id = "{{forloop.counter0}}" data-validate="required" placeholder="Number of Options" onchange="addKnockOutOptions(this.id,this.value)" value="{{value.no_of_options}}" />
                         <br />
                     </div>
                 </div>
+                <div id="feilds1">
+                    {% for i,j in value.opt_marks %}
+                        <div class='row'>
+                            <div class='col-sm-6'> 
+                                <div class='form-group'>
+                                    <label class='control-label' for='option{{forloop.counter0}}'>Option</label>
+                                    <input id='{{forloop.counter0}}' onchange='change_knoption("{{forloop.parentloop.counter0}}",this.id,this.value)' class='form-control' type='text' name ='option(k_x)' data-validate='required' value="{{i}}" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class='form-group'>
+                                    <label class='control-label' for='marks(k_x)'>Marks</label>
+                                    <input id='{{forloop.counter0}}' onchange='change_knmarks("{{forloop.parentloop.counter0}}",this.id,this.value)' class='form-control' type='text' name ='Marks(k_x)' data-validate='required' value="{{j}}" />
+                                </div> 
+                            </div>
+                        </div>
+                    {% endfor %}    
+                </div>
+
+            {% empty %}
+                    <div class="col-md-8">
+                            <div class="form-group"> 
+                                <label class="control-label" for="k_question1">Question</label> 
+                                <input onchange="change_knockout(this.id,this.value)" value="" class="form-control" name="k_question1" id="0" data-validate="required" placeholder="Question" />
+                                <br /> 
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="no_of_options1">Number of Options</label>
+                            <input value="" class="form-control" name="no_of_options1" id = "0" data-validate="number" placeholder="Number of Options" onchange="addKnockOutOptions(this.id,this.value)" />
+                            <br />
+                        </div>
+                    </div>
+                    <div id="fields1">
+                        
+                    </div>
+            {% endfor %}
+                <div class="row">
+                    <button type="button" class="btn btn-primary" onclick='addKQuestion("{{ edit_jobs.2.knockout.items|length }}")'>Add Question</button>
+                </div>
             </div> 
+            
             <div class="tab-pane" id="tab2-4"> 
+                {% comment %}
                 <!-- <strong>Current &amp; Past Jobs</strong> 
                 <br /> <br /> 
                 <div class="row"> 
@@ -318,50 +528,80 @@
                         </div> 
                     </div> 
                 </div>  -->
+                {% endcomment %}
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                                 <label for="question_type_1">Type</label>
-                                <select name="question_type_1" id="question_type_1">
-                                    <option value="aptitude">Aptitude</option>
-                                    <option value="maths">Maths</option>
-                                    <option value="english">English</option>
-                                    <option value="programming">Programming</option>
-                                    <option value="other">Other</option>
+                                <select onchange="type_change(this.value)" name="question_type_1" id="question_type_1">
+                                    
+                                    {% comment %}
+                                    {% for type in edit_jobs.3.types %}
+                                        <option value="{{type}}">{{type}}</option>
+                                    {% empty %}
+                                    {% endcomment %}
+
+                                            <option value="Aptitude">Aptitude</option>
+                                            <option value="Maths">Maths</option>
+                                            <option value="English">English</option>
+                                            <option value="Programming">Programming</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    {# {% endfor %} #}
+                                    
+                                    {% comment %}
+                                        <!-- <option value="aptitude">Aptitude</option>
+                                        <option value="maths">Maths</option>
+                                        <option value="english">English</option>
+                                        <option value="programming">Programming</option>
+                                        <option value="other">Other</option> -->
+                                    {% endcomment %}
                                 </select>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="question_1">Question</label>
-                            <input type="text" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="answer_1">Answer</label>
-                            <input type="text" class="form-control" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="marks_1">Marks</label>
-                                <input type="text" class="form-control" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+
+                <div id="main_questions">
+
+                {% for quest in edit_jobs.3.questions %}
+                        {% if quest.type == edit_jobs.3.types.0 %}
+                        <div id="quest_display">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="question_1">Question</label>
+                                        <input onchange="change_question(this.value,this.id)" id="{{ forloop.counter0 }}" value="{{quest.question}}" type="text" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
+                                    </div>
+                                </div>
                             </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <p>Options</p>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="answer_1">Answer</label>
+                                        <input onchange="change_answer(this.value,this.id)" id="{{ forloop.counter0 }}" value="{{quest.answer}}" type="text" class="form-control" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="marks_1">Marks</label>
+                                            <input onchange="change_marks(this.value,this.id)" id="{{ forloop.counter0 }}" value="{{quest.marks}}" type="text" class="form-control" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>Options</p>
+                                {% for opt in quest.options %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input onchange="change_options(this.value,{{forloop.parentloop.counter}},this.id)" id="{{ forloop.counter0 }}" value="{{opt}}" type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                        {% endif %}
+                    {% comment %}
+                    <!-- <div class="col-md-6">
                         
                         <div class="form-group">
                             <input type="text" class="form-control" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /> 
@@ -376,12 +616,70 @@
                         <div class="form-group">
                             <input type="text" class="form-control" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /> 
                         </div>
-                    </div>
+                    </div> -->
+                    {% endcomment %}
+                {% empty %}
+                    <div id="quest_display">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="question_1">Question</label>
+                                        <input onchange="change_question(this.value,this.id)" id="0" value="{{quest.question}}" type="text" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="answer_1">Answer</label>
+                                        <input onchange="change_answer(this.value,this.id)" id="0" value="{{quest.answer}}" type="text" class="form-control" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="marks_1">Marks</label>
+                                            <input onchange="change_marks(this.value,this.id)" id="0" value="{{quest.marks}}" type="text" class="form-control" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>Options</p>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input onchange="change_options(this.value,0,this.id)" id="0" value="{{opt}}" type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input onchange="change_options(this.value,0,this.id)" id="1" value="{{opt}}" type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input onchange="change_options(this.value,0,this.id)" id="2" value="{{opt}}" type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input onchange="change_options(this.value,0,this.id)" id="3" value="{{opt}}" type="text" class="form-control" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                {% endfor %}
+
                 </div>
+
+                <div class="row">
+                        <button class="btn btn-primary" style="float:right" type="button" onclick="addtypeQuestion()">Add Question</button><br><br>
+                </div>
+
                 <div class="form-group"> 
+                    <input type="hidden" name="edit_jobs_details" id="edit_jobs_details" value="" /> 
                     <button type="submit" class="btn btn-primary">Update</button> 
                 </div>
             </div> 
+            {% comment %}
             <!-- <div class="tab-pane" id="tab2-5"> 
                 <div class="form-group"> 
                     <label class="control-label">Choose Username</label> 
@@ -466,6 +764,7 @@
                     <button type="submit" class="btn btn-primary">Finish Registration</button> 
                 </div> 
             </div>  -->
+            {% endcomment %}
             <ul class="pager wizard"> 
                 <li class="previous"> <a href="#"><i class="entypo-left-open"></i> Previous</a> </li> 
                 <li class="next"> <a href="#">Next <i class="entypo-right-open"></i></a> </li> 
@@ -476,6 +775,149 @@
 {% endblock %}
 {% load static %}
 {% block footer %}
+<script>
+    var k_q_no = 0;
+    var k_x = 1;
+
+    function addKnockOutOptions(id,num) {
+        //var num = $("#no_of_options1").getattribute("value");
+        // var num = $("#no_of_options1").val();
+        //console.log(num);
+        temp = var1["2"]["knockout"];
+        // len = temp.length;
+        if(1){
+            // alert(123);
+            tp = var1["2"]["knockout"][id];
+            if(1){
+                // var1["2"]["knockout"][id] = {}
+                var1["2"]["knockout"][id]["no_of_options"] = num;    
+            }else{
+                // var1["2"]["knockout"][id] = {}
+                var1["2"]["knockout"][id]["no_of_options"] = num;
+            }
+            
+        }else{
+            var1["2"]["knockout"] = array();
+            var1["2"]["knockout"][id] = {}
+            var1["2"]["knockout"][id]["no_of_options"] = num;
+        }
+        if(1) {
+                //console.log(num);
+                var add = num - k_q_no;
+                k_q_no = num;
+                var openingRowDiv = "<div class = 'row'>";
+                var openingColumnDiv = "<div class = 'col-sm-6'>";
+                var closingDiv = "</div>";
+                //$("#feilds")
+                
+                for (let i = 0; i < num; i++) {
+                    // console.log("hello");
+                    var html = openingRowDiv + openingColumnDiv 
+                    +  "<div class='form-group'> <label class='control-label' for='option" + (k_x) + "'>"+"Option" 
+                    +"</label><input id='" + i + "' onchange='change_knoption(" + id + "," + i + ",this.value)' class='form-control' type='text' name ='option" + (k_x) + "' data-validate='required' /></div>" 
+                    + closingDiv + openingColumnDiv
+                    +  "<div class='form-group'> <label class='control-label' for='marks" + (k_x) + "'>"+ "Marks" 
+                    +"</label><input id='" + i + "' onchange='change_knmarks(" + id + "," + i + ",this.value)' class='form-control' type='text' name ='Marks" + (k_x) + "' data-validate='required' /></div>" 
+                    + closingDiv + closingDiv
+                    $("#fields1").append(html);
+                    k_x++;
+                }
+            }
+            else{
+                
+            }
+    }
+
+    function change_knockout(id,val){
+        // console.log(var1);
+        // alert(132);
+        temp = var1["2"]["knockout"];
+        if(1){
+            tp = var1["2"]["knockout"][id];
+            if(tp){
+                var1["2"]["knockout"][id]["question"] = val;    
+            }else{
+                var1["2"]["knockout"][id] = {};
+                var1["2"]["knockout"][id]["question"] = val;
+            }
+            
+        }else{
+            var1["2"]["knockout"] = array();
+            var1["2"]["knockout"][id] = {
+                "question" : val
+            }
+        }
+    }
+
+    // Adding another knockout question
+    var fields = 0;
+    function addKQuestion(tp) {
+        if(fields == 0){
+            fields = tp;
+        }
+        // alert(JSON.stringify(fields));
+        fields ++;
+        var html = '<div class="col-md-8"><div class="form-group"><label class="control-label" for="k_question1">Question</label><input onchange="change_knockout(this.id,this.value)" class="form-control" name="k_question1" id="' + fields + '" data-validate="required" placeholder="Question" /><br /></div></div><div class="col-md-4"><div class="form-group"><label class="control-label" for="no_of_options1">Number of Options</label><input value="" type = "number" class="form-control" name="no_of_options1" id = "' + fields + '" data-validate="required" placeholder="Number of Options" onchange="addKnockOutOptions(this.id,this.value)" /><br /></div></div>'; 
+        $('#fields1').append(html);
+    }
+
+    function change_knoption(pid,id,val){
+        // alert(val);
+        temp = var1["2"]["knockout"][pid];
+        if(temp){
+            if(temp["options"]){
+                var1["2"]["knockout"][pid]["options"][id] = val;    
+            }else{
+                var1["2"]["knockout"][pid]["options"] = [];
+                var1["2"]["knockout"][pid]["options"][id] = val;
+            }
+            
+        }else{
+            // var1["2"]["knockout"][pid] = {};
+            var1["2"]["knockout"][pid]["options"] = [];
+            var1["2"]["knockout"][pid]["options"][id] = val;
+        }
+        // console.log(var1)
+        // alert(JSON.stringify(var1));
+    }
+
+    // function change_knmarks(pid,id,val){
+    //     alert(val);
+        temp = var1["2"]["knockout"][pid];
+        if(temp){
+            if(temp["marks"]){
+                var1["2"]["knockout"][pid]["marks"][id] = val;    
+            }else{
+                var1["2"]["knockout"][pid]["marks"] = [];
+                var1["2"]["knockout"][pid]["marks"][id] = val;
+            }
+            
+        }else{
+            // var1["2"]["knockout"][pid] = {};
+            var1["2"]["knockout"][pid]["marks"] = [];
+            var1["2"]["knockout"][pid]["marks"][id] = val;
+        }
+        // console.log(var1);
+        // alert(JSON.stringify(var1));
+    }
+
+    let questions_count  = 1;
+    function addtypeQuestion(){
+        // alert(document.getElementById('questions').value);
+        questions_count++;
+        var questions_html = '';
+            questions_html+= '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + questions_count + '">Question</label><input type="text" onchange="change_question(this.id,this.value)" class="form-control" name="question_' +  questions_count + '" id="question_"' + questions_count + '"' + '" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + questions_count + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_' + questions_count + '" id="answer_' + questions_count + '" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + questions_count + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_' + questions_count + '" id="marks_' + questions_count + '" data-validate="required" placeholder="Marks" /></div></div></div>';
+
+
+
+            questions_html+='<div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_1" id="option_' + questions_count + '_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_'+ questions_count + '_2" id="option_' + questions_count + '_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_3" id="option_' + questions_count + '_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_4" id="option_' + questions_count + '_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
+
+        // document.getElementById('root-wizard-2')('questions').innerHTML += questions_html;
+        $('#main_questions').append(questions_html);
+        // questions_count++;
+        // window.stop();
+    }
+</script>
 <script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}" id="script-resource-8"></script> 
 <script src="{% static 'assets/js/jquery.validate.min.js' %}" id="script-resource-9"></script> 
 <script src="{% static 'assets/js/jquery.inputmask.bundle.js' %}" id="script-resource-10"></script> 

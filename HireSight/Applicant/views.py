@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db import connection
 from django.http import HttpResponse
 import json
@@ -6,6 +6,12 @@ import json
 data = {}
 # Create your views here.
 def index(request):
+
+    try:
+        id = request.session['id']
+    except:
+        return redirect('/')
+
     global data
     #print(request.session["id"])
     with connection.cursor() as cursor :
@@ -14,7 +20,7 @@ def index(request):
         #data = list(cursor.fetchall())
         #print(data)
     
-    
+    # return HttpResponse(str(request.session.items()))
     applicant_history(request)
     return render(request, "dashboard.html", data)
 
@@ -43,10 +49,11 @@ def applicant_history(request):
     
     history = dict()
     # Fetching history
+    return HttpResponse(123)
     with connection.cursor() as cursor :
         cursor.execute("SELECT * FROM application_status WHERE applicant_status LIKE '%{}%'".format(request.session["id"]))
         result = cursor.fetchall()
-        #print(result)
+        print(result)
         for _ in result:
             # for i in _:
             #     print(i)
@@ -55,6 +62,7 @@ def applicant_history(request):
             #status = eval(status[request.session["id"]])
             #print(status[request.session["id"]]["status"])
             s = ""
+
             if int(status[request.session["id"]]["status"]) == 0:
                 s = "Applied"
             elif int(status[request.session["id"]]["status"]) == 1:

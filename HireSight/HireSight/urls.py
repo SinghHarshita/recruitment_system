@@ -25,7 +25,7 @@ from . import views
 urlpatterns = [
     url(r'^$', include('LandingPage.urls')),
     url(r'^applicant/', include('Applicant.urls')),
-    url(r'^company/', include('Company.urls')),
+    url(r'^company/', include('Company.urls',namespace='Company')),
     path('admin/', admin.site.urls),
     # For OAuth
     path('',include('social_django.urls',namespace='social')),    
