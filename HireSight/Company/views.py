@@ -98,12 +98,13 @@ def company_view_jobs(request,job_id):
     for job in jobs:
         var1 = eval(job[2])
         temp = dict()
+        tp_date = str(job[5]).split('-')
         temp["0"] = {
             "job_details" : {
                 "designation": var1["designation"],
                 "description": var1["description"],
                 "no_of_vacancies": job[3],
-                "last_date": str(job[5])
+                "last_date": "{}/{}/{}".format(tp_date[1],tp_date[2],tp_date[0])
             }
         }
         temp["1"] = {
