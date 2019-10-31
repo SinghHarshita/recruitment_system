@@ -16,8 +16,9 @@
             </div>
             <div class="panel-body">
                 <!--
-                    Job details here
+                    Job details here                    
                 -->
+                <p style="color: black"><b>Hello</b> : hello world</p>
             </div> 
         </div>
     </div>
@@ -38,8 +39,9 @@
         </tr>
     </thead>
     <tbody>
-        {% for applicant in applicants %}
+        {% for key,value in data.items %}
             <tr>
+                {% for key1,value1 in value.items %}
                 <td>{{applicant.index}}</td>
                 <td>{{applicant.name}}</td>
                 <td>{{applicant.knockout_score}}</td>
@@ -63,6 +65,7 @@
                     <td>&nbsp;</td>
                     <td>On Hold</td>
                 {% endif %}
+                {% endfor %}
             </tr>
         {% empty %}
             <p class="text-center" style="color: black; font-size:16px;"><em>No Applicants</em></p>

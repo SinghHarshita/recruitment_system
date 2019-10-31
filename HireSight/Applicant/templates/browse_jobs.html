@@ -21,7 +21,7 @@
                         <a href="" class="btn btn-primary pull-right">Apply Now</a>
                     </h4> 
                     <div class="row info-list"> 
-                        <div class="col-sm-4"> 
+                        <div class="col-sm-4">
                             <i class="entypo-briefcase"></i>Posted By <a href="#">{{c_name}}</a> 
                         </div> 
                         <div class="col-sm-4"> 
@@ -68,6 +68,23 @@
       $("#job_details_modal_title").append(i);
       $("#job_details_modal_body").empty();
       $("#job_details_modal_body").append(j);
+  }
+
+  function filter_data(){
+    var action = 'fetch_data'
+    var location = get_filter('location');
+    $.ajax({
+        url:"",
+        method:"POST"
+    });
+  }
+
+  function get_filter{
+    var filter = [];
+    $('.'+ class_name +':checked').each(function(){
+        filter.push($(this).val());
+    });
+    return filter;
   }
 
 </script>

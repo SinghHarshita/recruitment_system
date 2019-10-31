@@ -112,7 +112,11 @@
                                 <td style="color: black">{{j.last_date}}</td>
                                 <td class="text-center">
                                     {% if job.applicants != 0 %} 
+<<<<<<< Updated upstream
                                     <a href="{% url 'Company:company_view_applicants' %}" class="btn btn-danger">
+=======
+                                    <a href="http://127.0.0.1:8000/company/view_applicants/{{j.j_id}}/" class="btn btn-danger">
+>>>>>>> Stashed changes
                                         <i class="entypo-eye"></i>
                                     </a>
                                     {% else %}

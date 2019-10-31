@@ -118,3 +118,7 @@ def notifications(request) :
 def test(request):
     global data
     return render(request, "apply_job_q_a.html", data)
+
+# def job_endpoint(request):
+#     if(request.method == 'POST'):
+#         return 

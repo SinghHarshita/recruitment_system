@@ -80,15 +80,19 @@ def company_post_jobs(request):
     """ Renders post jobs form """
     return render(request, "company_post_jobs.html", data)
 
-def company_view_applicants(request,id):
+def company_view_applicants(request,job_id):
     """ Renders applicants for a particular job """
     global data
-    job_id = int(id)
-    #data["applicants"]["job_details"] = data[]
+    job_id = int(job_id)
+    # data["applicants"]["job_details"] = data[]
     with connection.cursor() as cursor:
         cursor.execute("SELECT * from jobs WHERE j_id = {}".format(job_id))
+        res = list(cursor.fetchall())[0]
+        data['applicants'] = job_details(res)
+        data['applicants']['applicant_list'] = applicant_list(request,job_id)
     return render(request, "view_applicants.html", data)
 
+<<<<<<< Updated upstream
 def company_view_jobs(request,job_id):
     """ Renders view for editing a particular job """
     dict1 = dict()
@@ -215,6 +219,108 @@ def company_view_jobs(request,job_id):
         temp["job_id"] = job_id
         # return HttpResponse(str(temp))
         # final_arr.append(temp)
+=======
+def job_details(res):
+    return {
+        'job_details':{
+            "designation": eval(res[2])['designation'],
+            "experience": eval(res[2])['experience'],
+            "no_of_vacancies": res[3],
+            "skills": eval(res[2])['skills'],
+            "last_date": res[5] ,
+            "qualification": eval(res[2])['qualification'],
+            "threshold_value":res[4],
+        }
+    }
+
+def applicant_list(requsest,job_id):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from application_status WHERE j_id = {}".format(job_id))
+        res1 = list(cursor.fetchall())[0]
+        res2 = eval(res1[1])
+        res3 = dict()
+        i = 0
+        for k,v in res2.items():
+            res3[i] = v
+            res3[i]['u_id'] = k
+            sql = "SELECT full_name from user WHERE u_id = {}".format(k)
+            cursor.execute(sql)
+            res3[i]['full_name'] = cursor.fetchone()[0]
+            i=i+1
+    return res2
+
+def company_view_jobs(request):
+    """ Renders view for editing a particular job """
+    # dict1 = dict()
+    # with connection.cursor() as cursor:
+    #     cursor.execute("SELECT * from jobs where c_id = %s and last_date >= %s",[request.session['id'],date.today()])
+    #     jobs = list(cursor.fetchall())
+    # # Looping through all list of active jobs
+    # for job in jobs:
+    #     var1 = eval(job[2])
+    #     temp = dict()
+    #     temp["0"] = {
+    #         "job_details" : {
+    #             "designation": var1["designation"],
+    #             "description": var1["description"],
+    #             "no_of_vacancies": job[3],
+    #             "last_date": str(job[5])
+    #         }
+    #     }
+    #     temp["1"] = {
+    #         "requirements" : {
+    #             "skills" : var1["skills"],
+    #             "qualification" : var1["qualification"],
+    #             "experience" : var1["experience"],
+    #         }
+    #     }
+    #     with connection.cursor() as cursor:
+    #         cursor.execute("SELECT * from questions where c_id = %s and j_id = %s",[request.session['id'],job[0]])
+    #         questions = list(cursor.fetchone())
+    #     # return HttpResponse(questions[0])
+        
+    #     knockouts = eval(questions[3])
+    #     questions1 = eval(questions[2])
+        
+    #     # Looping through the list of array of Knockout_questions
+    #     temp1_dict = dict()
+    #     for c,knockout in enumerate(knockouts):
+    #         # knockout = eval(knockout)
+    #         temp1_dict[c] = {
+    #             "question" : knockout[0],
+    #             "no_of_options" : knockout[1],
+    #             "options" : knockout[2],
+    #             "marks" : knockout[3],
+    #         }
+    #     temp["2"] = {
+    #         "knockout" : temp1_dict
+    #     }
+
+    #     # Looping through Questions
+    #     temp1_dict.clear()
+    #     temp_arr = tuple(questions1.items()) #Converting all the questions details into suitable format
+    #     arr = []
+
+    #     for a in temp_arr:
+    #         type1 = a[0]    #For getting type
+    #         ques_arr = list(a[1])   #For getting Questions 
+    #         for b in ques_arr:
+    #             ques = b
+    #             opt = eval(str(list(b.items())[0][1][0][0]))
+    #             ans = str(list(b.items())[0][1][0][1])
+    #             marks = str(list(b.items())[0][1][1])
+    #             tp_dict10 = {
+    #                 "type" : type1,
+    #                 "question" : ques,
+    #                 "options" : opt,
+    #                 "answer" : ans,
+    #                 "marks" : marks
+    #             }
+    #             arr.append(tp_dict10)
+    #     temp["3"] = {
+    #         "questions" : arr
+    #     }
+>>>>>>> Stashed changes
         # return HttpResponse(temp.items()) 
 
         # temp_list1 = list(temp_arr[0][1])
@@ -245,10 +351,14 @@ def company_view_jobs(request,job_id):
     # for i,j in enumerate(final_arr):
     #     dict1[i] = j
 
+<<<<<<< Updated upstream
     print(temp)
     data["edit_jobs"] = temp
     # return HttpResponse(str(temp))
     # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
+=======
+    # return HttpResponse(temp.items()) #Final dictionary data
+>>>>>>> Stashed changes
     return render(request, "company_view_jobs.html", data)
 
 def company_statistics(request):
@@ -257,6 +367,7 @@ def company_statistics(request):
 
 def company_profile(request):
     """ Renders view for editing profile """
+    
     return render(request, "company_profile.html", data)
 
 def test(request):
