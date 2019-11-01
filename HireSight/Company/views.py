@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
 from datetime import date
+from django.contrib.auth import logout
 import json
 
 data = dict()
@@ -107,12 +108,13 @@ def company_view_jobs(request,job_id):
     for job in jobs:
         var1 = eval(job[2])
         temp = dict()
+        tp_date = str(job[5]).split('-')
         temp["0"] = {
             "job_details" : {
                 "designation": var1["designation"],
                 "description": var1["description"],
                 "no_of_vacancies": job[3],
-                "last_date": str(job[5])
+                "last_date": "{}/{}/{}".format(tp_date[1],tp_date[2],tp_date[0])
             }
         }
         temp["1"] = {
@@ -486,6 +488,10 @@ def save_job_questions(request):
         # return HttpResponse(str(sql3))
     # return HttpResponse("123")
     return redirect("Company:index")
+
+def log_out(request):
+    logout(request)
+    return redirect('/')
 
 
 def save_job_questions1(request):

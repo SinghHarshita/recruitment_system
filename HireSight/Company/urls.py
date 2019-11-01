@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^statistics/$', views.company_statistics, name = "company_statistics"),
     url(r'^profile/$', views.company_profile, name = "company_profile"),
     url(r'^save_questions/$',views.save_job_questions, name="saveQuestions"),
+    url(r'^logout/$', views.log_out, name="logout"),
     #url(r'^notifications/$', views.notifications, name = "notifications"),
 ]
