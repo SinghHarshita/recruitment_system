@@ -22,9 +22,7 @@ def index(request):
     return render(request, "new_company_dashboard.html", data)
     #return HttpResponse("Hello Comapny!")
 
-def company_data(data) :
-    """ Returns company details """
-
+def company_data(data):
     return {
         "name" : data[1],
         "address" : data[2],
@@ -44,11 +42,12 @@ def jobs(request):
         cursor.execute("SELECT * FROM jobs WHERE c_id = {}".format(request.session["c_id"]))
 
         i = 0
-        result = cursor.fetchall()
+        result = list(cursor.fetchall())
         for r in result:
             # Checking if applicants exist
             cursor.execute("SELECT * FROM application_status WHERE j_id = {}".format(r[0]))
-            a = cursor.fetchall()
+            a = list(cursor.fetchall())
+            r = list(r)
             if a != None:
                 applicants = 1
             else:
@@ -90,9 +89,10 @@ def company_view_applicants(request,job_id):
         res = list(cursor.fetchall())[0]
         data['applicants'] = job_details(res)
         data['applicants']['applicant_list'] = applicant_list(request,job_id)
+        #print(data)
     return render(request, "view_applicants.html", data)
 
-<<<<<<< Updated upstream
+
 def company_view_jobs(request,job_id):
     """ Renders view for editing a particular job """
     dict1 = dict()
@@ -219,7 +219,7 @@ def company_view_jobs(request,job_id):
         temp["job_id"] = job_id
         # return HttpResponse(str(temp))
         # final_arr.append(temp)
-=======
+
 def job_details(res):
     return {
         'job_details':{
@@ -320,7 +320,7 @@ def company_view_jobs(request):
     #     temp["3"] = {
     #         "questions" : arr
     #     }
->>>>>>> Stashed changes
+
         # return HttpResponse(temp.items()) 
 
         # temp_list1 = list(temp_arr[0][1])
@@ -351,14 +351,14 @@ def company_view_jobs(request):
     # for i,j in enumerate(final_arr):
     #     dict1[i] = j
 
-<<<<<<< Updated upstream
+
     print(temp)
     data["edit_jobs"] = temp
     # return HttpResponse(str(temp))
     # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
-=======
+
     # return HttpResponse(temp.items()) #Final dictionary data
->>>>>>> Stashed changes
+
     return render(request, "company_view_jobs.html", data)
 
 def company_statistics(request):

@@ -107,6 +107,77 @@ def applicant_history(request):
 # 'skills' : '('Java','SQL','HTML')','experience' : '5years', 'qualification' : '('HSC')'}", 
 # 9, 8.0, datetime.date(2019, 11, 12)),)
 
+def browse_filter_location(request):
+    # print(request.POST.dict())
+    data1 = json.loads(request.POST['formData'])
+    # print(data1)
+    loc = ''
+    for res in data1:
+        if res['name'] == 'location':
+            loc+="c.address like '%{}%' or ".format(res['value'])
+        if res['name'] == 'designation':
+            loc+="requirements like '%{}%' or ".format(res['value'])
+        if res['name'] == 'skills':
+            loc+="requirements like '%{}%' or ".format(res['value'])
+        if res['name'] == 'qualification':
+            loc+="requirements like '%{}%' or ".format(res['value'])
+        if res['name'] == 'experience':
+            loc+="requirements like '%{}%' or ".format(res['value'])
+    else:
+        loc = loc[:-4]
+
+    sql = "SELECT DISTINCT(j_id) name, email_id, contact, description, requirements, j_id , c.c_id, last_date FROM jobs as j, company as c WHERE j.j_id = c.c_id AND ({})".format(loc)
+    #print(sql)
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+        res = list(cursor.fetchall())
+        print(len(res))
+        final_arr = []
+    
+        for r in res:
+            temp = {
+                'c_name': r[0],
+                'c_email': r[1],
+                'c_phone': r[2],
+                'skills': eval(r[4])['skills'],
+                'qualification':eval(r[4])['qualification'],
+                'last_date':str(r[7]),
+                'designation':eval(r[4])['designation'],
+                'j_id':r[5],
+                'c_id':r[6],
+                'c_description':r[3],
+                'd_description':eval(r[4])['description'],
+            }
+            #print(temp)
+            final_arr.append(temp)
+
+    # with connection.cursor() as cursor:
+    #     cursor.execute("SELECT name, email_id, contact, description, requirements, j_id, c.c_id, last_date FROM jobs as j, company as c WHERE j.j_id = c.c_id AND c.address LIKE '%{}%'".format(request.POST['name']))
+    #     res1 = cursor.fetchall()
+    #     temp = []
+    #     for r in res1:
+    #         data1 = {
+    #             'c_name': r[0],
+    #             'c_email': r[1],
+    #             'c_phone': r[2],
+    #             'skills': eval(r[4])['skills'],
+    #             'qualification':eval(r[4])['qualification'],
+    #             'last_date':r[7],
+    #             'designation':eval(r[4])['designation'],
+    #             'j_id':r[5],
+    #             'c_id':r[6],
+    #             'c_description':r[3],
+    #             'd_description':eval(r[4])['description'],
+    #         }
+    #         temp.append(data1)
+
+    """ 
+        SELECT name, email_id, contact, description, requirements, j_id, c.c_id, last_date
+        FROM jobs as j, company as c
+        WHERE j.j_id = c.c_id AND c.address LIKE '%address%'
+    """
+    return HttpResponse(json.dumps(final_arr), content_type="application/json")
+
 def browse_jobs_render(request):
     return render(request, "browse_jobs.html", data)
 

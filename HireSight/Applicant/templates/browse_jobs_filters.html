@@ -4,11 +4,26 @@
     or in a separate file
     
 -->
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+      // function location_value(var1){
+      //   alert(var1);
+      // }
+
+</script>
+
 
     <!-- Sidebar --> 
     <div class="mail-sidebar"> 
         <!-- Form for filtering jobs --> 
-        <form method="get" role="form" class="mail-search form-groups-bordered">
+        <form id="form1" method="get" role="form" class="mail-search form-groups-bordered">
+            {% csrf_token %}
             <!-- Search Button -->
             <div class="mail-sidebar-row hidden-xs"> 
                 <!-- 
@@ -16,7 +31,7 @@
                     in the footer block 
                 -->
                 
-                <button type="submit" href="" class="btn btn-success btn-icon btn-block">Search<i class="entypo-search"></i> </button> 
+                <button type="button" href="" class="btn btn-success btn-icon btn-block" onclick="filter_data_location()">Search<i class="entypo-search"></i> </button> 
             </div>
 
             <!-- menu -->  
@@ -26,16 +41,16 @@
                     <div class="form-group location">
                         <p class="text-center"> <label class="control-label" style="color: black;">Location</label> </p>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="location" id="mumbai" value="mumbai">Mumbai</label>
+                            <label><input type="checkbox" name="location" id="mumbai" onchange="" value="mumbai">Mumbai</label>
                         </div>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="location" id="delhi" value="delhi">Delhi</label>
+                            <label><input type="checkbox" name="location" id="delhi" value="delhi" onchange="">Delhi</label>
                         </div>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="location" id="kolkata" value="kolkata">Kolkata</label>
+                            <label><input type="checkbox" name="location" id="kolkata" value="kolkata" onchange="">Kolkata</label>
                         </div>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="location" id="kolkata" value="kolkata">Chennai</label>
+                            <label><input type="checkbox" name="location" id="chennai" value="chennai" onchange="">Chennai</label>
                         </div>
                     </div>
                 </li> 
@@ -107,13 +122,13 @@
                             <label><input type="checkbox" name="qualification" id="hsc" value="hsc">HSC</label>
                         </div>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="designation" id="be" value="be">Bachelor of Engg.</label>
+                            <label><input type="checkbox" name="qualification" id="be" value="be">Bachelor of Engg.</label>
                         </div>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="designation" id="mtech" value="mtech">Master of Technology</label>
+                            <label><input type="checkbox" name="qualification" id="mtech" value="mtech">Master of Technology</label>
                         </div>
                         <div class="checkbox" style="margin-left: 40px; color: black">
-                            <label><input type="checkbox" name="designation" id="PhD" value="PhD">PhD</label>
+                            <label><input type="checkbox" name="qualification" id="PhD" value="PhD">PhD</label>
                         </div>
                     </div>
                 </li> 

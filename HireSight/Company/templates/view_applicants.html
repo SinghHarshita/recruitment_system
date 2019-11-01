@@ -18,7 +18,13 @@
                 <!--
                     Job details here                    
                 -->
-                <p style="color: black"><b>Hello</b> : hello world</p>
+                <p style="color: black; font-size: 14px;">
+                    {% for key,value in applicants.job_details.items %}
+                        <b>{{key}} : </b> {{value}}
+                        <br/>
+                    {% endfor %}
+                </p>
+                <!-- {{applicants.applicant_list}} -->
             </div> 
         </div>
     </div>
@@ -27,7 +33,6 @@
 <table class="table table-bordered table-responsive table-hover table-primary">
     <thead>
         <tr>
-            <td>#</td>
             <td>Name</td>
             <td>Knockout Questions Score</td>
             <td>Score</td>
@@ -39,33 +44,30 @@
         </tr>
     </thead>
     <tbody>
-        {% for key,value in data.items %}
+        {% for key,value in applicants.applicant_list.items %}
             <tr>
-                {% for key1,value1 in value.items %}
-                <td>{{applicant.index}}</td>
-                <td>{{applicant.name}}</td>
-                <td>{{applicant.knockout_score}}</td>
-                <td>{{applicant.score}}</td>
-                <td>{{applicant.cv_rank}}</td>
-                <td>{{applicant.total_rank}}</td>
-                {% if applicant.status == "0" %}
+                <td>{{value.full_name}}</td>
+                <td>{{value.knockout_score}}</td>
+                <td>{{value.score}}</td>
+                <td>{{value.cv_rank}}</td>
+                <td>{{value.total_rank}}</td>
+                {% if value.status == "0" %}
                     <td><button class="btn btn-primary">Accpet</button></td>
                     <td><button class="btn btn-danger">Reject</button></td>
                     <td><button class="btn btn-success">On Hold</button></td>
-                {% elif applicant.status == "1" %}
+                {% elif value.status == "1" %}
                     <td>Accepted</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                {% elif applicant.status == "2" %}
+                {% elif value.status == "2" %}
                     <td>&nbsp;</td>
                     <td>Rejected</td>
                     <td>&nbsp;</td>
-                {% elif applicant.status == "3" %}
+                {% elif value.status == "3" %}
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>On Hold</td>
                 {% endif %}
-                {% endfor %}
             </tr>
         {% empty %}
             <p class="text-center" style="color: black; font-size:16px;"><em>No Applicants</em></p>
