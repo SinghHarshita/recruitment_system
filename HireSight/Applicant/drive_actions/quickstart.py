@@ -16,7 +16,7 @@ def main(uid,cv_id,email_id):
     obj = auth.auth(SCOPES)
     path = os.path.join(os.getcwd(),'Dummy_Resume_{}.docx'.format(cv_id))
     file_id,folder_id = op.insert_file_into_folder(obj,path,'application/vnd.openxmlformats-officedocument.wordprocessingml.document',uid,email_id)
-    os.remove('Dummy_Resume_{}.docx'.format(cv_id))
+    # os.remove('Dummy_Resume_{}.docx'.format(cv_id))
     return file_id,folder_id
     # op.delete_file(obj,'1_U18ULvD7HYhDjmVbAtCder5cy-Ja1pY')
 
