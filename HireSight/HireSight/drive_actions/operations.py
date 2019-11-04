@@ -13,7 +13,7 @@ from apiclient.http import MediaFileUpload
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-import auth
+# import auth
 
 SCOPES = 'https://www.googleapis.com/auth/drive'
 CLIENT_SECRET_FILE = 'client_secrets.json'
@@ -28,7 +28,7 @@ def list_file(obj):
     results = service.files().list(pageSize=10, fields="nextPageToken, files(id, name)").execute()
     items = results.get('files', [])
 
-    
+
     if not items:
         print('No files found.')
     else:
@@ -77,10 +77,6 @@ def insert_file_into_folder(obj,local_path,mimetype,uid,email_id):
                                         media_body=media,
                                         fields='id').execute()
     print('File ID: %s' % file.get('id'))
-
-    # Sharing File with Applicant For edit access
-    file_permissions(obj,file.get('id'),email_id)
-
     return [file.get('id'),folder_id]
     # file_permissions(obj,file.get('id'),email_id)
 
@@ -97,10 +93,6 @@ def update_file_into_folder(obj,local_path,mimetype,file_id,folder_id):
     file = service.files().create(body=file_metadata,
                                         media_body=media,
                                         fields='id').execute()
-    
-    # Sharing File with Applicant For edit access
-    file_permissions(obj,file.get('id'),email_id)
-
     print('File ID: %s' % file.get('id'))
     return file.get('id')
 

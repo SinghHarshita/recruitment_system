@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.db import connection
 from django.http import HttpResponse
 import json
-from .drive_actions import quickstart as qk
+# from .drive_actions import quickstart as qk
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 
