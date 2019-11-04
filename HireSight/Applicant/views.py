@@ -112,21 +112,52 @@ def browse_filter_location(request):
     data1 = json.loads(request.POST['formData'])
     # print(data1)
     loc = ''
+    req = ''
+    designation = ''
+    skills = ''
+    qualification = ''
+    experience = ''
     for res in data1:
         if res['name'] == 'location':
             loc+="c.address like '%{}%' or ".format(res['value'])
         if res['name'] == 'designation':
-            loc+="requirements like '%{}%' or ".format(res['value'])
+            designation+="requirements like '%{}%' or ".format(res['value'])
         if res['name'] == 'skills':
-            loc+="requirements like '%{}%' or ".format(res['value'])
+            skills+="requirements like '%{}%' or ".format(res['value'])
         if res['name'] == 'qualification':
-            loc+="requirements like '%{}%' or ".format(res['value'])
+            qualification+="requirements like '%{}%' or ".format(res['value'])
         if res['name'] == 'experience':
-            loc+="requirements like '%{}%' or ".format(res['value'])
+            experience+="requirements like '%{}%' or ".format(res['value'])
     else:
         loc = loc[:-4]
+        designation = designation[:-4]
+        skills = skills[:-4]
+        qualification = qualification[:-4]
+        experience = experience[:-4]
+        if loc != '':
+            req = loc
+        if designation != '':
+            if req != '' :
+                req += ' and (' + designation + ')'
+            else :
+                req = designation
+        if skills != '' :
+            if req != '' :
+                req += ' and (' + skills + ')'
+            else :
+                req = skills
+        if qualification != '' :
+            if req != '':
+                req += ' and (' + qualification + ')'
+            else :
+                req = qualification
+        if experience != '':
+            if req != '' :
+                req += ' and (' + experience + ')'
+            else :
+                req = experience
 
-    sql = "SELECT DISTINCT(j_id) name, email_id, contact, description, requirements, j_id , c.c_id, last_date FROM jobs as j, company as c WHERE j.j_id = c.c_id AND ({})".format(loc)
+    sql = "SELECT DISTINCT(j_id) name, email_id, contact, description, requirements, j_id , c.c_id, last_date FROM jobs as j, company as c WHERE j.j_id = c.c_id AND ({})".format(req)
     #print(sql)
     with connection.cursor() as cursor:
         cursor.execute(sql)

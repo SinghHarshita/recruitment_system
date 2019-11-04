@@ -10,29 +10,18 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-
-      // function location_value(var1){
-      //   alert(var1);
-      // }
-
 </script>
 
 
     <!-- Sidebar --> 
     <div class="mail-sidebar"> 
         <!-- Form for filtering jobs --> 
-        <form id="form1" method="get" role="form" class="mail-search form-groups-bordered">
+        <form id="form1" method="get" role="form" class="mail-search form-groups-bordered" onchange="filter_data_location()">
             {% csrf_token %}
             <!-- Search Button -->
-            <div class="mail-sidebar-row hidden-xs"> 
-                <!-- 
-                    Write the ajax function in browse_jobs.html 
-                    in the footer block 
-                -->
-                
+            <!-- <div class="mail-sidebar-row hidden-xs"> 
                 <button type="button" href="" class="btn btn-success btn-icon btn-block" onclick="filter_data_location()">Search<i class="entypo-search"></i> </button> 
-            </div>
+            </div> -->
 
             <!-- menu -->  
             <ul class="mail-menu"> 
