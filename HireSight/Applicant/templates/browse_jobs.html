@@ -21,14 +21,42 @@
 
 <script>
 
-  function job_details() {
+  function job_details(id) {
     //For rendering job details in a modal
     // Make the necessary changes
-    // alert("job_details");
+    // console.log(jobs[id]);
+    // alert("Hello");
+
+    var heading = jobs[id]["designation"] + "<br>" + "<small>Posted By :"+ jobs[id]["c_name"] + "</small>";
+    
+    var skills = "<ul>"
+    for (var i = 0; i < jobs[id]["skills"].length; i++){
+      skills += "<li>" + jobs[id]["skills"][i] + "</li>";
+    }
+    skills += "</ul>";
+    
+    var qualification = "<ul>"
+    for (var i = 0; i < jobs[id]["qualification"].length; i++){
+      qualification += "<li>" + jobs[id]["qualification"][i] + "</li>";
+    }
+    qualification += "</ul>";
+
+    var url = "{% url 'test' %}";
+
+    var text ="<h4 style='font-size: 20px;'><strong>Company Description : </h4></strong>" + jobs[id]["c_description"] + "<br><br>"
+    + "<strong>Company Email : </strong>" + jobs[id]["c_email"] + "<br><br>" 
+    + "<h4 style='font-size: 20px;'><strong>Job Description : </h4></strong>" + jobs[id]["d_description"] + "<br><br>" 
+    + "<h4 style='font-size: 20px;'><strong>Skills Required : </h4></strong>" + skills 
+    + "<br>" 
+    + "<h4 style='font-size: 20px;'><strong>Qualification Required : </h4></strong>" + qualification + "<br>" 
+    + "<small>Last Date to Apply : " + jobs[id]["last_date"] + "</small>" ;
+
       $("#job_details_modal_title").empty();
-      $("#job_details_modal_title").append('hello');
+      $("#job_details_modal_title").append(heading);
       $("#job_details_modal_body").empty();
-      $("#job_details_modal_body").append(job);
+      $("#job_details_modal_body").append(text);
+      // $("#apply_now_modal_btn").empty();
+      $("#apply_now_modal_btn").attr("href",url);
   }
 
 
@@ -36,6 +64,7 @@
 
 
 <script type="text/javascript">
+  var jobs;
     function filter_data_location(){
         console.log($('#form1').serializeArray());
         $.ajax({
@@ -47,19 +76,20 @@
             },  
 
             success : function(data,status){
-                var jobs = JSON.parse(JSON.stringify(data));
+                jobs = JSON.parse(JSON.stringify(data));
 
                 $("#search_results").empty();
                 
                 for(var i = 0; i<jobs.length; i++){
-
+                    url = "{% url 'test' %}";
+                    // console.log(jobs[i])
                     var text = '<div class="member-entry" style="margin-left: 30px; margin-right: 30px;">'
                             +'<div class="member-details">'
                             +'<h4>' 
-                            +'<a href="#job_details" data-toggle="modal" data-target="#job_details" onclick="job_details()">Designation : '
+                            +'<a href="#job_details" data-toggle="modal" data-target="#job_details" onclick="job_details('+i+')">Designation : '
                             +jobs[i]['designation']
                             +'</a>' 
-                            +'<a href="" class="btn btn-primary pull-right">Apply Now</a></h4>'
+                            +'<a href="'+url+'" class="btn btn-primary pull-right">Apply Now</a></h4>'
                             +'<div class="row info-list">'
                             +'<div class="col-sm-4">'
                             +'<i class="entypo-briefcase"></i>Posted By <a href="#">'+jobs[i]['c_name']+'</a> '
