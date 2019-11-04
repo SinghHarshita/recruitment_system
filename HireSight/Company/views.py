@@ -49,7 +49,7 @@ def jobs(request):
             cursor.execute("SELECT * FROM application_status WHERE j_id = {}".format(r[0]))
             a = list(cursor.fetchall())
             r = list(r)
-            if a != None:
+            if len(a) != 0:
                 applicants = 1
             else:
                 applicants = 0
@@ -87,9 +87,11 @@ def company_view_applicants(request,job_id):
     # data["applicants"]["job_details"] = data[]
     with connection.cursor() as cursor:
         cursor.execute("SELECT * from jobs WHERE j_id = {}".format(job_id))
-        res = list(cursor.fetchall())[0]
-        data['applicants'] = job_details(res)
-        data['applicants']['applicant_list'] = applicant_list(request,job_id)
+        res = list(cursor.fetchall())
+        if len(res) > 1:
+            res = res[0]
+            data['applicants'] = job_details(res)
+            data['applicants']['applicant_list'] = applicant_list(request,job_id)
         #print(data)
     return render(request, "view_applicants.html", data)
 
