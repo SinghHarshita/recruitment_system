@@ -44,7 +44,7 @@ def createFolder(obj,name):
 
     # Call list_file function to identify file id of Resume
     tp = list_file(obj)
-    folder_id = '1zH6TC15EGNAuT81LJLdjGPf2PKkdI9aF'
+    global folder_id
     for i in tp:
         if i['name'] == 'ApplicantResume':
             folder_id = i['id']
