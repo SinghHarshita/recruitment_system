@@ -379,7 +379,7 @@ def company_profile(request):
     
     return render(request, "company_profile.html", data)
 
-def test(request):
+def test(request, job_id):
     """ Testing codes """
     return render(request, "company_test.html", {})
 

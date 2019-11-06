@@ -219,6 +219,62 @@ def notifications(request) :
 
 def test(request):
     global data
+    j_id = 1
+    c_id = 1
+
+    with connection.cursor() as cursor:
+        sql = "SELECT questions, knockout_questions FROM questions WHERE j_id = {} and c_id = {}".format(j_id,c_id)
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        if len(result) :
+            result = result[0]
+            try :
+                questions = json.loads(result[0])
+                knockout_questions = json.loads(result[1])
+            except :
+                questions = eval(result[0])
+                knockout_questions = eval(result[1])
+        # print(result)
+
+        # The tab titles for the form wizard
+        types = dict()
+        i = 0
+        for x in list(questions.keys()):
+            types[i] = x
+            i += 1
+        types[i] = "Knockout Questions"
+        # types.sort()
+        # types.append("Knockout Questions")
+        # print(types)
+        data["types"] = types
+        l = list(types.items())[:-1]
+        ques = dict()
+        i = 0
+        for x in l:
+            for q in questions[x[1]]:
+                # print(list(q.values())[0][0][0])
+                ques[i] = {
+                    
+                            tuple(q.keys())[0] : list(q.values())[0][0][0],
+                            "last" : 0
+                    
+                }
+            i+=1
+        # print(ques)
+        # print(knockout_questions)
+        kq = dict()
+        for k in list(knockout_questions.items()):
+            op = []
+            for x in k[1]:
+                op.append(x[0])
+            kq = {
+                k[0] : op
+            }
+        kq["last"] = 1
+        # print(kq)
+        ques[i] =  kq
+        print(ques)
+        data["questions"] = ques
     return render(request, "apply_job_q_a.html", data)
 
 # def job_endpoint(request):

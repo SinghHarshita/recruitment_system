@@ -1,7 +1,8 @@
 {% extends "layout/applicant_header.html" %}
 {% block applicant_content %}
-
+<!-- {{types}} -->
 <form id="rootwizard-2" method="post" action="" class="form-wizard validate"> 
+    {% csrf_token %}
     <div class="steps-progress"> 
         <div class="progress-indicator"></div> 
     </div> 
@@ -23,26 +24,34 @@
             {% for i,j in questions.items %} 
                 <div class="tab-pane active" id="tab{{i}}"> 
                     <!-- Deicded on the basis of json -->
-                    <div class="row"> 
-                        <div class="col-md-12"> 
-                            <p style="color: black; font-size: 13px;">{{question}}</p> 
-                        </div> 
-                        <!-- <div class="col-md-6"> 
-                            <div class="form-group"> 
-                                <label class="control-label" for="no_of_vacancies">Enter number of vacancies</label> 
-                                <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
-                            </div> 
-                        </div>  -->
-                    </div>  
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="option1"></label>
-                                <input type="radio" name="option1" id="option1">Option1
-                            </div>
-                        </div>
+                        
+                            {% for x,y in j.items %}
+                                {% if x != 'last' %}    
+                                    <div class="row"> 
+                                        <div class="col-md-12"> 
+                                            <p style="color: black; font-size: 13px;">{{x}}</p> 
+                                        </div> 
+                                        <!-- <div class="col-md-6"> 
+                                            <div class="form-group"> 
+                                                <label class="control-label" for="no_of_vacancies">Enter number of vacancies</label> 
+                                                <input type="number" class="form-control" name="no_of_vacancies" id="no_of_vacancies" data-validate="required" data-mask="date" placeholder="Experience in years" /> 
+                                            </div> 
+                                        </div>  -->
+                                    </div>  
+                                    <div class="row">
+                                        {% for z in y %}
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="{{z}}">{{z}}</label>
+                                                    <input type="radio" name="{{x}}" id="{{z}}">
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        
                     </div>
-                </div> 
             {%empty%}
             {% endfor %}
             <ul class="pager wizard"> 

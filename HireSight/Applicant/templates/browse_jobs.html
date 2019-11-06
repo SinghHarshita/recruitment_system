@@ -81,10 +81,12 @@
                 $("#search_results").empty();
                 
                 for(var i = 0; i<jobs.length; i++){
-                    url = '{% url "test" .'
-                    + jobs[i]['j_id']
-                    +' %}';
-                    // console.log(jobs[i])
+                    // url = '{% url "test" job_id='
+                    // + jobs[i]['j_id']
+                    // +' %}';
+                    // console.log(jobs[i]['j_id'])
+
+                    url = '{% url "test" %}'
                     var text = '<div class="member-entry" style="margin-left: 30px; margin-right: 30px;">'
                             +'<div class="member-details">'
                             +'<h4>' 
