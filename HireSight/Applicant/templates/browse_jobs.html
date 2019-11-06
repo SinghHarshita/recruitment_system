@@ -74,7 +74,7 @@
                 formData: JSON.stringify($('#form1').serializeArray()),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
             },  
-
+            
             success : function(data,status){
                 jobs = JSON.parse(JSON.stringify(data));
 

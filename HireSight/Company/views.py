@@ -87,16 +87,15 @@ def company_view_applicants(request,job_id):
     # data["applicants"]["job_details"] = data[]
     with connection.cursor() as cursor:
         cursor.execute("SELECT * from jobs WHERE j_id = {}".format(job_id))
-        res = list(cursor.fetchall())
-        if len(res) > 1:
-            res = res[0]
-            data['applicants'] = job_details(res)
-            data['applicants']['applicant_list'] = applicant_list(request,job_id)
+        res = list(cursor.fetchall())[0]
+        
+        data['applicants'] = job_details(res)
+        data['applicants']['applicant_list'] = applicant_list(request,job_id)
         #print(data)
     return render(request, "view_applicants.html", data)
 
 
-def company_view_jobs(request,job_id):
+def company_view_jobs(request, job_id):
     """ Renders view for editing a particular job """
     dict1 = dict()
     try:
@@ -221,6 +220,9 @@ def company_view_jobs(request,job_id):
                 "types" : []
             }
         temp["job_id"] = job_id
+        print(temp)
+        data["edit_jobs"] = temp
+        return render(request,"company_view_jobs.html", data)
         # return HttpResponse(str(temp))
         # final_arr.append(temp)
 
@@ -241,7 +243,10 @@ def applicant_list(requsest,job_id):
     with connection.cursor() as cursor:
         cursor.execute("SELECT * from application_status WHERE j_id = {}".format(job_id))
         res1 = list(cursor.fetchall())[0]
-        res2 = eval(res1[1])
+        try:
+            res2 = json.loads(res1[1])
+        except :
+            res2 = eval(res1[1])
         res3 = dict()
         i = 0
         for k,v in res2.items():
@@ -253,7 +258,7 @@ def applicant_list(requsest,job_id):
             i=i+1
     return res2
 
-def company_view_jobs(request):
+# def company_view_jobs(request):
     """ Renders view for editing a particular job """
     # dict1 = dict()
     # with connection.cursor() as cursor:
@@ -356,14 +361,14 @@ def company_view_jobs(request):
     #     dict1[i] = j
 
 
-    print(temp)
-    data["edit_jobs"] = temp
-    # return HttpResponse(str(temp))
-    # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
+    # print(temp)
+    # data["edit_jobs"] = temp
+    # # return HttpResponse(str(temp))
+    # # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
 
-    # return HttpResponse(temp.items()) #Final dictionary data
+    # # return HttpResponse(temp.items()) #Final dictionary data
 
-    return render(request, "company_view_jobs.html", data)
+    # return render(request, "company_view_jobs.html", data)
 
 def company_statistics(request):
     """ Renders view for company statistics """
@@ -432,6 +437,7 @@ def save_job_questions(request):
     for type1 in dict1["3"]["types"]:
         questions[type1] = []
 
+    return HttpResponse(dict1["3"]["questions"])
     for ques_ans in dict1["3"]["questions"]:
         list1 = questions[ques_ans["type"]]
         temp_dict = dict()
@@ -562,3 +568,60 @@ def save_job_questions1(request):
         cursor.execute(sql3)
 
     return redirect("Company:index")
+
+def company_accept_applicants(request, job_id) :
+    global data
+    # u_id = request.POST['u_id']
+    # print(type(u_id))
+    print(data['applicants']['applicant_list'])
+    try :
+        data['applicants']['applicant_list'][int(request.POST['u_id'])]['status'] = str(1)
+    except :
+        data['applicants']['applicant_list'][request.POST['u_id']]['status'] = str(1)
+    # print(job_id)
+    update = json.dumps(data['applicants']['applicant_list'])
+    # update = json.loads(json.dumps(update))
+    print(update)
+    with connection.cursor() as cursor :
+        sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
+        cursor.execute(sql)
+    
+    return HttpResponse(json.dumps(request.POST), content_type="application/json")
+
+def company_reject_applicants(request, job_id):
+    global data
+    # u_id = request.POST['u_id']
+    # print(type(u_id))
+    print(data['applicants']['applicant_list'])
+    try :
+        data['applicants']['applicant_list'][int(request.POST['u_id'])]['status'] = str(2)
+    except :
+        data['applicants']['applicant_list'][request.POST['u_id']]['status'] = str(2)
+    # print(job_id)
+    update = json.dumps(data['applicants']['applicant_list'])
+    # update = json.loads(json.dumps(update))
+    print(update)
+    with connection.cursor() as cursor :
+        sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
+        cursor.execute(sql)
+    
+    return HttpResponse(json.dumps(request.POST), content_type="application/json")
+
+def company_on_hold_applicants(request, job_id):
+    global data
+    # u_id = request.POST['u_id']
+    # print(type(u_id))
+    print(data['applicants']['applicant_list'])
+    try :
+        data['applicants']['applicant_list'][int(request.POST['u_id'])]['status'] = str(3)
+    except :
+        data['applicants']['applicant_list'][request.POST['u_id']]['status'] = str(3)
+    # print(job_id)
+    update = json.dumps(data['applicants']['applicant_list'])
+    # update = json.loads(json.dumps(update))
+    print(update)
+    with connection.cursor() as cursor :
+        sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
+        cursor.execute(sql)
+    
+    return HttpResponse(json.dumps(request.POST), content_type="application/json")

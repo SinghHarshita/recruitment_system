@@ -52,21 +52,25 @@
                 <td>{{value.cv_rank}}</td>
                 <td>{{value.total_rank}}</td>
                 {% if value.status == "0" %}
-                    <td><button class="btn btn-primary">Accpet</button></td>
-                    <td><button class="btn btn-danger">Reject</button></td>
-                    <td><button class="btn btn-success">On Hold</button></td>
+                    <td>
+                        <span id = "accept{{value.u_id}}">
+                            <button class="btn btn-primary" onclick="accept({{value.u_id}})">Accept</button>
+                        </span>
+                    </td>
+                    <td id = "reject{{value.u_id}}"><button class="btn btn-danger" onclick="reject({{value.u_id}})">Reject</button></td>
+                    <td id = "onHold{{value.u_id}}"><button class="btn btn-success" onclick="onHold({{value.u_id}})">On Hold</button></td>
                 {% elif value.status == "1" %}
-                    <td>Accepted</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td id = "accept{{value.u_id}}">Accepted</td>
+                    <td id = "reject{{value.u_id}}">&nbsp;</td>
+                    <td id = "onHold{{value.u_id}}">&nbsp;</td>
                 {% elif value.status == "2" %}
-                    <td>&nbsp;</td>
-                    <td>Rejected</td>
-                    <td>&nbsp;</td>
+                    <td id = "accept{{value.u_id}}">Rejected</td>
+                    <td id = "reject{{value.u_id}}"></td>
+                    <td id = "onHold{{value.u_id}}"></td>
                 {% elif value.status == "3" %}
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>On Hold</td>
+                    <td id = "accept{{value.u_id}}">On Hold</td>
+                    <td id = "reject{{value.u_id}}"></td>
+                    <td id = "onHold{{value.u_id}}"></td>
                 {% endif %}
             </tr>
         {% empty %}
@@ -74,4 +78,133 @@
         {% endfor %}
     </tbody>
 </table>
+
+<form class="pull-right">
+    {% csrf_token %}
+    <!-- <button class="btn btn-primary" id="save">
+        Save Changes
+    </button>
+
+    <button class="btn btn-danger" id="cancel">
+        Cancel Changes
+    </button>
+    <script>
+    
+        $("#save").hide();
+        $("#cancel").hide();
+        
+    </script> -->
+</form>
+{% endblock %}
+
+{% block footer %}
+    <script>
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+            }
+        });
+        
+        // Function to accept user
+
+        function accept(id) {
+            console.log(id);
+            var btnid = "#accept"+id;
+            var r = "#reject"+id, o = "#onHold" + id;
+            $.ajax({
+                type : "POST",
+                url : "accept",
+                data : {
+                    "u_id" : id,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                },
+
+                success : function(data,status){
+                    // alert("success!!");
+                    // $(btnid).empty();
+                    $(btnid).html("Accepted");
+                    $(btnid).attr("disabled","true");
+                    $(r).html("");
+                    $(o).html("");
+                }
+            });
+        }
+
+        // Function to reject user
+        function reject(id) {
+            console.log(id);
+            var btnid = "#accept"+id;
+            var r = "#reject"+id, o = "#onHold" + id;
+            $.ajax({
+                type : "POST",
+                url : "reject",
+                data : {
+                    "u_id" : id,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                },
+
+                success : function(data,status){
+                    // alert("success!!");
+                    // $(btnid).empty();
+                    $(btnid).html("Rejected");
+                    $(r).attr("disabled","true");
+                    $(r).html("");
+                    $(o).html("");
+                }
+            });
+        }
+
+        // Function for on hold
+        function onHold(id) {
+            console.log(id);
+            var btnid = "#accept"+id;
+            var r = "#reject"+id, o = "#onHold" + id;
+            $.ajax({
+                type : "POST",
+                url : "onHold",
+                data : {
+                    "u_id" : id,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                },
+
+                success : function(data,status){
+                    // alert("success!!");
+                    // $(btnid).empty();
+                    $(btnid).html("On Hold");
+                    $(r).attr("disabled","true");
+                    $(r).html("");
+                    $(o).html("");
+                }
+            });
+        }
+    </script>
+
+    <!-- <script>
+
+        var accept = Array();
+        var reject = Array();
+        var onHold = Array();
+        
+        function acceptFunc(u_id) {
+            // alert("hello")
+            accept.push(u_id);
+            // alert("hi");
+            var x = "#accept"+u_id;
+            // alert(x)
+            $(x).html("Accepted");
+            // alert("oaky")
+            $(x).attr("disabled","true");
+            // alert("sdfghjk")
+            $("#save").show();
+            $("#cancel").show();
+        }
+
+        function rejectFunc(u_id){
+            reject.push(u_id)
+        }
+        
+        function onHoldFunc(u_id){
+            onHold.push(u_id)
+        }
+    </script> -->
 {% endblock %}
