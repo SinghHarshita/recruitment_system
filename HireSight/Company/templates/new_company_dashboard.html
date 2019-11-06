@@ -104,15 +104,15 @@
                     <tbody> 
                         {% for i,j in jobs.items %}
                             <tr>
-                                <td style="color: black">{{i}}</td>
+                                <td style="color: black">{{j.j_id}}</td>
                                 <td style="color: black">{{j.requirements.designation}}</td>
                                 <td style="color: black">{{j.requirements.skills}}</td>
                                 <td style="color: black">{{j.requirements.experience}}</td>
                                 <td style="color: black">{{j.requirements.qualification}}</td>
                                 <td style="color: black">{{j.last_date}}</td>
                                 <td class="text-center">
-                                    {% if job.applicants != 0 %} 
-                                    <a href="{% url 'Company:company_view_applicants' %}" class="btn btn-danger">
+                                    {% if j.applicants != 0 %}
+                                    <a href="http://127.0.0.1:8000/company/view_applicants/{{j.j_id}}/" class="btn btn-danger">
                                         <i class="entypo-eye"></i>
                                     </a>
                                     {% else %}

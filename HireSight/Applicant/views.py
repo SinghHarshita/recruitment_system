@@ -15,7 +15,7 @@ def index(request):
     global data
     #print(request.session["id"])
     with connection.cursor() as cursor :
-        cursor.execute("SELECT * from user where u_id = {}".format(request.session["id"]))
+        cursor.execute("SELECT * from user where u_id = %s",[request.session["id"]])
         data = applicant_data(list(cursor.fetchall())[0])
         #data = list(cursor.fetchall())
         #print(data)
@@ -107,6 +107,108 @@ def applicant_history(request):
 # 'skills' : '('Java','SQL','HTML')','experience' : '5years', 'qualification' : '('HSC')'}", 
 # 9, 8.0, datetime.date(2019, 11, 12)),)
 
+def browse_filter_location(request):
+    # print(request.POST.dict())
+    data1 = json.loads(request.POST['formData'])
+    # print(data1)
+    loc = ''
+    req = ''
+    designation = ''
+    skills = ''
+    qualification = ''
+    experience = ''
+    for res in data1:
+        if res['name'] == 'location':
+            loc+="c.address like '%{}%' or ".format(res['value'])
+        if res['name'] == 'designation':
+            designation+="requirements like '%{}%' or ".format(res['value'])
+        if res['name'] == 'skills':
+            skills+="requirements like '%{}%' or ".format(res['value'])
+        if res['name'] == 'qualification':
+            qualification+="requirements like '%{}%' or ".format(res['value'])
+        if res['name'] == 'experience':
+            experience+="requirements like '%{}%' or ".format(res['value'])
+    else:
+        loc = loc[:-4]
+        designation = designation[:-4]
+        skills = skills[:-4]
+        qualification = qualification[:-4]
+        experience = experience[:-4]
+        if loc != '':
+            req = loc
+        if designation != '':
+            if req != '' :
+                req += ' and (' + designation + ')'
+            else :
+                req = designation
+        if skills != '' :
+            if req != '' :
+                req += ' and (' + skills + ')'
+            else :
+                req = skills
+        if qualification != '' :
+            if req != '':
+                req += ' and (' + qualification + ')'
+            else :
+                req = qualification
+        if experience != '':
+            if req != '' :
+                req += ' and (' + experience + ')'
+            else :
+                req = experience
+
+    sql = "SELECT DISTINCT(j_id) name, email_id, contact, description, requirements, j_id , c.c_id, last_date FROM jobs as j, company as c WHERE j.j_id = c.c_id AND ({})".format(req)
+    #print(sql)
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+        res = list(cursor.fetchall())
+        print(len(res))
+        final_arr = []
+    
+        for r in res:
+            temp = {
+                'c_name': r[0],
+                'c_email': r[1],
+                'c_phone': r[2],
+                'skills': eval(r[4])['skills'],
+                'qualification':eval(r[4])['qualification'],
+                'last_date':str(r[7]),
+                'designation':eval(r[4])['designation'],
+                'j_id':r[5],
+                'c_id':r[6],
+                'c_description':r[3],
+                'd_description':eval(r[4])['description'],
+            }
+            #print(temp)
+            final_arr.append(temp)
+
+    # with connection.cursor() as cursor:
+    #     cursor.execute("SELECT name, email_id, contact, description, requirements, j_id, c.c_id, last_date FROM jobs as j, company as c WHERE j.j_id = c.c_id AND c.address LIKE '%{}%'".format(request.POST['name']))
+    #     res1 = cursor.fetchall()
+    #     temp = []
+    #     for r in res1:
+    #         data1 = {
+    #             'c_name': r[0],
+    #             'c_email': r[1],
+    #             'c_phone': r[2],
+    #             'skills': eval(r[4])['skills'],
+    #             'qualification':eval(r[4])['qualification'],
+    #             'last_date':r[7],
+    #             'designation':eval(r[4])['designation'],
+    #             'j_id':r[5],
+    #             'c_id':r[6],
+    #             'c_description':r[3],
+    #             'd_description':eval(r[4])['description'],
+    #         }
+    #         temp.append(data1)
+
+    """ 
+        SELECT name, email_id, contact, description, requirements, j_id, c.c_id, last_date
+        FROM jobs as j, company as c
+        WHERE j.j_id = c.c_id AND c.address LIKE '%address%'
+    """
+    return HttpResponse(json.dumps(final_arr), content_type="application/json")
+
 def browse_jobs_render(request):
     return render(request, "browse_jobs.html", data)
 
@@ -117,4 +219,64 @@ def notifications(request) :
 
 def test(request):
     global data
+    j_id = 1
+    c_id = 1
+
+    with connection.cursor() as cursor:
+        sql = "SELECT questions, knockout_questions FROM questions WHERE j_id = {} and c_id = {}".format(j_id,c_id)
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        if len(result) :
+            result = result[0]
+            try :
+                questions = json.loads(result[0])
+                knockout_questions = json.loads(result[1])
+            except :
+                questions = eval(result[0])
+                knockout_questions = eval(result[1])
+        # print(result)
+
+        # The tab titles for the form wizard
+        types = dict()
+        i = 0
+        for x in list(questions.keys()):
+            types[i] = x
+            i += 1
+        types[i] = "Knockout Questions"
+        # types.sort()
+        # types.append("Knockout Questions")
+        # print(types)
+        data["types"] = types
+        l = list(types.items())[:-1]
+        ques = dict()
+        i = 0
+        for x in l:
+            for q in questions[x[1]]:
+                # print(list(q.values())[0][0][0])
+                ques[i] = {
+                    
+                            tuple(q.keys())[0] : list(q.values())[0][0][0],
+                            "last" : 0
+                    
+                }
+            i+=1
+        # print(ques)
+        # print(knockout_questions)
+        kq = dict()
+        for k in list(knockout_questions.items()):
+            op = []
+            for x in k[1]:
+                op.append(x[0])
+            kq = {
+                k[0] : op
+            }
+        kq["last"] = 1
+        # print(kq)
+        ques[i] =  kq
+        print(ques)
+        data["questions"] = ques
     return render(request, "apply_job_q_a.html", data)
+
+# def job_endpoint(request):
+#     if(request.method == 'POST'):
+#         return 

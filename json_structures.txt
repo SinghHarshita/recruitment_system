@@ -69,7 +69,7 @@ Column : knockout_questions
 
 Table : application_status
 Column : applicant_status
-staus : {
+status : {
     0 : applied,
     1 : accepted,
     2 : rejected,

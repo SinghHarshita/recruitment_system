@@ -23,9 +23,7 @@ def index(request):
     return render(request, "new_company_dashboard.html", data)
     #return HttpResponse("Hello Comapny!")
 
-def company_data(data) :
-    """ Returns company details """
-
+def company_data(data):
     return {
         "name" : data[1],
         "address" : data[2],
@@ -45,12 +43,13 @@ def jobs(request):
         cursor.execute("SELECT * FROM jobs WHERE c_id = {}".format(request.session["c_id"]))
 
         i = 0
-        result = cursor.fetchall()
+        result = list(cursor.fetchall())
         for r in result:
             # Checking if applicants exist
             cursor.execute("SELECT * FROM application_status WHERE j_id = {}".format(r[0]))
-            a = cursor.fetchall()
-            if a != None:
+            a = list(cursor.fetchall())
+            r = list(r)
+            if len(a) != 0:
                 applicants = 1
             else:
                 applicants = 0
@@ -81,11 +80,22 @@ def company_post_jobs(request):
     """ Renders post jobs form """
     return render(request, "company_post_jobs.html", data)
 
-def company_view_applicants(request):
+def company_view_applicants(request,job_id):
     """ Renders applicants for a particular job """
+    global data
+    job_id = int(job_id)
+    # data["applicants"]["job_details"] = data[]
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from jobs WHERE j_id = {}".format(job_id))
+        res = list(cursor.fetchall())[0]
+        
+        data['applicants'] = job_details(res)
+        data['applicants']['applicant_list'] = applicant_list(request,job_id)
+        #print(data)
     return render(request, "view_applicants.html", data)
 
-def company_view_jobs(request,job_id):
+
+def company_view_jobs(request, job_id):
     """ Renders view for editing a particular job """
     dict1 = dict()
     try:
@@ -214,8 +224,116 @@ def company_view_jobs(request,job_id):
                 "types" : []
             }
         temp["job_id"] = job_id
+        print(temp)
+        data["edit_jobs"] = temp
+        return render(request,"company_view_jobs.html", data)
         # return HttpResponse(str(temp))
         # final_arr.append(temp)
+
+def job_details(res):
+    return {
+        'job_details':{
+            "designation": eval(res[2])['designation'],
+            "experience": eval(res[2])['experience'],
+            "no_of_vacancies": res[3],
+            "skills": eval(res[2])['skills'],
+            "last_date": res[5] ,
+            "qualification": eval(res[2])['qualification'],
+            "threshold_value":res[4],
+        }
+    }
+
+def applicant_list(requsest,job_id):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from application_status WHERE j_id = {}".format(job_id))
+        res1 = list(cursor.fetchall())[0]
+        try:
+            res2 = json.loads(res1[1])
+        except :
+            res2 = eval(res1[1])
+        res3 = dict()
+        i = 0
+        for k,v in res2.items():
+            res3[i] = v
+            res3[i]['u_id'] = k
+            sql = "SELECT full_name from user WHERE u_id = {}".format(k)
+            cursor.execute(sql)
+            res3[i]['full_name'] = cursor.fetchone()[0]
+            i=i+1
+    return res2
+
+# def company_view_jobs(request):
+    """ Renders view for editing a particular job """
+    # dict1 = dict()
+    # with connection.cursor() as cursor:
+    #     cursor.execute("SELECT * from jobs where c_id = %s and last_date >= %s",[request.session['id'],date.today()])
+    #     jobs = list(cursor.fetchall())
+    # # Looping through all list of active jobs
+    # for job in jobs:
+    #     var1 = eval(job[2])
+    #     temp = dict()
+    #     temp["0"] = {
+    #         "job_details" : {
+    #             "designation": var1["designation"],
+    #             "description": var1["description"],
+    #             "no_of_vacancies": job[3],
+    #             "last_date": str(job[5])
+    #         }
+    #     }
+    #     temp["1"] = {
+    #         "requirements" : {
+    #             "skills" : var1["skills"],
+    #             "qualification" : var1["qualification"],
+    #             "experience" : var1["experience"],
+    #         }
+    #     }
+    #     with connection.cursor() as cursor:
+    #         cursor.execute("SELECT * from questions where c_id = %s and j_id = %s",[request.session['id'],job[0]])
+    #         questions = list(cursor.fetchone())
+    #     # return HttpResponse(questions[0])
+        
+    #     knockouts = eval(questions[3])
+    #     questions1 = eval(questions[2])
+        
+    #     # Looping through the list of array of Knockout_questions
+    #     temp1_dict = dict()
+    #     for c,knockout in enumerate(knockouts):
+    #         # knockout = eval(knockout)
+    #         temp1_dict[c] = {
+    #             "question" : knockout[0],
+    #             "no_of_options" : knockout[1],
+    #             "options" : knockout[2],
+    #             "marks" : knockout[3],
+    #         }
+    #     temp["2"] = {
+    #         "knockout" : temp1_dict
+    #     }
+
+    #     # Looping through Questions
+    #     temp1_dict.clear()
+    #     temp_arr = tuple(questions1.items()) #Converting all the questions details into suitable format
+    #     arr = []
+
+    #     for a in temp_arr:
+    #         type1 = a[0]    #For getting type
+    #         ques_arr = list(a[1])   #For getting Questions 
+    #         for b in ques_arr:
+    #             ques = b
+    #             opt = eval(str(list(b.items())[0][1][0][0]))
+    #             ans = str(list(b.items())[0][1][0][1])
+    #             marks = str(list(b.items())[0][1][1])
+    #             tp_dict10 = {
+    #                 "type" : type1,
+    #                 "question" : ques,
+    #                 "options" : opt,
+    #                 "answer" : ans,
+    #                 "marks" : marks
+    #             }
+    #             arr.append(tp_dict10)
+    #     temp["3"] = {
+    #         "questions" : arr
+    #     }
+
         # return HttpResponse(temp.items()) 
 
         # temp_list1 = list(temp_arr[0][1])
@@ -246,11 +364,15 @@ def company_view_jobs(request,job_id):
     # for i,j in enumerate(final_arr):
     #     dict1[i] = j
 
-    print(temp)
-    data["edit_jobs"] = temp
-    # return HttpResponse(str(temp))
-    # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
-    return render(request, "company_view_jobs.html", data)
+
+    # print(temp)
+    # data["edit_jobs"] = temp
+    # # return HttpResponse(str(temp))
+    # # return HttpResponse(data["edit_jobs"]["0"]) #Final dictionary data
+
+    # # return HttpResponse(temp.items()) #Final dictionary data
+
+    # return render(request, "company_view_jobs.html", data)
 
 def company_statistics(request):
     """ Renders view for company statistics """
@@ -258,9 +380,10 @@ def company_statistics(request):
 
 def company_profile(request):
     """ Renders view for editing profile """
+    
     return render(request, "company_profile.html", data)
 
-def test(request):
+def test(request, job_id):
     """ Testing codes """
     return render(request, "company_test.html", {})
 
@@ -318,6 +441,7 @@ def save_job_questions(request):
     for type1 in dict1["3"]["types"]:
         questions[type1] = []
 
+    return HttpResponse(dict1["3"]["questions"])
     for ques_ans in dict1["3"]["questions"]:
         list1 = questions[ques_ans["type"]]
         temp_dict = dict()
@@ -449,3 +573,60 @@ def save_job_questions1(request):
         cursor.execute(sql3)
 
     return redirect("Company:index")
+
+def company_accept_applicants(request, job_id) :
+    global data
+    # u_id = request.POST['u_id']
+    # print(type(u_id))
+    print(data['applicants']['applicant_list'])
+    try :
+        data['applicants']['applicant_list'][int(request.POST['u_id'])]['status'] = str(1)
+    except :
+        data['applicants']['applicant_list'][request.POST['u_id']]['status'] = str(1)
+    # print(job_id)
+    update = json.dumps(data['applicants']['applicant_list'])
+    # update = json.loads(json.dumps(update))
+    print(update)
+    with connection.cursor() as cursor :
+        sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
+        cursor.execute(sql)
+    
+    return HttpResponse(json.dumps(request.POST), content_type="application/json")
+
+def company_reject_applicants(request, job_id):
+    global data
+    # u_id = request.POST['u_id']
+    # print(type(u_id))
+    print(data['applicants']['applicant_list'])
+    try :
+        data['applicants']['applicant_list'][int(request.POST['u_id'])]['status'] = str(2)
+    except :
+        data['applicants']['applicant_list'][request.POST['u_id']]['status'] = str(2)
+    # print(job_id)
+    update = json.dumps(data['applicants']['applicant_list'])
+    # update = json.loads(json.dumps(update))
+    print(update)
+    with connection.cursor() as cursor :
+        sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
+        cursor.execute(sql)
+    
+    return HttpResponse(json.dumps(request.POST), content_type="application/json")
+
+def company_on_hold_applicants(request, job_id):
+    global data
+    # u_id = request.POST['u_id']
+    # print(type(u_id))
+    print(data['applicants']['applicant_list'])
+    try :
+        data['applicants']['applicant_list'][int(request.POST['u_id'])]['status'] = str(3)
+    except :
+        data['applicants']['applicant_list'][request.POST['u_id']]['status'] = str(3)
+    # print(job_id)
+    update = json.dumps(data['applicants']['applicant_list'])
+    # update = json.loads(json.dumps(update))
+    print(update)
+    with connection.cursor() as cursor :
+        sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
+        cursor.execute(sql)
+    
+    return HttpResponse(json.dumps(request.POST), content_type="application/json")
