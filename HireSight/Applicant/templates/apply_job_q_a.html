@@ -50,6 +50,9 @@
                                     </div>
                                 {% endif %}
                             {% endfor %}
+                            {% if j.last == 1 %}
+                                <a href="{% url 'apply_now' %}" class="btn btn-primary">Submit</a>
+                            {% endif %}
                         
                     </div>
             {%empty%}

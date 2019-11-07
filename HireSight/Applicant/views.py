@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.db import connection
 from django.http import HttpResponse
 import json
+import random
 
 data = {}
 # Create your views here.
@@ -275,7 +276,55 @@ def test(request):
         ques[i] =  kq
         print(ques)
         data["questions"] = ques
+        data["j_id"] = j_id
+        data["c_id"] = c_id
     return render(request, "apply_job_q_a.html", data)
+
+def apply_now(request):
+    global data
+    j_id = data["j_id"]
+    c_id = data["c_id"]
+    cv_rank = random.randint(1,10)
+    knockout_score = random.randint(1,10)
+    score = random.randint(1,10)
+    total_rank = (cv_rank + knockout_score + score)/3
+    new = dict()
+    new[request.session["id"]] = {
+        "status" : "0",
+        "knockout_score" : str(knockout_score),
+        "score" : str(score),
+        "cv_rank" : str(cv_rank),
+        "total_rank" : str(total_rank)
+    }
+    with connection.cursor() as cursor:
+        sql = "SELECT applicant_status from application_status WHERE j_id = {}".format(j_id)
+        cursor.execute(sql)
+
+        result = cursor.fetchall()
+
+        if len(result) :
+            result = list(result)[0]
+            try :
+                result = json.loads(result[0])
+            except :
+                result = eval(result[0])
+            # print(result.keys())
+            result[request.session["id"]] = {
+               "status" : "0",
+                "knockout_score" : str(knockout_score),
+                "score" : str(score),
+                "cv_rank" : str(cv_rank),
+                "total_rank" : str(total_rank) 
+            }
+            result = json.dumps(result)
+            sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(result,j_id)
+        else:
+            new = json.dumps(new)
+            sql = "INSERT INTO application_status(j_id,c_id,applicant_status) VALUES({},{},{})".format(j_id,c_id,new)
+
+        cursor.execute(sql)
+    # browse_jobs_render(request)
+    return redirect('http://127.0.0.1:8000/applicant/browse/')
 
 # def job_endpoint(request):
 #     if(request.method == 'POST'):

@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
 from datetime import date
+from django.core.mail import send_mail
 from django.contrib.auth import logout
+from django.template.loader import get_template
 import json
 
 data = dict()
@@ -585,7 +587,19 @@ def company_accept_applicants(request, job_id) :
     with connection.cursor() as cursor :
         sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
         cursor.execute(sql)
-    
+        
+        # sql = "SELECT email_id FROM user WHERE u_id = {}".format(request.POST["u_id"])
+        # cursor.execute(sql)
+        # result = list(cursor.fetchall()[0])
+        t = get_template("mail_accept.html")
+        send_mail(
+            "HireSight: Smart Recruiting",
+            "t.render()",
+            "wehire.sight@gmail.com",
+            ['2017.harshita.singh@ves.ac.in'],
+            fail_silently=False,
+            html_message=t.render()
+        )
     return HttpResponse(json.dumps(request.POST), content_type="application/json")
 
 def company_reject_applicants(request, job_id):
@@ -604,7 +618,18 @@ def company_reject_applicants(request, job_id):
     with connection.cursor() as cursor :
         sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
         cursor.execute(sql)
-    
+        # sql = "SELECT email_id FROM user WHERE u_id = {}".format(request.POST["u_id"])
+        # cursor.execute(sql)
+        # result = list(cursor.fetchall()[0])
+        t = get_template("mail_reject.html")
+        send_mail(
+            "HireSight: Smart Recruiting",
+            "t.render()",
+            "wehire.sight@gmail.com",
+            ['2017.harshita.singh@ves.ac.in'],
+            fail_silently=False,
+            html_message=t.render()
+        )
     return HttpResponse(json.dumps(request.POST), content_type="application/json")
 
 def company_on_hold_applicants(request, job_id):
@@ -623,5 +648,17 @@ def company_on_hold_applicants(request, job_id):
     with connection.cursor() as cursor :
         sql = "UPDATE application_status SET applicant_status = '{}' WHERE j_id = {}".format(update, job_id)
         cursor.execute(sql)
-    
+
+        # sql = "SELECT email_id FROM user WHERE u_id = {}".format(request.POST["u_id"])
+        # cursor.execute(sql)
+        # result = list(cursor.fetchall()[0])
+        t = get_template("mail_on_hold.html")
+        send_mail(
+            "HireSight: Smart Recruiting",
+            "t.render()",
+            "wehire.sight@gmail.com",
+            ['2017.harshita.singh@ves.ac.in'],
+            fail_silently=False,
+            html_message=t.render()
+        )
     return HttpResponse(json.dumps(request.POST), content_type="application/json")
