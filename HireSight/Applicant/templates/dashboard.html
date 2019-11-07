@@ -130,20 +130,6 @@
                     {% empty %}
                         <h4 class="text-center"><em>No history available!</em></h4>
                     {% endfor %}
-                    <!-- <tr>  
-                    </tr> 
-                    <tr> 
-                        <td>2</td> 
-                        <td>Ylli Pylla</td> 
-                        <td>Font-end Developer</td> 
-                        <td class="text-center"><span class="inlinebar-2">1,3,4,5,3,5</span></td> 
-                    </tr> 
-                    <tr> 
-                        <td>3</td> 
-                        <td>Arlind Nushi</td> 
-                        <td>Co-founder</td> 
-                        <td class="text-center"><span class="inlinebar-3">5,3,2,5,4,5</span></td> 
-                    </tr>  -->
                 </tbody> 
             </table> 
         </div> 
@@ -152,12 +138,13 @@
 
 <br />
 
-<a href="{% url 'test' %}" class="btn btn-primary">Apply now</a>
+<!-- <a href="{% url 'test' %}" class="btn btn-primary">Apply now</a> -->
 {% include 'applicant_history_details_modal.html' %}
 {% endblock %}
 
 {% block applicant_footer %}
 <script>
+
     function job_details(i,jobs){
 
       // console.log(i);
@@ -180,5 +167,6 @@
       $("#history_details_modal_body").append(body);
     
     }
+
 </script>
 {% endblock %}
