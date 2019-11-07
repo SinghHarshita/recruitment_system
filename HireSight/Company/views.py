@@ -111,13 +111,17 @@ def company_view_jobs(request, job_id):
     for job in jobs:
         var1 = eval(job[2])
         temp = dict()
-        tp_date = str(job[5]).split('-')
+        if(job[5]):
+            tp_date = str(job[5]).split('-')
+            ls_date = "{}-{}-{}".format(tp_date[1],tp_date[2],tp_date[0])
+        else:
+            ls_date = "2019-11-30"
         temp["0"] = {
             "job_details" : {
                 "designation": var1["designation"],
                 "description": var1["description"],
                 "no_of_vacancies": job[3],
-                "last_date": "{}/{}/{}".format(tp_date[1],tp_date[2],tp_date[0])
+                "last_date": ls_date
             }
         }
         temp["1"] = {
@@ -427,7 +431,7 @@ def save_job_questions(request):
             date_str1 = date.split("-")
 
         # return HttpResponse(str(date_str1))
-        last_date = date_str1[2] + '-' + date_str1[0] + '-' + date_str1[1]
+        last_date = date_str1[0] + '-' + date_str1[1] + '-' + date_str1[2]
     except:
         import datetime
         var1 = datetime.date.today()
@@ -469,7 +473,8 @@ def save_job_questions(request):
         kn_dict[kn_ques['question']] = val
     # return HttpResponse(str(kn_dict))
     # return HttpResponse(json.loads(var))
-    # return HttpResponse(str(questions))
+    # print(questions)
+    # return HttpResponse(str(last_date))
 
     
     with connection.cursor() as cursor:

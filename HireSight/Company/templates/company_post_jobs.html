@@ -351,7 +351,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="question_1">Question</label>
-                                    <input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
+                                    <input type="text" onchange="change_Question(this.id,'-1',this.value)" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /> 
                                 </div>
                             </div>
                         </div>
@@ -359,13 +359,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="answer_1">Answer</label>
-                                    <input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
+                                    <input type="text" class="form-control" onchange="change_answer(this.id,-1,this.value)" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /> 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="marks_1">Marks</label>
-                                        <input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
+                                        <input type="text" class="form-control" onchange="change_marks(this.id,-1,this.value)" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /> 
                                     </div>
                             </div>
                         </div>
@@ -376,23 +376,23 @@
                             <p>Options</p>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
+                                    <input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /> 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /> 
+                                    <input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /> 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /> 
+                                    <input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /> 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /> 
+                                    <input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /> 
                                 </div>
                             </div>
                         </div>
@@ -579,20 +579,21 @@
             for(var key in var1["3"]["questions"]){
                 if(var1["3"]["questions"][key]["type"] == val){
                     // alert("Inside for loop...");
-                    temp_html1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + (key+1) + '">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_' + (key+1) + '" id="question_' + (key+1) + '" data-validate="required" placeholder="Question" value=' + var1["3"]["questions"][key]["question"] + '/></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + (key+1) + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_' + (key+1) + '" id="answer_' + (key+1) + '" data-validate="required" placeholder="Answer" value=' + var1["3"]["questions"][key]["answer"] + ' /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + (key+1) + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_' + (key+1) + '" id="marks_' + (key+1) + '" data-validate="required" placeholder="Marks" value=' + var1["3"]["questions"][key]["marks"] + ' /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_1" id="option_' + (key+1) + '_1" data-validate="required" placeholder="Option 1" value=' + var1["3"]["questions"][key]["options"][0] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_2" id="option_' + (key+1) + '_2" data-validate="required" placeholder="Option 2" value=' + var1["3"]["questions"][key]["options"][1] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_3" id="option_' + (key+1) + '_3" data-validate="required" placeholder="Option 3" value=' + var1["3"]["questions"][key]["options"][2] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + (key+1) + '_4" id="option_' + (key+1) + '_4" data-validate="required" placeholder="Option 4" value=' + var1["3"]["questions"][key]["options"][3] + ' /></div></div></div>';
+                    temp_html1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + (key+1) + '">Question</label><input type="text" onchange="change_Question(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" class="form-control" name="question_' + (key+1) + '" id="question_' + (key+1) + '" data-validate="required" placeholder="Question" value=' + var1["3"]["questions"][key]["question"] + ' /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + (key+1) + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" name="answer_' + (key+1) + '" id="answer_' + (key+1) + '" data-validate="required" placeholder="Answer" value=' + var1["3"]["questions"][key]["answer"] + ' /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + (key+1) + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" name="marks_' + (key+1) + '" id="marks_' + (key+1) + '" data-validate="required" placeholder="Marks" value=' + var1["3"]["questions"][key]["marks"] + ' /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" name="option_' + (key+1) + '_1" id="option_' + (key+1) + '_1" data-validate="required" placeholder="Option 1" value=' + var1["3"]["questions"][key]["options"][0] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" name="option_' + (key+1) + '_2" id="option_' + (key+1) + '_2" data-validate="required" placeholder="Option 2" value=' + var1["3"]["questions"][key]["options"][1] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" name="option_' + (key+1) + '_3" id="option_' + (key+1) + '_3" data-validate="required" placeholder="Option 3" value=' + var1["3"]["questions"][key]["options"][2] + ' /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,' + var1["3"]["questions"][key]["arr_id"] + ',this.value)" name="option_' + (key+1) + '_4" id="option_' + (key+1) + '_4" data-validate="required" placeholder="Option 4" value=' + var1["3"]["questions"][key]["options"][3] + ' /></div></div></div>';
                     document.getElementById('main_questions').innerHTML = temp_html1;
                 }else{
                     // alert(temp_html1);
                 }
+                // alert(key);
             }
         }
+
         if(temp_html1.length == 0){
-            temp_html1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_1">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_1">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_1">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
+            temp_html1 += '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_1">Question</label><input type="text" onchange="change_Question(this.id,-1,this.value)" class="form-control" name="question_1" id="question_1" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_1">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,-1,this.value)" name="answer_1" id="answer_1" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_1">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,-1,this.value)" name="marks_1" id="marks_1" data-validate="required" placeholder="Marks" /></div></div></div><div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_1" id="option_1_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_2" id="option_1_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_3" id="option_1_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_1_4" id="option_1_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
             // document.getElementById('main_questions').innerHTML = temp_html1;
             $('#main_questions').html(temp_html1);
         }
-    }
-
+}
 
     // Knockout Questions start
 
@@ -659,51 +660,96 @@
         // alert(JSON.stringify(var1["0"]));
     }
 
-    function change_Question(id,val){
+    function change_Question(id,arr_id1,val){
         // alert(id[(id.length)-1]);
         // alert(JSON.stringify(var1["3"]["questions"]));
         // var1["3"]["questions"][id[(id.length)-1]-1] = {
         //     "type" : glb,
         //     "question" : val
         // }
-        var1["3"]["questions"].push({
-            "type" : glb,
-            "question" : val
-        });
+        if(arr_id1 == '-1'){
+            var1["3"]["questions"].push({
+                "arr_id" : var1["3"]["questions"].length,
+                "type" : glb,
+                "question" : val
+            });
+            // alert("push");    
+        }else{
+            var1["3"]["questions"][arr_id1]["question"] = val;
+            // alert("edit");
+        }
+        
         // alert(JSON.stringify(var1));
         // console.log(var1);
     }
 
-    function change_answer(id,val){
+    function change_answer(id,arr_id1,val){
+        
         // alert(id);
-        if(var1["3"]["questions"][id[(id.length)-1]-1]){
-            var1["3"]["questions"][id[(id.length)-1]-1]["answer"] = val;    
+        // alert(val);
+        if(arr_id1 == '-1'){
+            len1 = var1["3"]["questions"].length;
+            var1["3"]["questions"][len1-1]["answer"] = val;
         }else{
-            tp = {"answer" : val};
-            var1["3"]["questions"] = {}
-            var1["3"]["questions"][id[(id.length)-1]-1] = tp;
+            var1["3"]["questions"][arr_id1]["answer"] = val;
         }
+
+        // if(var1["3"]["questions"][id[(id.length)-1]-1]){
+        //     var1["3"]["questions"][id[(id.length)-1]-1]["answer"] = val;    
+        // }else{
+        //     tp = {"answer" : val};
+        //     var1["3"]["questions"] = {}
+        //     var1["3"]["questions"][id[(id.length)-1]-1] = tp;
+        // }
+        
+        console.log(var1);
     }
 
-    function change_marks(id,val){
-        var1["3"]["questions"][id[(id.length)-1]-1]["marks"] = val;
+    function change_marks(id,arr_id1,val){
+        if(arr_id1 == '-1'){
+            len1 = var1["3"]["questions"].length;
+            var1["3"]["questions"][len1-1]["marks"] = val;
+        }else{
+            var1["3"]["questions"][arr_id1]["marks"] = val;
+        }
+
+        // var1["3"]["questions"][id[(id.length)-1]-1]["marks"] = val;
+    
     }
 
-    function change_option(id,val){
+    function change_option(id,arr_id1,val){
         // alert(id);
-        parent = id[id.length-3];
-        opt = id[id.length-1];
-        list = var1["3"]["questions"][parent-1]["options"];
-        if(list){
-            list[opt-1] = val;
-            var1["3"]["questions"][parent-1]["options"] = list;
+        
+        if(arr_id1 == '-1'){
+            len1 = var1["3"]["questions"].length;
+            opt = id[id.length-1];
+            list1 = var1["3"]["questions"][len1-1]["options"];
+            if(list1){
+                var1["3"]["questions"][len1-1]["options"][opt-1] = val;    
+            }else{
+                var1["3"]["questions"][len1-1]["options"] = [];
+                var1["3"]["questions"][len1-1]["options"][opt-1] = val;
+            }
+            
         }else{
-            list = [];
-            list[opt-1] = val;
-            var1["3"]["questions"][parent-1]["options"] = list;
+            opt = id[id.length-1];
+            var1["3"]["questions"][arr_id1]["options"][opt-1] = val;
         }
+
+        // parent = id[id.length-3];
+        // opt = id[id.length-1];
+        // list = var1["3"]["questions"][parent-1]["options"];
+        // if(list){
+        //     list[opt-1] = val;
+        //     var1["3"]["questions"][parent-1]["options"] = list;
+        // }else{
+        //     list = [];
+        //     list[opt-1] = val;
+        //     var1["3"]["questions"][parent-1]["options"] = list;
+        // }
         // alert(JSON.stringify(var1));
         // var1["3"]["questions"][id[(id.length)-1]-1]["options"] = val;   
+    
     }
 
     function change_last_date(val){
@@ -774,11 +820,11 @@
         // alert(document.getElementById('questions').value);
         questions_count++;
         var questions_html = '';
-            questions_html+= '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + questions_count + '">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_' +  questions_count + '" id="question_"' + questions_count + '"' + '" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + questions_count + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,this.value)" name="answer_' + questions_count + '" id="answer_' + questions_count + '" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + questions_count + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,this.value)" name="marks_' + questions_count + '" id="marks_' + questions_count + '" data-validate="required" placeholder="Marks" /></div></div></div>';
+            questions_html+= '<div class="row"><div class="col-md-12"><div class="form-group"><label for="question_' + questions_count + '">Question</label><input type="text" onchange="change_Question(this.id,this.value)" class="form-control" name="question_' +  questions_count + '" id="question_"' + questions_count + '"' + '" data-validate="required" placeholder="Question" /></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="answer_' + questions_count + '">Answer</label><input type="text" class="form-control" onchange="change_answer(this.id,-1,this.value)" name="answer_' + questions_count + '" id="answer_' + questions_count + '" data-validate="required" placeholder="Answer" /></div></div><div class="col-md-6"><div class="form-group"><label for="marks_' + questions_count + '">Marks</label><input type="text" class="form-control" onchange="change_marks(this.id,-1,this.value)" name="marks_' + questions_count + '" id="marks_' + questions_count + '" data-validate="required" placeholder="Marks" /></div></div></div>';
 
 
 
-            questions_html+='<div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_1" id="option_' + questions_count + '_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_'+ questions_count + '_2" id="option_' + questions_count + '_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_3" id="option_' + questions_count + '_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,this.value)" name="option_' + questions_count + '_4" id="option_' + questions_count + '_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
+            questions_html+='<div class="row"><p>Options</p><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_' + questions_count + '_1" id="option_' + questions_count + '_1" data-validate="required" placeholder="Option 1" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_'+ questions_count + '_2" id="option_' + questions_count + '_2" data-validate="required" placeholder="Option 2" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_' + questions_count + '_3" id="option_' + questions_count + '_3" data-validate="required" placeholder="Option 3" /></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" onchange="change_option(this.id,-1,this.value)" name="option_' + questions_count + '_4" id="option_' + questions_count + '_4" data-validate="required" placeholder="Option 4" /></div></div></div>';
 
         // document.getElementById('root-wizard-2')('questions').innerHTML += questions_html;
         $('#main_questions').append(questions_html);
