@@ -1,4 +1,4 @@
-# recruitment_system
+# Recruitment System
 
 Company Dashboard Backend
 
